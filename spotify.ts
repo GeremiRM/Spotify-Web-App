@@ -12,6 +12,8 @@ const SCOPES = [
   "user-read-playback-position",
   "user-read-recently-played",
   "user-top-read",
+  "user-read-private",
+  "user-read-email",
 ].join("%20");
 
 // Whether or not to force the user to approve the app again

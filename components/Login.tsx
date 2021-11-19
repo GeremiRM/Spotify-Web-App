@@ -1,9 +1,8 @@
-import { NextPage } from "next";
 import styles from "../styles/Login.module.scss";
 
 import LOGIN_URL from "../spotify";
 
-const Login: NextPage = ({}) => {
+const Login: React.FC<{}> = ({}) => {
   return (
     <div className={styles.login}>
       <div>
