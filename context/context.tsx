@@ -1,3 +1,4 @@
+// libraries
 import {
   createContext,
   Dispatch,
@@ -7,19 +8,26 @@ import {
 } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
 
+// type definitions
+type Playlists = SpotifyApi.ListOfUsersPlaylistsResponse;
+type User = SpotifyApi.CurrentUsersProfileResponse;
+
+// context interface
 interface IContext {
   setToken: Dispatch<SetStateAction<string>>;
-  user: any;
-  playlists: any[];
-  setPlaylists: Dispatch<SetStateAction<any[]>>;
+  user: User;
+  playlists: Playlists;
+  setPlaylists: Dispatch<SetStateAction<Playlists>>;
 }
 
+// context
 export const Context = createContext<IContext>({} as IContext);
 
+// provider
 export const ContextProvider = (props: any) => {
   const [token, setToken] = useState("");
-  const [user, setUser] = useState({});
-  const [playlists, setPlaylists] = useState([{}]);
+  const [user, setUser] = useState<User>({} as User);
+  const [playlists, setPlaylists] = useState<Playlists>({} as Playlists);
 
   useEffect(() => {
     /* Get all the neccesary data from Spotify utilizing
@@ -39,7 +47,7 @@ export const ContextProvider = (props: any) => {
 
         // set the data
         setUser(userData.body);
-        setPlaylists([playlistsData.body]);
+        setPlaylists(playlistsData.body);
 
         // error
       } catch (err) {

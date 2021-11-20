@@ -1,0 +1,71 @@
+.sidebar {
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  width: 210px;
+  padding-top: 1.5rem;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+
+  &__logo {
+    margin-left: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  &__links {
+    flex: 1;
+  }
+
+  &__options {
+    margin: 1rem 0.5rem 0;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0 1rem;
+    color: gray;
+    transition: 0.25s all ease;
+    height: 2.25rem;
+    margin: 0.25rem 0;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &__option.active {
+    background: #222;
+  }
+
+  .active {
+    color: white;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+  }
+
+  &__playlists {
+    font-size: 0.75rem;
+    margin-top: 1rem;
+    margin-left: 1.75rem;
+    overflow-y: auto;
+    color: gray;
+
+    p {
+      transition: 0.25s all ease;
+
+      &:hover {
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}

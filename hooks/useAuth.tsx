@@ -9,14 +9,12 @@ const useAuth = (code: string) => {
   const [refreshToken, setRefreshToken] = useState(null);
   const [expiresIn, setExpiresIn] = useState(null);
 
-  const router = useRouter();
-  // functions
+  // const router = useRouter();
 
   // get access token on login
   useEffect(() => {
     const getToken = async () => {
       try {
-        console.log("hola");
         const res = await axios.post(`${URL}/login`, {
           code,
         });
@@ -37,7 +35,6 @@ const useAuth = (code: string) => {
         }
       }
     };
-    console.log(code);
     if (code) getToken();
   }, [code]);
 
