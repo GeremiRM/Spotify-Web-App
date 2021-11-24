@@ -1,5 +1,5 @@
 // libraries
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -13,19 +13,26 @@ import { RiAddBoxFill } from "react-icons/ri";
 
 // components
 import { SidebarOption } from "./SidebarOption";
+import { getUserPlaylists } from "../../Spotify/SpotifyApi";
 
-// context
-import { Context } from "../../context/context";
+type Playlists = SpotifyApi.PlaylistObjectSimplified[];
 
-interface SidebarProps {}
-
-export const Sidebar: React.FC<SidebarProps> = ({}) => {
-  const { playlists } = useContext(Context);
+export const Sidebar: React.FC<{}> = ({}) => {
+  const [playlists, setPlaylists] = useState<Playlists>();
   const router = useRouter();
   const location = router.pathname;
 
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getUserPlaylists();
+      setPlaylists(data);
+    };
+    getData();
+    return;
+  }, []);
+
   const renderPlaylistsNames = () => {
-    return playlists.items?.map((playlist) => (
+    return playlists?.map((playlist) => (
       <p className={styles.sidebar__playlistName} key={playlist.id}>
         {playlist.name}
       </p>
@@ -47,33 +54,27 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
         <div className={styles.sidebar__options}>
           <Link href="/dashboard">
             <a>
-              <SidebarOption
-                text="Home"
-                icon={FiHome}
-                active={location === "/dashboard"}
-              />
+              <SidebarOption icon={FiHome} active={location === "/dashboard"}>
+                Home
+              </SidebarOption>
             </a>
           </Link>
           <Link href="/search">
             <a>
-              <SidebarOption
-                text="Search"
-                icon={FiSearch}
-                active={location === "/search"}
-              />
+              <SidebarOption icon={FiSearch} active={location === "/search"}>
+                Search
+              </SidebarOption>
             </a>
           </Link>
-          <SidebarOption
-            text="Your Library"
-            icon={BiLibrary}
-            active={location === "/library"}
-          />
+          <SidebarOption icon={BiLibrary} active={location === "/library"}>
+            Library
+          </SidebarOption>
         </div>
 
         {/* create playlist - liked songs */}
         <div className={styles.sidebar__options}>
-          <SidebarOption text="Create Playlist" icon={RiAddBoxFill} />
-          <SidebarOption text="Liked Songs" icon={AiFillHeart} />
+          <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption>
+          <SidebarOption icon={AiFillHeart}>Liked Songs</SidebarOption>
         </div>
 
         {/* playlists list */}
