@@ -17,6 +17,24 @@ export const searchTracks = async (query: string) => {
   return data.body.tracks;
 };
 
+// User
+
+export const getUser = async () => {
+  const data = await spotifyApi.getMe();
+  return data.body;
+};
+
+export const getUserId = async () => {
+  const data = await spotifyApi.getMe();
+  return data.body.id;
+};
+
+export const getUserPlaylists = async () => {
+  const user = await spotifyApi.getMe();
+  const data = await spotifyApi.getUserPlaylists(user.body.id);
+  return data.body.items;
+};
+
 // Artists
 
 export const getArtist = async (id: string) => {

@@ -56,11 +56,12 @@ export const Artist: React.FC<{}> = ({}) => {
       });
       setArtistTracks(tracks);
     };
-    getData();
+    if (id) getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  if (!artist) return <></>;
+  if (Object.keys(artist!).length === 0 || typeof id === "undefined")
+    return <></>;
 
   const renderCards = () => {
     let cards = [];

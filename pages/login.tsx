@@ -1,6 +1,6 @@
 import styles from "../styles/Login.module.scss";
 
-import LOGIN_URL from "../spotify";
+import LOGIN_URL from "../Spotify/SpotifyConfig";
 
 const Login: React.FC<{}> = ({}) => {
   return (

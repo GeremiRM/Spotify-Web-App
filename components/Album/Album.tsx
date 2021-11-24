@@ -24,16 +24,13 @@ type OtherAlbums = SpotifyApi.AlbumObjectSimplified[];
 export const Album: React.FC<{}> = ({}) => {
   const [album, setAlbum] = useState<AlbumType>({} as AlbumType);
   const [artists, setArtists] = useState<Artists>({} as Artists);
-  const [otherAlbums, setOtherAlbums] = useState<OtherAlbums>(
-    [] as OtherAlbums
-  );
+  const [otherAlbums, setOtherAlbums] = useState<OtherAlbums>([]);
 
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
     const getData = async () => {
-      // spotify api handler
       const data = await getAlbum(id as string);
       const artists = await getAlbumArtists(data.artists);
       const artistsAlbums = await getArtistAlbums(artists[0].id);
@@ -42,7 +39,7 @@ export const Album: React.FC<{}> = ({}) => {
       setArtists(artists);
       setOtherAlbums(artistsAlbums);
     };
-    getData();
+    if (id) getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 

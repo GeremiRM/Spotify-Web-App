@@ -24,11 +24,14 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
     <div
       className={styles.artist__banner}
       style={{
-        background: `linear-gradient(
-      0deg,
-      #121212 30%,
-      ${randomBackground()} 95%)`,
+        background: `url(${artist.images[0].url}) no-repeat center/cover`,
       }}
+      // style={{
+      //   background: `linear-gradient(
+      // 0deg,
+      // #121212 30%,
+      // ${randomBackground()} 95%)`,
+      // }}
     >
       <div className={styles.artist__info}>
         <div className={styles.artist__info__verified}>Verified Artist</div>
