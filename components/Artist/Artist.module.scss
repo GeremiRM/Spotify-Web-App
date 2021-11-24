@@ -1,0 +1,32 @@
+.artist {
+  &__banner {
+    height: clamp(325px, 49vh, 375px);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+  }
+
+  &__info {
+    align-self: flex-end;
+    padding-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #ccc;
+
+    > * {
+      margin-bottom: 1.5rem;
+    }
+
+    &__name {
+      font-size: 2.25rem;
+
+      color: white;
+      font-family: "Montserrat", sans-serif;
+
+      h1 {
+        font-weight: 800;
+        text-overflow: ellipsis;
+        word-spacing: normal;
+      }
+    }
+  }
+}

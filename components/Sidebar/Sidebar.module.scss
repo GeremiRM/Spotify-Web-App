@@ -1,0 +1,72 @@
+.sidebar {
+  min-height: 100vh;
+  width: 235px;
+  padding-top: 1.5rem;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+
+  &__logo {
+    position: relative;
+    height: 40px;
+    width: 135px;
+    margin-left: 1.25rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-self: flex-start;
+  }
+
+  &__links {
+    flex: 1;
+  }
+
+  &__options {
+    margin: 1rem 0.5rem 0;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 1.25rem 1rem;
+    color: #bbb;
+    transition: 0.25s all ease;
+    height: 2.25rem;
+    margin: 0.25rem 0;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &__option.active {
+    background: #222;
+  }
+
+  .active {
+    color: white;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+
+  &__playlistName {
+    font-size: 0.75rem;
+    margin-left: 1.25rem;
+    overflow-y: auto;
+    color: gray;
+    transition: 0.25s all ease;
+
+    &:hover {
+      color: white;
+      cursor: pointer;
+    }
+  }
+}

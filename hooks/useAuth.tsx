@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 const URL = "http://localhost:3001";
 
@@ -8,8 +7,6 @@ const useAuth = (code: string) => {
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
   const [expiresIn, setExpiresIn] = useState(null);
-
-  // const router = useRouter();
 
   // get access token on login
   useEffect(() => {

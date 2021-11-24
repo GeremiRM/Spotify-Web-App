@@ -2,12 +2,12 @@
 import React from "react";
 
 // components
-import { Album } from "../../components/Album/Album";
+import { Artist } from "../../components/Artist/Artist";
 
 //interface
 
 export const artist: React.FC<{}> = ({}) => {
-  return <Album />;
+  return <Artist />;
 };
 
 export default artist;

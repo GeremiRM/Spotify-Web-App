@@ -14,6 +14,7 @@ type User = SpotifyApi.CurrentUsersProfileResponse;
 
 // context interface
 interface IContext {
+  token: string;
   setToken: Dispatch<SetStateAction<string>>;
   user: User;
   playlists: Playlists;
@@ -60,6 +61,7 @@ export const ContextProvider = (props: any) => {
   return (
     <Context.Provider
       value={{
+        token,
         setToken,
         user,
         playlists,

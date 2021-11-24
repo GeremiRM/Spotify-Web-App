@@ -1,0 +1,42 @@
+.card {
+  background: #181818;
+  padding: 1.25rem;
+  transition: 0.25s all ease;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 1rem;
+  font-family: "Rubik", sans-serif;
+  cursor: pointer;
+
+  &__img {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .artist {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &__desc {
+    margin-top: 1rem;
+    color: #ccc;
+    font-size: 0.8rem;
+    text-overflow: ellipsis;
+
+    &__title {
+      color: white;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &:hover {
+    background: #333;
+  }
+}

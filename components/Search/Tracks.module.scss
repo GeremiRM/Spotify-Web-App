@@ -1,0 +1,78 @@
+.wrapper {
+  gap: 1rem;
+  color: white;
+  padding: 0 1rem;
+  overflow: hidden;
+  max-height: 375px;
+  margin-top: 1rem;
+  max-width: 1000px;
+  margin-bottom: 3rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+  }
+
+  &__link {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #ccc;
+    letter-spacing: 1px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .track {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    padding-right: 2rem;
+    margin-bottom: 0.25rem;
+    color: #ccc;
+    font-size: 0.8rem;
+    border-radius: 5px;
+
+    &:hover {
+      background: #333;
+    }
+
+    &__img {
+      min-height: 40px;
+      min-width: 40px;
+      flex-basis: 40px;
+      margin-right: 1rem;
+    }
+
+    &__body {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-overflow: ellipsis;
+    }
+
+    &__desc {
+      width: 35vw;
+      &__title {
+        color: white;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+    &__duration {
+      flex: 1;
+
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
