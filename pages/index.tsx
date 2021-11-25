@@ -30,12 +30,12 @@ const Home: NextPage = () => {
   }, [accessToken, setToken]);
 
   // has the user logged in?
-  // code != null -> yes, send them to dashboard
+  // code != null -> yes, send them to home
   // code == null -> no, send them to login
 
   useEffect(() => {
     if (!code) router.push("/login");
-    else if (token !== "") router.push("/dashboard");
+    else if (token !== "") router.push("/home");
   }, [token, router]);
 
   return (

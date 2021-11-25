@@ -19,8 +19,9 @@
     overflow: hidden;
   }
 
-  &__desc {
+  &__body {
     margin-top: 1rem;
+    padding-bottom: 0.5rem;
     color: #ccc;
     font-size: 0.8rem;
     text-overflow: ellipsis;
@@ -33,6 +34,15 @@
       overflow: hidden;
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
+    }
+
+    &__desc {
+      a {
+        &:hover {
+          text-decoration: underline;
+          color: white;
+        }
+      }
     }
   }
 

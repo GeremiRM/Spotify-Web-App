@@ -1,11 +1,12 @@
 import React from "react";
 
-import styles from "./Playlist.module.scss";
+import styles from "./Tracklist.module.scss";
 import { BsClock } from "react-icons/bs";
 import { Track } from "./Track";
 
 interface TracklistProps {
   tracks: SpotifyApi.TrackObjectSimplified[];
+  hideAlbum?: boolean;
 }
 
 export const Tracklist: React.FC<TracklistProps> = ({ tracks }) => {
@@ -15,15 +16,17 @@ export const Tracklist: React.FC<TracklistProps> = ({ tracks }) => {
     });
   };
 
+  if (Object.keys(tracks).length === 0) return <></>;
+
   return (
     <div className={styles.tracklist}>
       <div className={`${styles.tracklist__header}`}>
-        <div className={styles.tracklist__header__number}>
+        <div className={`${styles.tracklist__title}`}>
           <p>#</p>
+          <p>Title</p>
         </div>
-        <div className={styles.tracklist__header__title}>Title</div>
-        <div className={styles.tracklist__header__album}>Album</div>
-        <div className={styles.tracklist__header__duration}>
+        <div className={styles.tracklist__album}>Album</div>
+        <div className={styles.tracklist__duration}>
           <BsClock />
         </div>
       </div>

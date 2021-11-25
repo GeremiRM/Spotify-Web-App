@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import styles from "./Playlist.module.scss";
-import { getTrackAlbum, getTrackImage } from "../../Spotify/SpotifyApi";
+import styles from "./Tracklist.module.scss";
+import { getTrackAlbum } from "../../Spotify/SpotifyApi";
 import { convertMillisToMinutes } from "../../utils/utils";
 
 type Album = SpotifyApi.AlbumObjectSimplified;

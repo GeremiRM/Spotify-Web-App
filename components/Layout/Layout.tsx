@@ -6,9 +6,8 @@ import styles from "./Layout.module.scss";
 
 // components
 import { Sidebar } from "../Sidebar/Sidebar";
-import { Header } from "../Header/Header";
 
-const Dashboard: React.FC<{}> = ({ children }) => {
+export const Layout: React.FC<{}> = ({ children }) => {
   return (
     <div className={styles.dashboard}>
       <Sidebar />
@@ -17,5 +16,3 @@ const Dashboard: React.FC<{}> = ({ children }) => {
     </div>
   );
 };
-
-export default Dashboard;

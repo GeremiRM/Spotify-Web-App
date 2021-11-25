@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 
 import styles from "./Album.module.scss";
 import { Header } from "../Header/Header";
-import Layout from "../Layout/Layout";
+import { Layout } from "../Layout/Layout";
 
 import { Banner } from "./Banner";
-import { Tracklist } from "./Tracklist";
-import { Cards } from "../Artist/Cards";
+import { Tracklist } from "../Shared/Tracklist";
+import { Cards } from "../Shared/Cards";
 
 // functions
 import {

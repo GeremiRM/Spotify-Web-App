@@ -1,0 +1,12 @@
+.home {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  padding-top: 3rem;
+  min-height: 100vh;
+  background: linear-gradient(0deg, #111 60%, #333 100%);
+
+  &__body {
+    padding: 1.5rem 0;
+  }
+}

@@ -14,33 +14,6 @@
   max-width: 80vw;
   z-index: 1000;
 
-  .searchBar {
-    display: flex;
-    height: 2.25rem;
-    align-items: center;
-    background: white;
-    color: gray;
-    width: 350px;
-    border-radius: 1000px;
-    padding: 1.3rem 0;
-    padding-left: 1rem;
-
-    &__icon {
-      margin-right: 0.75rem;
-      font-size: 1.25rem;
-    }
-
-    &__input {
-      border: none;
-      font-size: 0.85rem;
-      width: 100%;
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-
   .userMenu {
     &__avatar {
       height: 1.75rem;

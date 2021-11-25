@@ -1,0 +1,32 @@
+.tracklist {
+  padding: 0.5rem 1rem;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 50% 30% 8%;
+    gap: 4%;
+    text-transform: uppercase;
+    color: #aaa;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #333;
+    padding: 1rem 1rem 0.75rem;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    display: flex;
+
+    p {
+      margin-right: 1rem;
+    }
+  }
+
+  &__album {
+    text-align: center;
+  }
+
+  &__duration {
+    text-align: end;
+  }
+}

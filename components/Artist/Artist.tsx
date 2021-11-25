@@ -4,10 +4,9 @@ import { useRouter } from "next/router";
 
 // components
 import { Header } from "../Header/Header";
-import Layout from "../Layout/Layout";
+import { Layout } from "../Layout/Layout";
 import { Banner } from "./Banner";
-import { Cards } from "./Cards";
-import { TracksResult } from "./TracksResult";
+import { Cards } from "../Shared/Cards";
 
 // styling
 import styles from "./Artist.module.scss";
@@ -25,6 +24,7 @@ import {
   getArtistTopTracks,
   getRelatedArtists,
 } from "../../Spotify/SpotifyApi";
+import { Tracklist } from "../Shared/Tracklist";
 
 // interface
 interface Data {
@@ -32,10 +32,17 @@ interface Data {
   relatedArtists: Artists;
 }
 
+const cardsTitle = {
+  albums: "Albums",
+  relatedArtists: "Fans Also Like",
+};
+
 export const Artist: React.FC<{}> = ({}) => {
   const [artist, setArtist] = useState<ArtistType>({} as ArtistType);
   const [artistData, setArtistData] = useState<Data>({} as Data);
   const [artistTracks, setArtistTracks] = useState<Tracks>({} as Tracks);
+
+  const [seeMore, setSeeMore] = useState(false);
 
   // get artist id
   const router = useRouter();
@@ -69,11 +76,20 @@ export const Artist: React.FC<{}> = ({}) => {
       // @ts-expect-error
       const data = artistData[type];
       if (data?.length > 0) {
-        cards.push(<Cards data={data} title={type} key={type} />);
+        cards.push(
+          // @ts-expect-error
+          <Cards data={data} title={cardsTitle[type]} key={type} />
+        );
       }
     }
     return cards;
   };
+
+  if (
+    Object.keys(artist!).length === 0 ||
+    Object.keys(artistTracks!).length === 0
+  )
+    return <></>;
 
   return (
     <Layout>
@@ -81,8 +97,16 @@ export const Artist: React.FC<{}> = ({}) => {
       <div className={styles.artist}>
         <Banner artist={artist} />
         <div className={styles.body}>
-          <TracksResult tracks={artistTracks} />
-          {renderCards()}
+          <div className={styles.tracks}>
+            <h2 className={styles.tracks__title}>Popular</h2>
+            <div className={styles.tracks__tracklist}>
+              <Tracklist tracks={artistTracks!.slice(0, seeMore ? 10 : 5)} />
+            </div>
+            <p onClick={() => setSeeMore(!seeMore)} className={styles.seeMore}>
+              {seeMore ? "See Less" : "See More"}
+            </p>
+          </div>
+          <div className={styles.cards}>{renderCards()}</div>
         </div>
       </div>
     </Layout>

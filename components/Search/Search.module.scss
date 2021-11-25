@@ -1,11 +1,51 @@
+.searchBar {
+  display: flex;
+  height: 2.25rem;
+  align-items: center;
+  background: white;
+  color: gray;
+  width: 350px;
+  border-radius: 1000px;
+  padding: 1.3rem 0;
+  padding-left: 1rem;
+
+  &__icon {
+    margin-right: 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  &__input {
+    border: none;
+    font-size: 0.85rem;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 .search {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  padding-top: 3rem;
+  padding-top: 4rem;
   min-height: 100vh;
 
   &__body {
     padding: 1.5rem 0;
+  }
+
+  &__tracks {
+    display: grid;
+    row-gap: 2rem;
+  }
+
+  &__topResult {
+    margin-left: 1.5rem;
+    &__title {
+      font-size: 1.5rem;
+      color: white;
+    }
   }
 }

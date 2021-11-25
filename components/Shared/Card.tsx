@@ -7,8 +7,8 @@ import Link from "next/link";
 import styles from "./Card.module.scss";
 
 // types
-import { Track, Artist, Album } from "../../types/types";
-type Info = Track | Artist | Album;
+import { Artist, Album, Playlist } from "../../types/types";
+type Info = Artist | Album | Playlist | SpotifyApi.TrackObjectFull;
 
 // interface
 interface CardProps {
@@ -16,20 +16,18 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ info }) => {
-  // the image is located at different attributes
-  // depending on the type.
-
   const cardImage = () => {
     switch (info?.type) {
       case "artist":
-        return info?.images[0]?.url;
+        return info?.images[1]?.url;
       case "album":
-        return info?.images[0]?.url;
+        return info?.images[1]?.url;
+      case "track":
+        return info?.album?.images[1]?.url;
       default:
         return "/placeholder.png";
     }
   };
-  //
 
   const cardDesc = () => {
     switch (info?.type) {
@@ -37,6 +35,10 @@ const Card: React.FC<CardProps> = ({ info }) => {
         return "Artist";
       case "album":
         return info.release_date.substring(0, 4);
+      case "playlist":
+        return "By " + info.owner.display_name;
+      case "track":
+        return <Link href={`/album/${info.album.id}`}>{info.album.name}</Link>;
       default:
         return "";
     }
@@ -61,9 +63,11 @@ const Card: React.FC<CardProps> = ({ info }) => {
             objectFit="cover"
           />
         </div>
-        <div className={styles.card__desc}>
-          <p className={styles.card__desc__title}>{info?.name}</p>
-          <p>{cardDesc()}</p>
+        <div className={styles.card__body}>
+          <p className={styles.card__body__title}>{info?.name}</p>
+          <p className={`${styles.card__body__desc} ${info?.type === "track"}`}>
+            {cardDesc()}
+          </p>
         </div>
       </div>
     </Link>

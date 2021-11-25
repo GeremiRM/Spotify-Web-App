@@ -33,26 +33,31 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
   const renderPlaylistsNames = () => {
     return playlists?.map((playlist) => (
-      <p className={styles.sidebar__playlistName} key={playlist.id}>
-        {playlist.name}
-      </p>
+      <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
+        <a>
+          <p className={styles.sidebar__playlistName}>{playlist.name}</p>
+        </a>
+      </Link>
     ));
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
-        <div className={styles.sidebar__logo}>
-          <Image
-            src="/header/header_logo.png"
-            alt="spotify logo"
-            layout="fill"
-          />
-        </div>
+        <Link href="/home" passHref>
+          <div className={styles.sidebar__logo}>
+            <Image
+              src="/header/header_logo.png"
+              alt="spotify logo"
+              layout="fill"
+              priority
+            />
+          </div>
+        </Link>
 
         {/* home - search - library */}
         <div className={styles.sidebar__options}>
-          <Link href="/dashboard">
+          <Link href="/home">
             <a>
               <SidebarOption icon={FiHome} active={location === "/dashboard"}>
                 Home
@@ -66,9 +71,13 @@ export const Sidebar: React.FC<{}> = ({}) => {
               </SidebarOption>
             </a>
           </Link>
-          <SidebarOption icon={BiLibrary} active={location === "/library"}>
-            Library
-          </SidebarOption>
+          <Link href="/collection">
+            <a>
+              <SidebarOption icon={BiLibrary} active={location === "/library"}>
+                Your Library
+              </SidebarOption>
+            </a>
+          </Link>
         </div>
 
         {/* create playlist - liked songs */}

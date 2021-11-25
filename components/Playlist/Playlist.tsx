@@ -6,7 +6,7 @@ import { Header } from "../Header/Header";
 import Layout from "../Layout/Layout";
 
 import { Banner } from "./Banner";
-import { Tracklist } from "./Tracklist";
+import { Tracklist } from "../Shared/Tracklist";
 
 // functions
 import { getPlaylist, getPlaylistTracks } from "../../Spotify/SpotifyApi";
@@ -33,24 +33,14 @@ export const Playlist: React.FC<{}> = ({}) => {
     if (id) getData();
   }, [id]);
 
-  if (Object.keys(playlist).length === 0 || tracks.length === 0) return <></>;
+  if (Object.keys(playlist).length === 0) return <></>;
 
   return (
     <Layout>
       <Header />
       <div className={styles.playlist}>
         <Banner playlist={playlist} />
-        <Tracklist tracks={tracks} />
-        {/* <div className={styles.album__copyright}>
-          &copy; {album?.copyrights[0]?.text}
-        </div>
-        <div className={styles.album__otherAlbums}>
-          <Cards
-            data={otherAlbums}
-            title={`More by ${artists[0]?.name}`}
-            ignoreCard={album.id}
-          />
-        </div> */}
+        <Tracklist tracks={tracks!} />
       </div>
     </Layout>
   );

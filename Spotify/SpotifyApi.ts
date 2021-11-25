@@ -5,16 +5,35 @@ let token = null;
 if (typeof window !== "undefined") token = localStorage.getItem("token");
 const spotifyApi = new SpotifyWebApi({ accessToken: token! });
 
+const orderByPopularity = (list: any[]) => {
+  type popularity = { popularity: number };
+
+  const compare = (a: popularity, b: popularity) => {
+    if (a.popularity < b.popularity) {
+      return 1;
+    }
+    if (a.popularity > b.popularity) {
+      return -1;
+    }
+    return 0;
+  };
+  return list.sort(compare);
+};
+
 // Search
 
 export const searchAll = async (query: string) => {
   const data = await spotifyApi.search(query, ["album", "artist", "playlist"]);
-  return data.body;
+  return {
+    albums: data.body.albums?.items,
+    artists: data.body.artists?.items,
+    playlists: data.body.playlists?.items,
+  };
 };
 
 export const searchTracks = async (query: string) => {
   const data = await spotifyApi.searchTracks(query);
-  return data.body.tracks;
+  return data.body.tracks?.items;
 };
 
 // User
@@ -29,10 +48,57 @@ export const getUserId = async () => {
   return data.body.id;
 };
 
+export const getUserTopArtists = async () => {
+  const data = await spotifyApi.getMyTopArtists();
+  return data.body.items;
+};
+
+export const getUserTopTracks = async () => {
+  const data = await spotifyApi.getMyTopTracks();
+  return data.body.items;
+};
+
+export const getUserRecommendations = async () => {
+  const topArtists = await spotifyApi.getMyTopArtists();
+  const topArtistsId = topArtists.body.items
+    .slice(0, 5)
+    .map((artist) => artist.id);
+  const data = await spotifyApi.getRecommendations({
+    min_popularity: 40,
+    seed_artists: topArtistsId,
+  });
+  return data.body.tracks;
+};
+
+export const getUserRecentlyPlayedTracks = async () => {
+  const data = await spotifyApi.getMyRecentlyPlayedTracks();
+  const tracks = data.body.items.map((item) => item.track);
+  return tracks;
+};
+
 export const getUserPlaylists = async () => {
   const user = await spotifyApi.getMe();
   const data = await spotifyApi.getUserPlaylists(user.body.id);
   return data.body.items;
+};
+
+export const getUserLibrary = async () => {
+  const playlists = await spotifyApi.getUserPlaylists();
+  const artists = await spotifyApi.getFollowedArtists();
+  const albumsData = await spotifyApi.getMySavedAlbums();
+  const albums = albumsData.body.items.map((item) => item.album);
+
+  return {
+    playlists: playlists.body.items,
+    artists: artists.body.artists.items,
+    albums: albums,
+  };
+};
+
+export const getUserLikedSongs = async () => {
+  const data = await spotifyApi.getMySavedTracks();
+  const tracks = data.body.items.map((item) => item.track);
+  return tracks;
 };
 
 // Artists
@@ -62,6 +128,11 @@ export const getRelatedArtists = async (id: string) => {
 export const getPlaylist = async (id: string) => {
   const data = await spotifyApi.getPlaylist(id);
   return data.body;
+};
+
+export const getFeaturedPlaylists = async () => {
+  const data = await spotifyApi.getFeaturedPlaylists();
+  return data.body.playlists.items;
 };
 
 export const getPlaylistTracks = async (id: string) => {
@@ -114,7 +185,12 @@ export const getAlbumArtists = async (
 export const getAlbumDuration = (album: SpotifyApi.AlbumObjectFull) => {
   let totalDuration = 0;
   for (let i = 0; i < album.total_tracks; i++) {
-    totalDuration += album.tracks.items[i].duration_ms;
+    totalDuration += album.tracks.items[i]?.duration_ms;
   }
   return totalDuration;
+};
+
+export const getNewReleases = async () => {
+  const data = await spotifyApi.getNewReleases();
+  return data.body.albums.items;
 };

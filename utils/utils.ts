@@ -1,5 +1,13 @@
 export const convertMillisToMinutes = (millis: number) => {
   let minutes = Math.floor(millis / 60000);
   let seconds = ((millis % 60000) / 1000).toFixed(0);
-  return `${minutes} min ${Number(seconds) < 10 ? "0" : ""}${seconds} sec`;
+  return `${minutes}:${Number(seconds) < 10 ? "0" : ""}${seconds}`;
 };
+
+export const filterRepeated = (list: any) => {
+  return list?.filter(
+    (v: { name: any }, i: any, a: any[]) =>
+      a.findIndex((t: { name: any }) => t.name === v.name) === i
+  );
+};
+``;
