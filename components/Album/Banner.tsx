@@ -22,11 +22,9 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
 
   const renderArtists = () => {
     return artists?.map((artist, idx, array) => (
-      <p key={artist.id}>
-        <Link href={`/artist/${artist.id}`}>{`${artist.name}${
-          idx !== array.length - 1 ? "," : ""
-        }`}</Link>
-      </p>
+      <Link href={`/artist/${artist.id}`} key={artist.id}>{`${artist.name}${
+        idx !== array.length - 1 ? "," : ""
+      }`}</Link>
     ));
   };
 
@@ -45,7 +43,7 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
     >
       <div className={styles.album__cover}>
         <Image
-          src={album?.images[0]?.url || "/placeholder.png"}
+          src={album?.images[1]?.url || "/placeholder.png"}
           width="100%"
           height="100%"
           layout="responsive"

@@ -3,8 +3,9 @@
   color: white;
   padding: 0 1rem;
   overflow: hidden;
-  max-height: 375px;
   margin-top: 1rem;
+  font-family: "Rubik";
+  margin-bottom: 3rem;
 
   &__header {
     display: flex;
@@ -25,10 +26,18 @@
     font-size: 1.5rem;
   }
 
+  // one single row
   &__cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     column-gap: 1.5rem;
-    row-gap: 100rem; // hide everything that doesn't fit in one row
+    grid-template-rows: auto;
+    grid-auto-rows: 0;
+  }
+
+  // multiple rows
+  .multi-row {
+    grid-template-columns: none;
+    grid-auto-rows: auto;
   }
 }

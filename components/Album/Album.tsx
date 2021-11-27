@@ -15,13 +15,14 @@ import {
   getAlbumArtists,
   getArtistAlbums,
 } from "../../Spotify/SpotifyApi";
+import { GetServerSideProps } from "next";
 
 // types
 type AlbumType = SpotifyApi.AlbumObjectFull;
 type Artists = SpotifyApi.ArtistObjectFull[];
 type OtherAlbums = SpotifyApi.AlbumObjectSimplified[];
 
-export const Album: React.FC<{}> = ({}) => {
+export const Album: React.FC<{}> = () => {
   const [album, setAlbum] = useState<AlbumType>({} as AlbumType);
   const [artists, setArtists] = useState<Artists>({} as Artists);
   const [otherAlbums, setOtherAlbums] = useState<OtherAlbums>([]);
@@ -40,28 +41,30 @@ export const Album: React.FC<{}> = ({}) => {
       setOtherAlbums(artistsAlbums);
     };
     if (id) getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  if (Object.keys(album).length === 0) return <></>;
-
   return (
-    <Layout>
+    <div>
       <Header />
-      <div className={styles.album}>
-        <Banner album={album} artists={artists} />
-        <Tracklist tracks={album.tracks.items} />
-        <div className={styles.album__copyright}>
-          &copy; {album?.copyrights[0]?.text}
+      {Object.keys(album).length !== 0 && (
+        <div className={styles.album}>
+          <Banner album={album} artists={artists} />
+
+          <Tracklist tracks={album.tracks.items} />
+
+          <div className={styles.album__copyright}>
+            &copy; {album?.copyrights[0]?.text}
+          </div>
+
+          <div className={styles.album__otherAlbums}>
+            <Cards
+              data={otherAlbums}
+              title={`More by ${artists[0]?.name}`}
+              ignoreCard={album.id}
+            />
+          </div>
         </div>
-        <div className={styles.album__otherAlbums}>
-          <Cards
-            data={otherAlbums}
-            title={`More by ${artists[0]?.name}`}
-            ignoreCard={album.id}
-          />
-        </div>
-      </div>
-    </Layout>
+      )}
+    </div>
   );
 };

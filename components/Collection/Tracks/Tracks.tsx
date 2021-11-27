@@ -5,6 +5,7 @@ import styles from "./Tracks.module.scss";
 import { Header } from "../../Header/Header";
 import { Layout } from "../../Layout/Layout";
 import { Tracklist } from "../../Shared/Tracklist";
+import { Banner } from "./Banner";
 
 type Tracks = SpotifyApi.TrackObjectFull[];
 
@@ -23,11 +24,12 @@ export const Tracks: React.FC<{}> = ({}) => {
   }, []);
 
   return (
-    <Layout>
+    <div>
       <Header />
       <div className={styles.tracks}>
+        <Banner amountSongs={tracks.length} />
         <Tracklist tracks={tracks!} />
       </div>
-    </Layout>
+    </div>
   );
 };

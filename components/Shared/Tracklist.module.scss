@@ -3,15 +3,24 @@
 
   &__header {
     display: grid;
-    grid-template-columns: 50% 30% 8%;
+    grid-template-columns: 45% 25% 18%;
     gap: 4%;
     text-transform: uppercase;
     color: #aaa;
     letter-spacing: 1px;
-    border-bottom: 1px solid #333;
-    padding: 1rem 1rem 0.75rem;
+    border-bottom: 1px solid #222;
+    padding: 0.75rem 1rem;
     font-size: 0.85rem;
     margin-bottom: 1rem;
+  }
+
+  &__onTop {
+    position: sticky;
+    top: 0;
+    background: #121212;
+    top: 50px;
+    width: 100%;
+    z-index: 100;
   }
 
   &__title {

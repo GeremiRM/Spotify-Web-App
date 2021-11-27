@@ -46,14 +46,12 @@ export const Cards: React.FC<Cards> = ({
         <div className={styles.wrapper__title}>
           <h2>{title === "relatedArtists" ? "Fans also like" : title}</h2>
         </div>
-
         {!hideLink && (
           <div className={styles.wrapper__link}>
             <p>See All</p>
           </div>
         )}
       </div>
-
       <div className={styles.wrapper__cards}>{renderCards()}</div>
     </div>
   );

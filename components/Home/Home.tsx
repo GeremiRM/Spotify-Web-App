@@ -78,20 +78,17 @@ export const Home: React.FC<{}> = ({}) => {
     return cards;
   };
 
-  if (
-    Object.keys(user!).length === 0 ||
-    Object.keys(userPlaylists).length === 0
-  )
-    return <></>;
-
   return (
-    <Layout>
+    <div>
       <Header />
-      <div className={styles.home}>
-        <div className={styles.home__body}>
-          <div className={styles.home__results}>{renderTrackCards()}</div>
-        </div>
-      </div>
-    </Layout>
+      {Object.keys(user!).length !== 0 &&
+        Object.keys(userPlaylists).length !== 0 && (
+          <div className={styles.home}>
+            <div className={styles.home__body}>
+              <div className={styles.home__results}>{renderTrackCards()}</div>
+            </div>
+          </div>
+        )}
+    </div>
   );
 };

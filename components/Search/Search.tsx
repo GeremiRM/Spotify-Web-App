@@ -35,15 +35,17 @@ export const Search: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     const search = async () => {
+      if (searchInput === "") return "";
+
       const results = await searchAll(searchInput);
       const tracks = await searchTracks(searchInput);
 
       setSearchResults(results);
       setTrackResults(tracks!.slice(0, LIMIT));
     };
-    if (searchInput !== "") {
-      search();
-    }
+
+    const timeOutId = setTimeout(() => search(), 250);
+    return () => clearTimeout(timeOutId);
   }, [searchInput]);
 
   const handleInputChange = (e: Event) => {
@@ -63,7 +65,7 @@ export const Search: React.FC<{}> = ({}) => {
   };
 
   return (
-    <Layout>
+    <div>
       <Header>
         <div className={styles.searchBar}>
           <FiSearch className={styles.searchBar__icon} />
@@ -91,6 +93,6 @@ export const Search: React.FC<{}> = ({}) => {
           </div>
         )}
       </div>
-    </Layout>
+    </div>
   );
 };

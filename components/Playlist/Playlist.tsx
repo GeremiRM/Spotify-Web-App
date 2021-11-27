@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import styles from "./Playlist.module.scss";
 import { Header } from "../Header/Header";
-import Layout from "../Layout/Layout";
+import { Layout } from "../Layout/Layout";
 
 import { Banner } from "./Banner";
 import { Tracklist } from "../Shared/Tracklist";
@@ -33,15 +33,15 @@ export const Playlist: React.FC<{}> = ({}) => {
     if (id) getData();
   }, [id]);
 
-  if (Object.keys(playlist).length === 0) return <></>;
-
   return (
-    <Layout>
+    <div>
       <Header />
-      <div className={styles.playlist}>
-        <Banner playlist={playlist} />
-        <Tracklist tracks={tracks!} />
-      </div>
-    </Layout>
+      {Object.keys(playlist).length !== 0 && (
+        <div className={styles.playlist}>
+          <Banner playlist={playlist} />
+          <Tracklist tracks={tracks!} />
+        </div>
+      )}
+    </div>
   );
 };

@@ -83,7 +83,11 @@ export const Sidebar: React.FC<{}> = ({}) => {
         {/* create playlist - liked songs */}
         <div className={styles.sidebar__options}>
           <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption>
-          <SidebarOption icon={AiFillHeart}>Liked Songs</SidebarOption>
+          <Link href="/collection/tracks">
+            <a>
+              <SidebarOption icon={AiFillHeart}>Liked Songs</SidebarOption>
+            </a>
+          </Link>
         </div>
 
         {/* playlists list */}

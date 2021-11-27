@@ -64,11 +64,7 @@ export const Artist: React.FC<{}> = ({}) => {
       setArtistTracks(tracks);
     };
     if (id) getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-
-  if (Object.keys(artist!).length === 0 || typeof id === "undefined")
-    return <></>;
 
   const renderCards = () => {
     let cards = [];
@@ -85,30 +81,32 @@ export const Artist: React.FC<{}> = ({}) => {
     return cards;
   };
 
-  if (
-    Object.keys(artist!).length === 0 ||
-    Object.keys(artistTracks!).length === 0
-  )
-    return <></>;
-
   return (
-    <Layout>
+    <div>
       <Header />
-      <div className={styles.artist}>
-        <Banner artist={artist} />
-        <div className={styles.body}>
-          <div className={styles.tracks}>
-            <h2 className={styles.tracks__title}>Popular</h2>
-            <div className={styles.tracks__tracklist}>
-              <Tracklist tracks={artistTracks!.slice(0, seeMore ? 10 : 5)} />
+      {Object.keys(artist!).length !== 0 &&
+        Object.keys(artistTracks!).length !== 0 && (
+          <div className={styles.artist}>
+            <Banner artist={artist} />
+            <div className={styles.body}>
+              <div className={styles.tracks}>
+                <h2 className={styles.tracks__title}>Popular</h2>
+                <div className={styles.tracks__tracklist}>
+                  <Tracklist
+                    tracks={artistTracks!.slice(0, seeMore ? 10 : 5)}
+                  />
+                </div>
+                <p
+                  onClick={() => setSeeMore(!seeMore)}
+                  className={styles.seeMore}
+                >
+                  {seeMore ? "See Less" : "See More"}
+                </p>
+              </div>
+              <div className={styles.cards}>{renderCards()}</div>
             </div>
-            <p onClick={() => setSeeMore(!seeMore)} className={styles.seeMore}>
-              {seeMore ? "See Less" : "See More"}
-            </p>
           </div>
-          <div className={styles.cards}>{renderCards()}</div>
-        </div>
-      </div>
-    </Layout>
+        )}
+    </div>
   );
 };

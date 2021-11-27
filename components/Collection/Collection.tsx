@@ -22,8 +22,8 @@ type Library = {
 };
 
 export const Collection: React.FC<{}> = ({}) => {
-  const [userLibrary, setUserLibrary] = useState<Library>();
-  const [likedSongs, setLikedSongs] = useState<LikedSongs>();
+  const [userLibrary, setUserLibrary] = useState<Library>({} as Library);
+  const [likedSongs, setLikedSongs] = useState<LikedSongs>({} as LikedSongs);
   const [selector, setSelector] = useState(0);
 
   useEffect(() => {
@@ -37,26 +37,27 @@ export const Collection: React.FC<{}> = ({}) => {
     getData();
   }, []);
 
-  if (!userLibrary || !likedSongs) return <></>;
-
   return (
-    <Layout>
+    <div>
       <Header>
         <Selector selector={selector} setSelector={setSelector} />
       </Header>
-      <div className={styles.collection}>
-        <Cards
-          data={
-            selector === 0
-              ? userLibrary.playlists
-              : selector === 1
-              ? userLibrary.artists
-              : userLibrary.albums
-          }
-        >
-          {selector === 0 && <SongsCard tracks={likedSongs} />}
-        </Cards>
-      </div>
-    </Layout>
+      {Object.keys(userLibrary!).length !== 0 &&
+        Object.keys(likedSongs!).length !== 0 && (
+          <div className={styles.collection}>
+            <Cards
+              data={
+                selector === 0
+                  ? userLibrary!.playlists
+                  : selector === 1
+                  ? userLibrary!.artists
+                  : userLibrary!.albums
+              }
+            >
+              {selector === 0 && <SongsCard tracks={likedSongs} />}
+            </Cards>
+          </div>
+        )}
+    </div>
   );
 };

@@ -58,11 +58,24 @@ export const getUserTopTracks = async () => {
   return data.body.items;
 };
 
+export const addToSaved = async (id: string) => {
+  const response = await spotifyApi.addToMySavedTracks([id]);
+  console.log(response.body);
+};
+
+export const removeFromSaved = async (id: string) => {
+  const response = await spotifyApi.removeFromMySavedTracks([id]);
+  console.log(response.body);
+};
+
+export const containedInSavedTrack = async (id: string) => {
+  const data = await spotifyApi.containsMySavedTracks([id]);
+  return data;
+};
+
 export const getUserRecommendations = async () => {
-  const topArtists = await spotifyApi.getMyTopArtists();
-  const topArtistsId = topArtists.body.items
-    .slice(0, 5)
-    .map((artist) => artist.id);
+  const topArtists = await spotifyApi.getMyTopArtists({ limit: 5 });
+  const topArtistsId = topArtists.body.items.map((artist) => artist.id);
   const data = await spotifyApi.getRecommendations({
     min_popularity: 40,
     seed_artists: topArtistsId,
@@ -96,7 +109,7 @@ export const getUserLibrary = async () => {
 };
 
 export const getUserLikedSongs = async () => {
-  const data = await spotifyApi.getMySavedTracks();
+  const data = await spotifyApi.getMySavedTracks({ limit: 50 });
   const tracks = data.body.items.map((item) => item.track);
   return tracks;
 };
@@ -109,7 +122,9 @@ export const getArtist = async (id: string) => {
 };
 
 export const getArtistAlbums = async (id: string) => {
-  const data = await spotifyApi.getArtistAlbums(id);
+  //@ts-expect-error
+  const data = await spotifyApi.getArtistAlbums(id, { album_type: "album" });
+  //@ts-expect-error
   return data.body.items;
 };
 
