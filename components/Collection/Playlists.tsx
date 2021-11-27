@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../Shared/Card";
+import Card from "../Common/Card";
 
 import styles from "./Collection.module.scss";
 

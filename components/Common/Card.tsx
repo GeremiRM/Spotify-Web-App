@@ -7,8 +7,12 @@ import Link from "next/link";
 import styles from "./Card.module.scss";
 
 // types
-import { Artist, Album, Playlist } from "../../types/types";
-type Info = Artist | Album | Playlist | SpotifyApi.TrackObjectFull;
+type Artist = SpotifyApi.ArtistObjectFull;
+type Album = SpotifyApi.AlbumObjectSimplified;
+type Playlist = SpotifyApi.PlaylistObjectSimplified;
+type Track = SpotifyApi.TrackObjectFull;
+
+type Info = Artist | Album | Playlist | Track;
 
 // interface
 interface CardProps {

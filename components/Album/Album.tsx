@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import styles from "./Album.module.scss";
+// components
 import { Header } from "../Header/Header";
-import { Layout } from "../Layout/Layout";
-
 import { Banner } from "./Banner";
-import { Tracklist } from "../Shared/Tracklist";
-import { Cards } from "../Shared/Cards";
+import { Tracklist } from "../Common/Tracklist";
+import { Cards } from "../Common/Cards";
 
-// functions
-import {
-  getAlbum,
-  getAlbumArtists,
-  getArtistAlbums,
-} from "../../Spotify/SpotifyApi";
-import { GetServerSideProps } from "next";
+// styling
+import styles from "./Album.module.scss";
+
+// hook
+import { useSpotify } from "../../hooks/useSpotify";
 
 // types
 type AlbumType = SpotifyApi.AlbumObjectFull;
@@ -27,35 +23,49 @@ export const Album: React.FC<{}> = () => {
   const [artists, setArtists] = useState<Artists>({} as Artists);
   const [otherAlbums, setOtherAlbums] = useState<OtherAlbums>([]);
 
+  const spotifyApi = useSpotify();
+
+  // album id
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getAlbum(id as string);
-      const artists = await getAlbumArtists(data.artists);
-      const artistsAlbums = await getArtistAlbums(artists[0].id);
+      const data = await spotifyApi.getAlbum(id as string);
 
-      setAlbum(data);
-      setArtists(artists);
-      setOtherAlbums(artistsAlbums);
+      // need the full artist object to get the artist image
+      const artists = await spotifyApi.getArtists(
+        data.body.artists.map((artist) => artist.id)
+      );
+
+      const artistsAlbums = await spotifyApi.getArtistAlbums(
+        artists.body.artists[0].id,
+        { album_type: "album" }
+      );
+
+      setAlbum(data.body);
+      setArtists(artists.body.artists);
+      setOtherAlbums(artistsAlbums.body.items);
     };
     if (id) getData();
-  }, [id]);
+  }, [id, spotifyApi]);
 
   return (
     <div>
       <Header />
       {Object.keys(album).length !== 0 && (
         <div className={styles.album}>
+          {/* Banner */}
           <Banner album={album} artists={artists} />
 
+          {/* Tracklist */}
           <Tracklist tracks={album.tracks.items} />
 
+          {/* Copyright */}
           <div className={styles.album__copyright}>
             &copy; {album?.copyrights[0]?.text}
           </div>
-
+          {/* Cards */}
           <div className={styles.album__otherAlbums}>
             <Cards
               data={otherAlbums}

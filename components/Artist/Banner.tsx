@@ -4,12 +4,9 @@ import React from "react";
 // styling
 import styles from "./Artist.module.scss";
 
-// types
-import { Artist } from "../../types/types";
-
 // interface
 interface BannerProps {
-  artist: Artist;
+  artist: SpotifyApi.ArtistObjectFull;
 }
 
 const randomBackground = () => {

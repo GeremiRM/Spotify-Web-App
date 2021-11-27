@@ -1,42 +1,16 @@
 // libraries
-import { useContext, useEffect, useState } from "react";
+
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 import type { NextPage } from "next";
 
-// hooks
-import useAuth from "../hooks/useAuth";
-
-// context
-import { Context } from "../context/context";
-
-// get access code after logging
-let code: string | null = "";
-if (typeof window !== "undefined")
-  code = new URLSearchParams(window.location.search).get("code");
-
+//
 const Home: NextPage = () => {
-  const accessToken = useAuth(code!);
-  const { token, setToken } = useContext(Context);
-  const router = useRouter();
-
   // set the access token
-  useEffect(() => {
-    if (accessToken) {
-      localStorage.setItem("token", accessToken);
-      setToken(accessToken);
-    }
-  }, [accessToken, setToken]);
 
   // has the user logged in?
   // code != null -> yes, send them to home
   // code == null -> no, send them to login
-
-  useEffect(() => {
-    if (!code) router.push("/login");
-    else if (token !== "") router.push("/home");
-  }, [token, router]);
 
   return (
     <div>

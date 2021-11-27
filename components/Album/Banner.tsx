@@ -9,11 +9,8 @@ import styles from "./Album.module.scss";
 import { getAlbumDuration } from "../../Spotify/SpotifyApi";
 import { convertMillisToMinutes } from "../../utils/utils";
 
-// types
-type Album = SpotifyApi.AlbumObjectFull;
-
 interface BannerProps {
-  album: Album;
+  album: SpotifyApi.AlbumObjectFull;
   artists: SpotifyApi.ArtistObjectFull[];
 }
 

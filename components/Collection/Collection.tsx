@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import { Layout } from "../Layout/Layout";
 import { Header } from "../Header/Header";
 import { Selector } from "./Selector";
 import { SongsCard } from "./SongsCard";
 
-import { getUserLibrary, getUserLikedSongs } from "../../Spotify/SpotifyApi";
-
 import styles from "./Collection.module.scss";
 import { Cards } from "./Playlists";
+import { useSession } from "next-auth/react";
+import { useSpotify } from "../../hooks/useSpotify";
 
 type Playlists = SpotifyApi.PlaylistObjectSimplified[];
 type Artists = SpotifyApi.ArtistObjectFull[];
@@ -26,16 +25,34 @@ export const Collection: React.FC<{}> = ({}) => {
   const [likedSongs, setLikedSongs] = useState<LikedSongs>({} as LikedSongs);
   const [selector, setSelector] = useState(0);
 
+  const { status } = useSession();
+  const spotifyApi = useSpotify();
+
   useEffect(() => {
     const getData = async () => {
-      const data = await getUserLibrary();
-      const tracks = await getUserLikedSongs();
+      const playlists = await spotifyApi.getUserPlaylists();
+      const artists = await spotifyApi.getFollowedArtists();
+      const albums = await (
+        await spotifyApi.getMySavedAlbums()
+      ).body.items.map((item) => item.album);
+
+      const test = await spotifyApi.getMySavedAlbums();
+      console.log(test.body.total);
+
+      const data = {
+        playlists: playlists.body.items,
+        artists: artists.body.artists.items,
+        albums: albums,
+      };
+      const tracks = await (
+        await spotifyApi.getMySavedTracks()
+      ).body.items.map((item) => item.track);
 
       setUserLibrary(data);
       setLikedSongs(tracks);
     };
-    getData();
-  }, []);
+    if (status === "authenticated") getData();
+  }, [spotifyApi, status]);
 
   return (
     <div>

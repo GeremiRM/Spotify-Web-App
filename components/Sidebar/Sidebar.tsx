@@ -1,5 +1,4 @@
-// libraries
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -13,32 +12,37 @@ import { RiAddBoxFill } from "react-icons/ri";
 
 // components
 import { SidebarOption } from "./SidebarOption";
-import { getUserPlaylists } from "../../Spotify/SpotifyApi";
+import { useSpotify } from "../../hooks/useSpotify";
+import { useSession } from "next-auth/react";
 
 type Playlists = SpotifyApi.PlaylistObjectSimplified[];
 
 export const Sidebar: React.FC<{}> = ({}) => {
-  const [playlists, setPlaylists] = useState<Playlists>();
+  const [playlists, setPlaylists] = useState<Playlists>([] as Playlists);
+  const { status } = useSession();
+
   const router = useRouter();
   const location = router.pathname;
 
+  const spotifyApi = useSpotify();
+
   useEffect(() => {
     const getData = async () => {
-      const data = await getUserPlaylists();
-      setPlaylists(data);
+      const data = await spotifyApi.getUserPlaylists();
+      setPlaylists(data.body.items);
     };
-    getData();
-    return;
-  }, []);
+    if (status === "authenticated") getData();
+  }, [status, spotifyApi]);
 
   const renderPlaylistsNames = () => {
-    return playlists?.map((playlist) => (
-      <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
-        <a>
-          <p className={styles.sidebar__playlistName}>{playlist.name}</p>
-        </a>
-      </Link>
-    ));
+    if (playlists.length !== 0)
+      return playlists?.map((playlist) => (
+        <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
+          <a>
+            <p className={styles.sidebar__playlistName}>{playlist.name}</p>
+          </a>
+        </Link>
+      ));
   };
 
   return (

@@ -14,6 +14,9 @@ interface TopResultProps {
 }
 
 export const TopResult: React.FC<TopResultProps> = ({ data }) => {
+
+  if(!data) return <></>
+
   return (
     <Link href={`/${data?.type}/${data?.id}`} passHref>
       <div className={styles.card}>

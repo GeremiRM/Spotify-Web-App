@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { Layout } from "../Layout/Layout";
 import { Header } from "../Header/Header";
-import {
-  getUser,
-  getFeaturedPlaylists,
-  getUserRecommendations,
-  getUserRecentlyPlayedTracks,
-  getNewReleases,
-  getUserTopArtists,
-} from "../../Spotify/SpotifyApi";
 
 import styles from "./Home.module.scss";
-import { Cards } from "../Shared/Cards";
+import { Cards } from "../Common/Cards";
+import { useSession } from "next-auth/react";
+import { useSpotify } from "../../hooks/useSpotify";
 
 type User = SpotifyApi.CurrentUsersProfileResponse;
 type FeaturedPlaylists = SpotifyApi.PlaylistObjectSimplified[];
@@ -42,28 +35,41 @@ export const Home: React.FC<{}> = ({}) => {
     {} as UserPlaylists
   );
 
+  const { status } = useSession();
+  const spotifyApi = useSpotify();
+
   useEffect(() => {
     const getData = async () => {
-      const data = await getUser();
-      const recs = await getUserRecommendations();
-      const featuredPlaylists = await getFeaturedPlaylists();
-      const recentlyPlayed = await getUserRecentlyPlayedTracks();
-      const newReleases = await getNewReleases();
-      const topArtists = await getUserTopArtists();
+      const data = await spotifyApi.getMe();
+      const topArtists = await spotifyApi.getMyTopArtists();
+      const newReleases = await spotifyApi.getNewReleases();
+      const featuredPlaylists = await spotifyApi.getFeaturedPlaylists();
 
-      setUser(data);
+      const recentlyPlayed = await (
+        await spotifyApi.getMyRecentlyPlayedTracks()
+      ).body.items.map((item) => item.track);
+
+      const recs = await spotifyApi.getRecommendations({
+        seed_artists: [
+          topArtists.body.items[0].id,
+          topArtists.body.items[1].id,
+        ],
+        min_popularity: 40,
+      });
+
+      setUser(data.body);
       setUserPlaylists({
-        recs: recs,
+        recs: recs.body.tracks,
         recentlyPlayed: recentlyPlayed,
-        featured: featuredPlaylists,
-        newReleases: newReleases,
-        topArtists: topArtists,
+        featured: featuredPlaylists.body.playlists.items,
+        newReleases: newReleases.body.albums.items,
+        topArtists: topArtists.body.items,
       });
     };
-    getData();
-  }, []);
+    if (status === "authenticated") getData();
+  }, [spotifyApi, status]);
 
-  const renderTrackCards = () => {
+  const renderCards = () => {
     let cards = [];
     for (let type in userPlaylists) {
       // @ts-expect-error
@@ -85,7 +91,7 @@ export const Home: React.FC<{}> = ({}) => {
         Object.keys(userPlaylists).length !== 0 && (
           <div className={styles.home}>
             <div className={styles.home__body}>
-              <div className={styles.home__results}>{renderTrackCards()}</div>
+              <div className={styles.home__results}>{renderCards()}</div>
             </div>
           </div>
         )}

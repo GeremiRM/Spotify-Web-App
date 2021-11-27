@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+// styling and icons
 import styles from "./Track.module.scss";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
+// util
 import { convertMillisToMinutes } from "../../utils/utils";
-import {
-  addToSaved,
-  containedInSavedTrack,
-  getTrackAlbum,
-  removeFromSaved,
-} from "../../Spotify/SpotifyApi";
 
+// hook
+import { useSpotify } from "../../hooks/useSpotify";
+
+// types
 type Track = SpotifyApi.TrackObjectFull | SpotifyApi.TrackObjectSimplified;
 type TrackAlbum = SpotifyApi.AlbumObjectSimplified;
 
@@ -26,21 +26,23 @@ export const Track: React.FC<TrackProps> = ({ track, idx }) => {
   const [isSavedTrack, setIsSavedTrack] = useState(false);
   const trackDuration = convertMillisToMinutes(track!.duration_ms);
 
-  // if track doesn't include track album
-  // search for it manually
+  const spotifyApi = useSpotify();
+
   useEffect(() => {
     const getData = async () => {
-      const savedTrack = await containedInSavedTrack(track.id);
+      const savedTrack = await spotifyApi.containsMySavedTracks([track.id]);
+      // if track doesn't include track album
+      // search for it manually
       const album = track.hasOwnProperty("album")
         ? track.album
-        : await getTrackAlbum(track.id);
+        : (await spotifyApi.getTrack(track.id)).body.album;
 
       setIsSavedTrack(savedTrack.body[0]);
       setTrackAlbum(album);
     };
 
     getData();
-  }, [track]);
+  }, [track, spotifyApi]);
 
   const renderArtists = () => {
     return track.artists.map((artist, idx, array) => (
@@ -51,8 +53,8 @@ export const Track: React.FC<TrackProps> = ({ track, idx }) => {
   };
 
   const changeSavedState = async () => {
-    if (isSavedTrack) removeFromSaved(track.id);
-    else addToSaved(track.id);
+    if (isSavedTrack) spotifyApi.removeFromMySavedTracks([track.id]);
+    else spotifyApi.addToMySavedTracks([track.id]);
     setIsSavedTrack(!isSavedTrack);
   };
 

@@ -1,8 +1,7 @@
 import queryString from "query-string";
+import SpotifyWebApi from "spotify-web-api-node";
 
 const AUTH_URL = "https://accounts.spotify.com/authorize?";
-const CLIENT_ID = "a03ca82d335e44e3a1da43b717149629";
-const REDIRECT_URI = "http://localhost:3000";
 const SCOPES = [
   "user-library-modify",
   "user-library-read",
@@ -14,19 +13,28 @@ const SCOPES = [
   "user-top-read",
   "user-read-private",
   "user-read-email",
+  "playlist-read-private",
+  "playlist-read-collaborative",
+  "playlist-modify-private",
+  "playlist-modify-public",
 ].join("%20");
 
 // Whether or not to force the user to approve the app again
 const DIALOG = false;
 
-const URL =
+const SPOTIFY_URL =
   AUTH_URL +
   queryString.stringify({
-    client_id: CLIENT_ID,
-    redirect_uri: REDIRECT_URI,
     scope: SCOPES,
     response_type: "code",
     show_dialog: DIALOG,
   });
 
-export default URL;
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.NEXT_PUBLIC_CLIENT_ID!,
+  clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET!,
+});
+
+export { SPOTIFY_URL };
+
+export { spotifyApi };

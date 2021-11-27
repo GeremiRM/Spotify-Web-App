@@ -122,9 +122,8 @@ export const getArtist = async (id: string) => {
 };
 
 export const getArtistAlbums = async (id: string) => {
-  //@ts-expect-error
   const data = await spotifyApi.getArtistAlbums(id, { album_type: "album" });
-  //@ts-expect-error
+
   return data.body.items;
 };
 

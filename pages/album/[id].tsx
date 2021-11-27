@@ -1,11 +1,8 @@
-// libraries
-import React from "react";
-
 // components
 import { Album } from "../../components/Album/Album";
 
-export const artist: React.FC<{}> = ({}) => {
+export const album: React.FC<{}> = () => {
   return <Album />;
 };
 
-export default artist;
+export default album;

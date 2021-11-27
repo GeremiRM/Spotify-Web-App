@@ -29,7 +29,7 @@ export const Selector: React.FC<SelectorProps> = ({
         className={`${styles.selection} ${selector === 2 ? styles.active : ""}`}
         onClick={() => setSelector(2)}
       >
-        <p>Artists</p>
+        <p>Albums</p>
       </div>
     </div>
   );

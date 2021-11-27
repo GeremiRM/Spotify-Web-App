@@ -1,22 +1,20 @@
 import React from "react";
-import Image from "next/image";
 
 // styling
 import styles from "./Playlist.module.scss";
 import { convertMillisToMinutes } from "../../utils/utils";
-import { getPlaylistDuration } from "../../Spotify/SpotifyApi";
-
-// types
-type Playlist = SpotifyApi.PlaylistObjectFull;
 
 interface BannerProps {
-  playlist: Playlist;
+  playlist: SpotifyApi.PlaylistObjectFull;
+  tracks: SpotifyApi.TrackObjectFull[];
 }
 
-export const Banner: React.FC<BannerProps> = ({ playlist }) => {
-  const playlistDuration = convertMillisToMinutes(
-    getPlaylistDuration(playlist)
-  );
+export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
+  const getPlaylistDuration = () => {
+    let totalDuration = 0;
+    tracks.map((track) => (totalDuration += track.duration_ms));
+    return convertMillisToMinutes(totalDuration);
+  };
 
   if (Object.keys(playlist).length === 0) return <></>;
 
@@ -56,7 +54,9 @@ export const Banner: React.FC<BannerProps> = ({ playlist }) => {
           <div className={styles.playlist__tracks}>
             {playlist.tracks.items.length} songs,{" "}
           </div>
-          <div className={styles.playlist__duration}>{playlistDuration}</div>
+          <div className={styles.playlist__duration}>
+            {getPlaylistDuration()}
+          </div>
         </div>
       </div>
     </div>

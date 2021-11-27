@@ -1,30 +1,23 @@
-// libraries
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 // components
 import { Header } from "../Header/Header";
-import { Layout } from "../Layout/Layout";
 import { Banner } from "./Banner";
-import { Cards } from "../Shared/Cards";
+import { Tracklist } from "../Common/Tracklist";
+import { Cards } from "../Common/Cards";
 
 // styling
 import styles from "./Artist.module.scss";
 
 // types
-import {
-  Artist as ArtistType,
-  AlbumList as Albums,
-  TracksList as Tracks,
-  ArtistsList as Artists,
-} from "../../types/types";
-import {
-  getArtist,
-  getArtistAlbums,
-  getArtistTopTracks,
-  getRelatedArtists,
-} from "../../Spotify/SpotifyApi";
-import { Tracklist } from "../Shared/Tracklist";
+type ArtistType = SpotifyApi.SingleArtistResponse;
+type Albums = SpotifyApi.AlbumObjectSimplified[];
+type Tracks = SpotifyApi.TrackObjectFull[];
+type Artists = SpotifyApi.ArtistObjectFull[];
+
+// hook
+import { useSpotify } from "../../hooks/useSpotify";
 
 // interface
 interface Data {
@@ -32,7 +25,7 @@ interface Data {
   relatedArtists: Artists;
 }
 
-const cardsTitle = {
+const cardsTitles = {
   albums: "Albums",
   relatedArtists: "Fans Also Like",
 };
@@ -42,43 +35,42 @@ export const Artist: React.FC<{}> = ({}) => {
   const [artistData, setArtistData] = useState<Data>({} as Data);
   const [artistTracks, setArtistTracks] = useState<Tracks>({} as Tracks);
 
+  const spotifyApi = useSpotify();
+
   const [seeMore, setSeeMore] = useState(false);
 
-  // get artist id
+  // artist id
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getArtist(id as string);
-      const albums = await getArtistAlbums(id as string);
-      const tracks = await getArtistTopTracks(id as string);
-      const relatedArts = await getRelatedArtists(id as string);
+      const data = await spotifyApi.getArtist(id as string);
+      const albums = await spotifyApi.getArtistAlbums(id as string);
+      const topTracks = await spotifyApi.getArtistTopTracks(id as string, "US");
+      const relatedArts = await spotifyApi.getArtistRelatedArtists(
+        id as string
+      );
 
-      // artist info
-      setArtist(data);
+      setArtist(data.body);
       setArtistData({
-        albums: albums,
-        relatedArtists: relatedArts,
+        albums: albums.body.items,
+        relatedArtists: relatedArts.body.artists,
       });
-      setArtistTracks(tracks);
+      setArtistTracks(topTracks.body.tracks);
     };
     if (id) getData();
-  }, [id]);
+  }, [id, spotifyApi]);
 
   const renderCards = () => {
-    let cards = [];
-    for (let type in artistData) {
-      // @ts-expect-error
-      const data = artistData[type];
-      if (data?.length > 0) {
-        cards.push(
-          // @ts-expect-error
-          <Cards data={data} title={cardsTitle[type]} key={type} />
-        );
-      }
-    }
-    return cards;
+    return Object.values(artistData).map((data) => (
+      <Cards
+        data={data!}
+        //@ts-expect-error
+        title={cardsTitles[data![0].type]}
+        key={data![0].type}
+      />
+    ));
   };
 
   return (
@@ -87,8 +79,11 @@ export const Artist: React.FC<{}> = ({}) => {
       {Object.keys(artist!).length !== 0 &&
         Object.keys(artistTracks!).length !== 0 && (
           <div className={styles.artist}>
+            {/* Banner */}
             <Banner artist={artist} />
+
             <div className={styles.body}>
+              {/* Tracklist */}
               <div className={styles.tracks}>
                 <h2 className={styles.tracks__title}>Popular</h2>
                 <div className={styles.tracks__tracklist}>
@@ -103,6 +98,8 @@ export const Artist: React.FC<{}> = ({}) => {
                   {seeMore ? "See Less" : "See More"}
                 </p>
               </div>
+
+              {/* Cards */}
               <div className={styles.cards}>{renderCards()}</div>
             </div>
           </div>
