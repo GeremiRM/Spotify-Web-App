@@ -6,20 +6,15 @@
     grid-template-columns: 45% 25% 18%;
     gap: 4%;
     text-transform: uppercase;
-    color: #aaa;
+    color: #ccc;
     letter-spacing: 1px;
     border-bottom: 1px solid #222;
     padding: 0.75rem 1rem;
     font-size: 0.85rem;
     margin-bottom: 1rem;
-  }
-
-  &__onTop {
-    position: sticky;
-    top: 0;
-    background: #121212;
     top: 50px;
-    width: 100%;
+    position: sticky;
+    background: #121212;
     z-index: 100;
   }
 
@@ -29,10 +24,6 @@
     p {
       margin-right: 1rem;
     }
-  }
-
-  &__album {
-    text-align: center;
   }
 
   &__duration {

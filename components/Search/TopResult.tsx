@@ -14,12 +14,31 @@ interface TopResultProps {
 }
 
 export const TopResult: React.FC<TopResultProps> = ({ data }) => {
+  const saveSearch = () => {
+    const search = data;
 
-  if(!data) return <></>
+    // if searches doesn't exist in localStorage, intialize data
+    if (!window.localStorage.getItem("searches"))
+      window.localStorage.setItem("searches", JSON.stringify([search]));
+    // otherwise, just get the data
+    else {
+      const oldSearches: any[] = JSON.parse(
+        window.localStorage.getItem("searches")!
+      );
+
+      // if search is not already in pastSearches, add it
+      if (oldSearches.findIndex((item) => item.id === search.id) === -1)
+        window.localStorage.setItem(
+          "searches",
+          JSON.stringify([search, ...oldSearches])
+        );
+    }
+  };
+  if (!data) return <></>;
 
   return (
     <Link href={`/${data?.type}/${data?.id}`} passHref>
-      <div className={styles.card}>
+      <div className={styles.card} onClick={() => saveSearch()}>
         <div className={styles.card__image}>
           <div
             className={`${data?.type === "artist" ? styles.artist : ""} ${

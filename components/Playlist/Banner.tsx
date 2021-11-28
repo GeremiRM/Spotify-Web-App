@@ -1,7 +1,9 @@
-import React from "react";
+import Image from "next/image";
 
 // styling
 import styles from "./Playlist.module.scss";
+
+//func
 import { convertMillisToMinutes } from "../../utils/utils";
 
 interface BannerProps {
@@ -28,7 +30,10 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
       #333 95%)`,
       }}
     >
-      <div className={styles.playlist__cover}></div>
+      <div className={styles.playlist__cover}>
+        {/*eslint-disable-next-line @next/next/no-img-element  */}
+        <img src={playlist.images[0].url} alt={playlist.name} />
+      </div>
       <div className={styles.playlist__info}>
         <div className={styles.playlist__name}>
           <h1

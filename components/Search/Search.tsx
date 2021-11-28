@@ -9,12 +9,14 @@ import { Header } from "../Header/Header";
 import { TopResult } from "./TopResult";
 import { Tracklist } from "../Common/Tracklist";
 import { Cards } from "../Common/Cards";
+import { Genres } from "./Genres";
 
 // hook
 import { useSpotify } from "../../hooks/useSpotify";
 
 // types
 import { Results } from "../../types/types";
+import { PastSearches } from "./PastSearches";
 type Tracks = SpotifyApi.TrackObjectFull[];
 type Event = React.ChangeEvent<HTMLInputElement>;
 
@@ -91,6 +93,12 @@ export const Search: React.FC<{}> = ({}) => {
         </div>
       </Header>
       <div className={styles.search}>
+        {searchInput === "" && (
+          <div>
+            <PastSearches />
+            <Genres />
+          </div>
+        )}
         {/* Query empty? */}
         {searchInput !== "" && Object.keys(searchResults).length !== 0 && (
           <div className={styles.search__body}>

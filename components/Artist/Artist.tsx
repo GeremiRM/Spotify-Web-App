@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 // components
 import { Header } from "../Header/Header";
@@ -10,14 +11,14 @@ import { Cards } from "../Common/Cards";
 // styling
 import styles from "./Artist.module.scss";
 
+// hook
+import { useSpotify } from "../../hooks/useSpotify";
+
 // types
 type ArtistType = SpotifyApi.SingleArtistResponse;
 type Albums = SpotifyApi.AlbumObjectSimplified[];
 type Tracks = SpotifyApi.TrackObjectFull[];
 type Artists = SpotifyApi.ArtistObjectFull[];
-
-// hook
-import { useSpotify } from "../../hooks/useSpotify";
 
 // interface
 interface Data {
@@ -36,6 +37,7 @@ export const Artist: React.FC<{}> = ({}) => {
   const [artistTracks, setArtistTracks] = useState<Tracks>({} as Tracks);
 
   const spotifyApi = useSpotify();
+  const { status } = useSession();
 
   const [seeMore, setSeeMore] = useState(false);
 
@@ -59,16 +61,18 @@ export const Artist: React.FC<{}> = ({}) => {
       });
       setArtistTracks(topTracks.body.tracks);
     };
-    if (id) getData();
-  }, [id, spotifyApi]);
+    if (id && status === "authenticated") getData();
+  }, [id, spotifyApi, status]);
 
   const renderCards = () => {
-    return Object.values(artistData).map((data) => (
+    console.log(Object.entries(artistData));
+
+    return Object.entries(artistData).map((data) => (
       <Cards
-        data={data!}
+        data={data[1]}
         //@ts-expect-error
-        title={cardsTitles[data![0].type]}
-        key={data![0].type}
+        title={cardsTitles[data[0]]}
+        key={data[0]}
       />
     ));
   };

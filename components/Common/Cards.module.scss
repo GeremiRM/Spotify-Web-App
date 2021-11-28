@@ -4,7 +4,6 @@
   padding: 0 1rem;
   overflow: hidden;
   margin-top: 1rem;
-  font-family: "Rubik";
   margin-bottom: 3rem;
 
   &__header {
@@ -26,7 +25,7 @@
     font-size: 1.5rem;
   }
 
-  // one single row
+  // one row
   &__cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -36,8 +35,8 @@
   }
 
   // multiple rows
-  .multi-row {
-    grid-template-columns: none;
+  .multirow {
     grid-auto-rows: auto;
+    grid-template-rows: auto;
   }
 }

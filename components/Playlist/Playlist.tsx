@@ -25,11 +25,15 @@ export const Playlist: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await spotifyApi.getPlaylist(id as string);
-      const tracks = data.body.tracks.items.map((item) => item.track);
+      try {
+        const data = await spotifyApi.getPlaylist(id as string);
+        const tracks = data.body.tracks.items.map((item) => item.track);
 
-      setPlaylist(data.body);
-      setTracks(tracks);
+        setPlaylist(data.body);
+        setTracks(tracks);
+      } catch (err) {
+        console.error(err);
+      }
     };
     if (id && status === "authenticated") getData();
   }, [id, spotifyApi, status]);

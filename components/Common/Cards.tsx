@@ -15,6 +15,7 @@ interface Cards {
   title: string;
   ignoreCard?: string;
   hideLink?: boolean;
+  multirow?: boolean;
 }
 
 export const Cards: React.FC<Cards> = ({
@@ -22,6 +23,7 @@ export const Cards: React.FC<Cards> = ({
   title,
   ignoreCard,
   hideLink,
+  multirow,
 }) => {
   const renderCards = () => {
     return data?.map((info) => {
@@ -47,7 +49,13 @@ export const Cards: React.FC<Cards> = ({
           </div>
         )}
       </div>
-      <div className={styles.wrapper__cards}>{renderCards()}</div>
+      <div
+        className={`${styles.wrapper__cards} ${
+          multirow ? styles.multirow : ""
+        }`}
+      >
+        {renderCards()}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 // components
 import { Header } from "../Header/Header";
@@ -24,6 +25,7 @@ export const Album: React.FC<{}> = () => {
   const [otherAlbums, setOtherAlbums] = useState<OtherAlbums>([]);
 
   const spotifyApi = useSpotify();
+  const { status } = useSession();
 
   // album id
   const router = useRouter();
@@ -47,8 +49,8 @@ export const Album: React.FC<{}> = () => {
       setArtists(artists.body.artists);
       setOtherAlbums(artistsAlbums.body.items);
     };
-    if (id) getData();
-  }, [id, spotifyApi]);
+    if (id && status === "authenticated") getData();
+  }, [id, spotifyApi, status]);
 
   return (
     <div>

@@ -4,7 +4,7 @@
   gap: 4%;
   padding: 0.5rem 0.75rem;
   margin-bottom: 0.25rem;
-  color: #aaa;
+  color: #ccc;
   font-size: 0.9rem;
   border-radius: 5px;
   transition: 0.1s all ease;
@@ -85,7 +85,6 @@
   &__album {
     display: flex;
     align-items: center;
-    justify-content: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
