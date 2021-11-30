@@ -31,7 +31,7 @@ export const Banner: React.FC<BannerProps> = ({ amountSongs }) => {
         />
       </div>
       <div className={styles.playlist__info}>
-        <div className={styles.playlist__name}>
+        <div className={styles.playlist__title}>
           <h1
             style={{
               fontSize: `clamp(4rem,5vw, 7rem)`,

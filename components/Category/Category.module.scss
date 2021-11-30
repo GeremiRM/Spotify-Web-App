@@ -4,6 +4,7 @@
   overflow: hidden;
   color: white;
   padding-bottom: 2.5rem;
+  font-family: "Proxima Nova", sans-serif;
 
   &__banner {
     min-height: 275px;
@@ -16,7 +17,6 @@
   &__title {
     h1 {
       font-size: clamp(5rem, 7.75vw, 6rem);
-      font-family: "Montserrat", sans-serif;
     }
   }
 }

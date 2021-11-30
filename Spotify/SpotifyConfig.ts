@@ -35,6 +35,4 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET!,
 });
 
-export { SPOTIFY_URL };
-
-export { spotifyApi };
+export { SPOTIFY_URL, spotifyApi };

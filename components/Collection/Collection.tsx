@@ -28,8 +28,10 @@ export const Collection: React.FC<{}> = ({}) => {
   const [likedSongs, setLikedSongs] = useState<LikedSongs>({} as LikedSongs);
   const [selector, setSelector] = useState(0);
 
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const spotifyApi = useSpotify();
+
+  console.log(session);
 
   useEffect(() => {
     const getData = async () => {

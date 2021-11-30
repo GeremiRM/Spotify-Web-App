@@ -1,5 +1,4 @@
-// libraries
-import React from "react";
+import Image from "next/image";
 
 // styling
 import styles from "./Artist.module.scss";
@@ -9,31 +8,32 @@ interface BannerProps {
   artist: SpotifyApi.ArtistObjectFull;
 }
 
-const randomBackground = () => {
-  return `rgb(${Math.floor(Math.random() * 255)},${Math.floor(
-    Math.random() * 150 + 105
-  )},${Math.floor(Math.random() * 255)})`;
-};
-
 export const Banner: React.FC<BannerProps> = ({ artist }) => {
   if (!artist) return <></>;
   return (
-    <div
-      className={styles.artist__banner}
-      style={{
-        background: `linear-gradient(
-      0deg,
-      #121212 30%,
-      ${randomBackground()} 95%)`,
-      }}
-    >
+    <div className={styles.artist__banner}>
+      <div className={styles.artist__cover}>
+        <Image
+          src={artist.images[0].url || "/placeholder.png"}
+          width="100%"
+          height="100%"
+          layout="responsive"
+          alt={artist.name}
+          objectFit="cover"
+        />
+      </div>
       <div className={styles.artist__info}>
-        <div className={styles.artist__info__verified}>Verified Artist</div>
-        <div className={styles.artist__info__name}>
-          <h1>{artist.name}</h1>
+        <div className={styles.artist__name}>
+          <h1
+            style={{
+              fontSize: `clamp(2.75rem,calc(5.75vw - ${artist.name.length}px), 7rem)`,
+            }}
+          >
+            {artist.name}
+          </h1>
         </div>
-        <div className={styles.artist__info__followers}>
-          <p>{artist.followers?.total.toLocaleString()} followers</p>
+        <div className={styles.artist__desc}>
+          {artist.followers.total.toLocaleString()} followers
         </div>
       </div>
     </div>

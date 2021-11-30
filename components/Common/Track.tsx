@@ -5,12 +5,14 @@ import Link from "next/link";
 // styling and icons
 import styles from "./Track.module.scss";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 // util
 import { convertMillisToMinutes } from "../../utils/utils";
 
 // hook
 import { useSpotify } from "../../hooks/useSpotify";
+import { useSession } from "next-auth/react";
 
 // types
 type Track = SpotifyApi.TrackObjectFull | SpotifyApi.TrackObjectSimplified;
@@ -19,14 +21,16 @@ type TrackAlbum = SpotifyApi.AlbumObjectSimplified;
 interface TrackProps {
   track: Track;
   idx: number;
+  hideAlbum?: boolean;
 }
 
-export const Track: React.FC<TrackProps> = ({ track, idx }) => {
+export const Track: React.FC<TrackProps> = ({ track, idx, hideAlbum }) => {
   const [trackAlbum, setTrackAlbum] = useState<TrackAlbum>({} as TrackAlbum);
   const [isSavedTrack, setIsSavedTrack] = useState(false);
   const trackDuration = convertMillisToMinutes(track!.duration_ms);
 
   const spotifyApi = useSpotify();
+  const { status } = useSession();
 
   useEffect(() => {
     const getData = async () => {
@@ -41,8 +45,8 @@ export const Track: React.FC<TrackProps> = ({ track, idx }) => {
       setTrackAlbum(album);
     };
 
-    getData();
-  }, [track, spotifyApi]);
+    if (status === "authenticated") getData();
+  }, [track, spotifyApi, status]);
 
   const renderArtists = () => {
     return track.artists.map((artist, idx, array) => (
@@ -62,7 +66,9 @@ export const Track: React.FC<TrackProps> = ({ track, idx }) => {
     return <></>;
 
   return (
-    <div className={styles.track}>
+    <div
+      className={`${styles.track} ${hideAlbum ? styles.track__noAlbum : ""}`}
+    >
       <div className={styles.track__header}>
         <div className={styles.track__index}>
           <p>{idx}</p>
@@ -85,11 +91,13 @@ export const Track: React.FC<TrackProps> = ({ track, idx }) => {
           </div>
         </div>
       </div>
-      <div className={styles.track__album}>
-        <Link href={`/album/${trackAlbum.id}`} passHref>
-          <p>{trackAlbum.name}</p>
-        </Link>
-      </div>
+      {!hideAlbum && (
+        <div className={styles.track__album}>
+          <Link href={`/album/${trackAlbum.id}`} passHref>
+            <p>{trackAlbum.name}</p>
+          </Link>
+        </div>
+      )}
       <div className={styles.track__duration}>
         <div onClick={() => changeSavedState()}>
           {isSavedTrack ? (
@@ -104,6 +112,7 @@ export const Track: React.FC<TrackProps> = ({ track, idx }) => {
         </div>
         <p>{trackDuration}</p>
       </div>
+      {/* <BiDotsHorizontalRounded className={styles.track__options} /> */}
     </div>
   );
 };

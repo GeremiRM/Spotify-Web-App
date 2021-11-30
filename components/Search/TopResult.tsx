@@ -54,10 +54,10 @@ export const TopResult: React.FC<TopResultProps> = ({ data }) => {
               objectFit="cover"
             />
           </div>
-          <div className={styles.card__info}>
-            <h2 className={styles.card__title}>{data?.name}</h2>
-            <p className={`${styles.card__desc}`}>{data.type}</p>
-          </div>
+        </div>
+        <div className={styles.card__info}>
+          <h2 className={styles.card__title}>{data?.name}</h2>
+          <p className={`${styles.card__desc}`}>{data.type}</p>
         </div>
       </div>
     </Link>

@@ -40,13 +40,38 @@ export default NextAuth({
   pages: {
     signIn: "/login",
   },
+
+  events: {
+    async signIn(message) {
+      console.log(message, "hola");
+    },
+    async signIn(message) {
+      console.log(message, "hola");
+    },
+    async signOut(message) {
+      console.log(message, "hola");
+    },
+    async createUser(message) {
+      console.log(message, "hola");
+    },
+    async updateUser(message) {
+      console.log(message, "hola");
+    },
+    async linkAccount(message) {
+      console.log(message, "hola");
+    },
+    async session(message) {
+      console.log(message, "hola");
+    },
+  },
   callbacks: {
     async jwt({ account, token, user }) {
       // Initial sign in
       if (account && user) {
+        console.log(account);
         return {
           ...token,
-          acessToken: account.access_token,
+          accessToken: account.access_token,
           refreshToken: account.refresh_token,
           username: account.providerAccountId,
           accessTokenExpires: account.expires_at! * 1000,

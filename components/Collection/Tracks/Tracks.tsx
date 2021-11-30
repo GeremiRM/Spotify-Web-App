@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
+// styling
 import styles from "./Tracks.module.scss";
 
+// components
 import { Header } from "../../Header/Header";
 import { Tracklist } from "../../Common/Tracklist";
 import { Banner } from "./Banner";
 
 type Tracks = SpotifyApi.TrackObjectFull[];
 
-// functions
+// hooks
 import { useSpotify } from "../../../hooks/useSpotify";
-import { useSession } from "next-auth/react";
 
 export const Tracks: React.FC<{}> = ({}) => {
   const [tracks, setTracks] = useState<Tracks>([] as Tracks);
@@ -20,7 +22,7 @@ export const Tracks: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await spotifyApi.getMySavedTracks();
+      const data = await spotifyApi.getMySavedTracks({ limit: 50 });
       const savedTracks = data.body.items.map((item) => item.track);
       setTracks(savedTracks);
     };

@@ -12,10 +12,27 @@
   &__tracks {
     display: grid;
     row-gap: 2rem;
+
+    @media (min-width: 1000px) {
+      display: flex;
+    }
+  }
+
+  &__tracklist {
+    flex: 3;
   }
 
   &__topResult {
     margin-left: 1.5rem;
+
+    @media (min-width: 800px) {
+      min-width: 200px;
+      max-width: 500px;
+      margin-right: 1rem;
+      width: 100%;
+      flex: 1;
+      overflow: hidden;
+    }
 
     &__title {
       font-size: 1.5rem;
@@ -31,7 +48,7 @@
   background: white;
   color: gray;
   width: 350px;
-  border-radius: 1000px;
+  border-radius: 20px;
   padding: 1.3rem 0;
   padding-left: 1rem;
 

@@ -7,7 +7,10 @@ export const convertMillisToMinutes = (millis: number) => {
 export const filterRepeated = (list: any) => {
   return list?.filter(
     (v: { name: any }, i: any, a: any[]) =>
-      a.findIndex((t: { name: any }) => t.name === v.name) === i
+      a.findIndex(
+        (t: { name: string }) =>
+          t.name.toLocaleLowerCase() === v.name.toLocaleLowerCase()
+      ) === i
   );
 };
 ``;

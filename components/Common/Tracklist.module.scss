@@ -1,5 +1,5 @@
 .tracklist {
-  padding: 0.5rem 1rem;
+  font-family: "Proxima Nova", sans-serif;
 
   &__header {
     display: grid;
@@ -8,14 +8,26 @@
     text-transform: uppercase;
     color: #ccc;
     letter-spacing: 1px;
-    border-bottom: 1px solid #222;
-    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 0.75rem 1.5rem;
     font-size: 0.85rem;
     margin-bottom: 1rem;
+    background: transparent;
+  }
+
+  &__noAlbum {
+    grid-template-columns: 72% 20%;
+  }
+
+  &__sticky {
     top: 50px;
     position: sticky;
-    background: #121212;
     z-index: 100;
+    background: #181818;
+  }
+
+  &__body {
+    padding: 0.5rem 1rem;
   }
 
   &__title {

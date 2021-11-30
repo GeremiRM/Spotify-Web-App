@@ -26,16 +26,16 @@ export const Cards: React.FC<Cards> = ({
   multirow,
 }) => {
   const renderCards = () => {
-    return data?.map((info) => {
+    return data?.map((info, idx) => {
       if (info.id === ignoreCard) return "";
-      return <Card info={info} key={info.id} />;
+      return <Card info={info} key={info.id + idx} />;
     });
   };
 
   if (Object.keys(data!).length === 0) return <></>;
 
   // if data are albums, filter repeated albums
-  if (data![0].type === "album") data = filterRepeated(data!);
+  if (data![0]?.type === "album") data = filterRepeated(data!);
 
   return (
     <div className={styles.wrapper}>

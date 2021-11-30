@@ -17,6 +17,7 @@ import { useSpotify } from "../../hooks/useSpotify";
 // types
 import { Results } from "../../types/types";
 import { PastSearches } from "./PastSearches";
+import { useSession } from "next-auth/react";
 type Tracks = SpotifyApi.TrackObjectFull[];
 type Event = React.ChangeEvent<HTMLInputElement>;
 
@@ -29,6 +30,9 @@ export const Search: React.FC<{}> = ({}) => {
   const [trackResults, setTrackResults] = useState<Tracks>({} as Tracks);
 
   const spotifyApi = useSpotify();
+  const { data, status } = useSession();
+
+  console.log(data, status);
 
   // Get albums, artists and playlists results
   const searchAll = useCallback(async () => {
@@ -110,7 +114,9 @@ export const Search: React.FC<{}> = ({}) => {
                 <TopResult data={searchResults.artists![0]} />
               </div>
               {/* Tracklist */}
-              <Tracklist tracks={trackResults} />
+              <div className={styles.search__tracklist}>
+                <Tracklist tracks={trackResults} hideAlbum />
+              </div>
             </div>
 
             {/* Albums, Artists, Playlists Results */}

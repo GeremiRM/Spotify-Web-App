@@ -19,7 +19,13 @@ export const Cards: React.FC<CardsProps> = ({ children, data }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapper__header}>
-        <h3 className={styles.wrapper__header__title}>Playlists</h3>
+        <h3 className={styles.wrapper__header__title}>
+          {data[0].type === "playlist"
+            ? "Playlists"
+            : data[0].type === "album"
+            ? "Albums"
+            : "Artists"}
+        </h3>
       </div>
       <div className={styles.wrapper__body}>
         {children}

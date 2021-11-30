@@ -1,22 +1,27 @@
 .header {
   width: inherit;
-
   position: sticky;
-  top: 0;
+  top: 5px;
   width: 100%;
-  max-width: 80vw;
   z-index: 1000;
 
   .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
     position: absolute;
-    padding: 0.5rem 2rem 0.5rem;
+    padding: 0 2rem;
+    background-color: transparent;
+    transition: 0.25s all ease;
+    height: 50px;
+    width: 100%;
   }
 
   .userMenu {
+    justify-self: flex-end;
+    position: absolute;
+    right: 1rem;
+
     &__avatar {
       height: 1.75rem;
       width: 1.75rem;

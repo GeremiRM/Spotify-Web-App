@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+
+// @ts-ignore
+import analyze from "rgbaster";
+import { usePalette } from "react-palette";
 
 // components
 import { Header } from "../Header/Header";
@@ -12,102 +15,63 @@ import { Cards } from "../Common/Cards";
 import styles from "./Artist.module.scss";
 
 // hook
-import { useSpotify } from "../../hooks/useSpotify";
-
-// types
-type ArtistType = SpotifyApi.SingleArtistResponse;
-type Albums = SpotifyApi.AlbumObjectSimplified[];
-type Tracks = SpotifyApi.TrackObjectFull[];
-type Artists = SpotifyApi.ArtistObjectFull[];
-
-// interface
-interface Data {
-  albums: Albums;
-  relatedArtists: Artists;
-}
-
-const cardsTitles = {
-  albums: "Albums",
-  relatedArtists: "Fans Also Like",
-};
+import { PlayBar } from "./PlayBar";
+import { useArtistInfo } from "../../hooks/useArtistInfo";
+import { useImageColor } from "../../hooks/useImageColor";
 
 export const Artist: React.FC<{}> = ({}) => {
-  const [artist, setArtist] = useState<ArtistType>({} as ArtistType);
-  const [artistData, setArtistData] = useState<Data>({} as Data);
-  const [artistTracks, setArtistTracks] = useState<Tracks>({} as Tracks);
-
-  const spotifyApi = useSpotify();
-  const { status } = useSession();
-
+  const [background, setBackground] = useState("");
   const [seeMore, setSeeMore] = useState(false);
 
   // artist id
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await spotifyApi.getArtist(id as string);
-      const albums = await spotifyApi.getArtistAlbums(id as string);
-      const topTracks = await spotifyApi.getArtistTopTracks(id as string, "US");
-      const relatedArts = await spotifyApi.getArtistRelatedArtists(
-        id as string
-      );
+  const { albums, artist, otherArtists, topTracks } = useArtistInfo(
+    id as string
+  );
 
-      setArtist(data.body);
-      setArtistData({
-        albums: albums.body.items,
-        relatedArtists: relatedArts.body.artists,
-      });
-      setArtistTracks(topTracks.body.tracks);
-    };
-    if (id && status === "authenticated") getData();
-  }, [id, spotifyApi, status]);
-
-  const renderCards = () => {
-    console.log(Object.entries(artistData));
-
-    return Object.entries(artistData).map((data) => (
-      <Cards
-        data={data[1]}
-        //@ts-expect-error
-        title={cardsTitles[data[0]]}
-        key={data[0]}
-      />
-    ));
-  };
+  if (!albums || !artist || !otherArtists || !topTracks) return <></>;
 
   return (
     <div>
       <Header />
-      {Object.keys(artist!).length !== 0 &&
-        Object.keys(artistTracks!).length !== 0 && (
-          <div className={styles.artist}>
-            {/* Banner */}
-            <Banner artist={artist} />
+      <div
+        className={styles.artist}
+        style={{
+          background: `linear-gradient(
+      0deg,
+      #121212 65%,
+      ${background} 100%)`,
+        }}
+      >
+        {/* Banner */}
+        <Banner artist={artist} />
 
-            <div className={styles.body}>
-              {/* Tracklist */}
-              <div className={styles.tracks}>
-                <h2 className={styles.tracks__title}>Popular</h2>
-                <div className={styles.tracks__tracklist}>
-                  <Tracklist
-                    tracks={artistTracks!.slice(0, seeMore ? 10 : 5)}
-                  />
-                </div>
-                <p
-                  onClick={() => setSeeMore(!seeMore)}
-                  className={styles.seeMore}
-                >
-                  {seeMore ? "See Less" : "See More"}
-                </p>
-              </div>
+        <div className={styles.body}>
+          {/* Playbar */}
+          <PlayBar id={artist.id} />
 
-              {/* Cards */}
-              <div className={styles.cards}>{renderCards()}</div>
+          {/* Tracklist */}
+          <div className={styles.tracks}>
+            <h2 className={styles.tracks__title}>Popular</h2>
+            <div className={styles.tracks__tracklist}>
+              <Tracklist tracks={topTracks!.slice(0, seeMore ? 10 : 5)} />
             </div>
+
+            {/* See More */}
+            <p onClick={() => setSeeMore(!seeMore)} className={styles.seeMore}>
+              {seeMore ? "See Less" : "See More"}
+            </p>
           </div>
-        )}
+
+          {/* Cards */}
+          <div className={styles.cards}>
+            <Cards data={albums} title="Albums" />
+            <Cards data={otherArtists} title="Related Artists" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

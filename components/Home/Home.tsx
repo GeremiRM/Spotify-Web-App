@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
-
-import { Header } from "../Header/Header";
-
-import styles from "./Home.module.scss";
-import { Cards } from "../Common/Cards";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useSpotify } from "../../hooks/useSpotify";
 
+// components
+import { Header } from "../Header/Header";
+import { Cards } from "../Common/Cards";
+
+// styling
+import styles from "./Home.module.scss";
+
+// types
 type User = SpotifyApi.CurrentUsersProfileResponse;
 type FeaturedPlaylists = SpotifyApi.PlaylistObjectSimplified[];
 type Tracks = SpotifyApi.TrackObjectFull[];
@@ -70,18 +73,15 @@ export const Home: React.FC<{}> = ({}) => {
   }, [spotifyApi, status]);
 
   const renderCards = () => {
-    let cards = [];
-    for (let type in userPlaylists) {
-      // @ts-expect-error
-      const data = userPlaylists[type];
-      if (data?.length > 0) {
-        cards.push(
-          // @ts-expect-error
-          <Cards data={data} title={cardsTitles[type]} key={type} hideLink />
-        );
-      }
-    }
-    return cards;
+    return Object.entries(userPlaylists).map((data) => (
+      <Cards
+        data={data[1]}
+        // @ts-expect-error
+        title={cardsTitles[data[0]]}
+        key={data[0]}
+        hideLink
+      />
+    ));
   };
 
   return (

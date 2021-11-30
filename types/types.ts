@@ -9,4 +9,5 @@ export type CardsData =
   | SpotifyApi.AlbumObjectSimplified[]
   | SpotifyApi.ArtistObjectFull[]
   | SpotifyApi.PlaylistObjectSimplified[]
+  | SpotifyApi.TrackObjectFull[]
   | undefined;

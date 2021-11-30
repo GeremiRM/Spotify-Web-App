@@ -1,12 +1,9 @@
 .genres {
   gap: 1rem;
   color: white;
-  padding: 0 1rem;
-  margin-top: 1rem;
-  font-family: "Montserrat", sans-serif;
-  margin-bottom: 3rem;
-  font-size: 16px;
-  padding-bottom: 3rem;
+  padding: 0 1rem 3rem;
+  margin: 1rem 0 3rem;
+  font-family: "Proxima Nova", sans-serif;
 
   h2 {
     font-size: 1.4rem;
@@ -22,12 +19,12 @@
 
     .card {
       padding: 1.25rem;
-      position: relative;
+      padding-bottom: 95%;
       display: flex;
+      position: relative;
       flex-direction: column;
       overflow: hidden;
       border-radius: 10px;
-      padding-bottom: 95%;
       cursor: pointer;
       transition: 0.25s all ease;
 
@@ -37,7 +34,7 @@
 
       &__image {
         align-self: flex-end;
-        transform: rotate(25deg) translate(30%, -2%);
+        transform: rotate(25deg) translate(33%, -2%);
         bottom: 0;
         position: absolute;
       }
@@ -45,9 +42,9 @@
       &__title {
         position: relative;
         h3 {
-          font-size: 1.3rem;
+          font-size: 1.4rem;
           position: absolute;
-          font-weight: 600;
+          font-weight: 700;
           overflow-wrap: break-word;
         }
         .ellipsis {

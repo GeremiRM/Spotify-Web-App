@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+
+//@ts-expect-error
+import analyze from "rgbaster";
 
 import styles from "./Playlist.module.scss";
 import { Header } from "../Header/Header";
@@ -16,6 +19,7 @@ type Tracks = SpotifyApi.TrackObjectFull[];
 export const Playlist: React.FC<{}> = ({}) => {
   const [playlist, setPlaylist] = useState<PlaylistType>({} as PlaylistType);
   const [tracks, setTracks] = useState<Tracks>([] as Tracks);
+  const [background, setBackground] = useState("");
 
   const { status } = useSession();
   const spotifyApi = useSpotify();
@@ -25,15 +29,14 @@ export const Playlist: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const data = await spotifyApi.getPlaylist(id as string);
-        const tracks = data.body.tracks.items.map((item) => item.track);
+      const data = await spotifyApi.getPlaylist(id as string);
+      const tracks = data.body.tracks.items.map((item) => item.track);
 
-        setPlaylist(data.body);
-        setTracks(tracks);
-      } catch (err) {
-        console.error(err);
-      }
+      setPlaylist(data.body);
+      setTracks(tracks);
+
+      const result = await analyze(data.body.images[0].url, { scale: 0.25 });
+      setBackground(result[0].color);
     };
     if (id && status === "authenticated") getData();
   }, [id, spotifyApi, status]);
@@ -42,9 +45,17 @@ export const Playlist: React.FC<{}> = ({}) => {
     <div>
       <Header />
       {Object.keys(playlist).length !== 0 && (
-        <div className={styles.playlist}>
+        <div
+          className={styles.playlist}
+          style={{
+            background: `linear-gradient(
+      0deg,
+      #121212 65%,
+      ${background} 100%)`,
+          }}
+        >
           <Banner playlist={playlist} tracks={tracks} />
-          <Tracklist tracks={tracks!} />
+          <Tracklist tracks={tracks!} stickyHeader />
         </div>
       )}
     </div>

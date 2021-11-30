@@ -26,7 +26,7 @@ const Login: React.FC<LoginProps> = ({ providers }) => {
           <button
             className={styles.login__btn}
             key={provider.id}
-            onClick={() => signIn(provider.id, { callbackUrl: "/home" })}
+            onClick={() => signIn(provider.id, { callbackUrl: "/" })}
           >
             Login with {provider.name}
           </button>

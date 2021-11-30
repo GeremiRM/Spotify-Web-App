@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,6 +15,8 @@ interface BannerProps {
 }
 
 export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
+  const bannerRef = useRef<HTMLDivElement>(null);
+
   const albumDuration = convertMillisToMinutes(getAlbumDuration(album));
 
   const renderArtists = () => {
@@ -29,18 +31,10 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
     return <></>;
 
   return (
-    <div
-      className={styles.album__banner}
-      style={{
-        background: `linear-gradient(
-      0deg,
-      #121212 0%,
-      #333 95%)`,
-      }}
-    >
-      <div className={styles.album__cover}>
+    <div className={styles.album__banner}>
+      <div className={styles.album__cover} ref={bannerRef}>
         <Image
-          src={album?.images[1]?.url || "/placeholder.png"}
+          src={album?.images[0]?.url || "/placeholder.png"}
           width="100%"
           height="100%"
           layout="responsive"

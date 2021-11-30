@@ -5,8 +5,12 @@
   border-radius: 5px;
   overflow: hidden;
   margin-top: 1rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Proxima Nova", sans-serif;
   cursor: pointer;
+
+  &:hover {
+    background: #333;
+  }
 
   &__img {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
@@ -39,21 +43,15 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      font-size: 0.9rem;
+      font-size: 1rem;
       margin-bottom: 0.5rem;
     }
 
     &__desc {
-      a {
-        &:hover {
-          text-decoration: underline;
-          color: white;
-        }
+      a:hover {
+        text-decoration: underline;
+        color: white;
       }
     }
-  }
-
-  &:hover {
-    background: #333;
   }
 }

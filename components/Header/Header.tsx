@@ -1,5 +1,5 @@
 // libraries
-import React, { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 // styling
 import styles from "./Header.module.scss";
@@ -8,21 +8,15 @@ interface HeaderProps {
   background?: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  children,
-  background = "transparent",
-}) => {
-  const headerRef = useRef<HTMLDivElement>(null);
+export const Header: React.FC<HeaderProps> = ({ children }) => {
+  const [headerBg, setHeaderBg] = useState("");
 
   const handleScroll = () => {
-    if (typeof window === "undefined" || !headerRef.current) return;
+    if (typeof window === "undefined") return;
 
-    const position = window.scrollY;
-    const { offsetTop } = headerRef.current!;
-
-    if (position > offsetTop) {
-      headerRef.current!.className = `${styles.tracklist__header} ${styles.tracklist__onTop}`;
-    }
+    if (window.scrollY) {
+      setHeaderBg("");
+    } else setHeaderBg("transparent");
   };
 
   useEffect(() => {
@@ -32,8 +26,8 @@ export const Header: React.FC<HeaderProps> = ({
   }, []);
 
   return (
-    <header className={styles.header} style={{ background: background }}>
-      <div className={styles.navigation}>
+    <header className={styles.header}>
+      <div className={`${styles.navigation}`} style={{ background: headerBg }}>
         {children}
         <div className={styles.userMenu}>
           <div className={styles.userMenu__avatar}></div>

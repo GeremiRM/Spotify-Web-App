@@ -8,23 +8,22 @@ import styles from "./Sidebar.module.scss";
 import { FiHome, FiSearch } from "react-icons/fi";
 import { BiLibrary } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
-import { RiAddBoxFill } from "react-icons/ri";
 
 // components
 import { SidebarOption } from "./SidebarOption";
 import { useSpotify } from "../../hooks/useSpotify";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 type Playlists = SpotifyApi.PlaylistObjectSimplified[];
 
 export const Sidebar: React.FC<{}> = ({}) => {
   const [playlists, setPlaylists] = useState<Playlists>([] as Playlists);
-  const { status } = useSession();
 
   const router = useRouter();
   const location = router.pathname;
 
   const spotifyApi = useSpotify();
+  const { status } = useSession();
 
   useEffect(() => {
     const getData = async () => {
@@ -48,7 +47,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
-        <Link href="/home" passHref>
+        <Link href="/" passHref>
           <div className={styles.sidebar__logo}>
             <Image
               src="/header/header_logo.png"
@@ -61,7 +60,14 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
         {/* home - search - library */}
         <div className={styles.sidebar__options}>
-          <Link href="/home">
+          <div
+            onClick={() =>
+              signOut({ callbackUrl: "http://localhost:3000/login" })
+            }
+          >
+            <SidebarOption>LogOut</SidebarOption>
+          </div>
+          <Link href="/">
             <a>
               <SidebarOption icon={FiHome} active={location === "/dashboard"}>
                 Home
@@ -86,7 +92,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
         {/* create playlist - liked songs */}
         <div className={styles.sidebar__options}>
-          <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption>
+          {/* <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption> */}
           <Link href="/collection/tracks">
             <a>
               <SidebarOption icon={AiFillHeart}>Liked Songs</SidebarOption>

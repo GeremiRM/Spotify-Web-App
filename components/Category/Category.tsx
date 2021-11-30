@@ -27,14 +27,18 @@ export const Category: React.FC<{}> = ({}) => {
 
   useEffect(() => {
     const getData = async () => {
-      // get category name
-      const category = await spotifyApi.getCategory(id as string);
-      const data = await spotifyApi.getPlaylistsForCategory(id as string, {
-        limit: 50,
-      });
+      try {
+        // get category name
+        const category = await spotifyApi.getCategory(id as string);
+        const data = await spotifyApi.getPlaylistsForCategory(id as string, {
+          limit: 50,
+        });
 
-      setPlaylists(data.body.playlists.items);
-      setCategoryTitle(category.body.name);
+        setPlaylists(data.body.playlists.items);
+        setCategoryTitle(category.body.name);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
     if (status === "authenticated") getData();

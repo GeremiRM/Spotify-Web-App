@@ -2,9 +2,9 @@
   gap: 1rem;
   color: white;
   padding: 0 1rem;
-  overflow: hidden;
   margin-top: 1rem;
   margin-bottom: 3rem;
+  overflow: hidden;
 
   &__header {
     display: flex;
@@ -23,6 +23,7 @@
 
   h2 {
     font-size: 1.5rem;
+    font-family: "Proxima Nova", sans-serif;
   }
 
   // one row

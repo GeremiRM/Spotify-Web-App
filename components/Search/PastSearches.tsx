@@ -32,7 +32,7 @@ export const PastSearches: React.FC<{}> = ({}) => {
     <div className={styles.wrapper}>
       <div className={styles.wrapper__header}>
         <div className={styles.wrapper__title}>
-          <h2>Past Searches</h2>
+          <h2>Recent Searches</h2>
         </div>
       </div>
       <div className={`${styles.wrapper__cards}`}>{renderCards()}</div>

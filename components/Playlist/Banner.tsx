@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 // styling
 import styles from "./Playlist.module.scss";
 
@@ -21,15 +19,7 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
   if (Object.keys(playlist).length === 0) return <></>;
 
   return (
-    <div
-      className={styles.playlist__banner}
-      style={{
-        background: `linear-gradient(
-      0deg,
-      #121212 0%,
-      #333 95%)`,
-      }}
-    >
+    <div className={styles.playlist__banner}>
       <div className={styles.playlist__cover}>
         {/*eslint-disable-next-line @next/next/no-img-element  */}
         <img src={playlist.images[0].url} alt={playlist.name} />
