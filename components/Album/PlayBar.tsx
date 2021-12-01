@@ -5,17 +5,21 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useSpotify } from "../../hooks/useSpotify";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+import { usePlay } from "../../hooks/usePlay";
 
 interface PlaybarProps {
   id?: string;
   bg?: string;
+  uri: string;
 }
 
-export const PlayBar: React.FC<PlaybarProps> = ({ id }) => {
+export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
   const [isSavedAlbum, setisSavedAlbum] = useState(false);
 
   const spotifyApi = useSpotify();
   const { status } = useSession();
+
+  const play = usePlay(uri);
 
   useEffect(() => {
     const getData = async () => {
@@ -34,7 +38,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id }) => {
   return (
     <div className={styles.playbar}>
       <div className={styles.playbar__button}>
-        <ImPlay3 />
+        <ImPlay3 onClick={play} />
       </div>
       <div onClick={() => changeSavedState()} className={styles.playbar__heart}>
         {isSavedAlbum ? (

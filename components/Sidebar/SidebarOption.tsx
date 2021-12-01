@@ -18,7 +18,7 @@ export const SidebarOption: React.FC<SidebarOptionProps> = ({
     <div className={`${styles.sidebar__option} ${active && styles.active}`}>
       {icon && <Icon className={styles.sidebar__icon} />}
 
-      <p>{children}</p>
+      <p className={styles.sidebar__text}>{children}</p>
     </div>
   );
 };

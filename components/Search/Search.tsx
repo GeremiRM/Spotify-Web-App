@@ -32,8 +32,6 @@ export const Search: React.FC<{}> = ({}) => {
   const spotifyApi = useSpotify();
   const { data, status } = useSession();
 
-  console.log(data, status);
-
   // Get albums, artists and playlists results
   const searchAll = useCallback(async () => {
     const data = await spotifyApi.search(searchInput, [

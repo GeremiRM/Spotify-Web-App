@@ -1,5 +1,5 @@
 .sidebar {
-  min-height: 100vh;
+  height: 100vh;
   width: 235px;
   padding-top: 1.5rem;
   background-color: black;
@@ -7,6 +7,7 @@
   flex-direction: column;
   position: sticky;
   top: 0;
+  max-height: 100vh;
 
   &__logo {
     position: relative;
@@ -55,24 +56,31 @@
   &__icon {
     font-size: 1.5rem;
     margin-right: 1rem;
+    color: #777;
+  }
+
+  &__text {
+    font-weight: 700;
   }
 
   &__playlists {
-    border-top: 1px solid rgba(100, 100, 100, 0.5);
-    padding-top: 2rem;
+    border-top: 2px solid rgba(39, 39, 39, 0.568);
+    padding-top: 1.5rem;
+    overflow-y: auto;
+    max-height: 100%;
   }
 
   &__playlistName {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-left: 1.25rem;
     overflow-y: auto;
-    color: gray;
+    color: #ddd;
     transition: 0.25s all ease;
     margin-bottom: 1rem;
+    cursor: pointer;
 
     &:hover {
       color: white;
-      cursor: pointer;
     }
   }
 }

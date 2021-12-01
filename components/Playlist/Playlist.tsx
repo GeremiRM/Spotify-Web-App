@@ -1,45 +1,25 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-//@ts-expect-error
-import analyze from "rgbaster";
-
-import styles from "./Playlist.module.scss";
+// components
 import { Header } from "../Header/Header";
-
 import { Banner } from "./Banner";
 import { Tracklist } from "../Common/Tracklist";
-import { useSpotify } from "../../hooks/useSpotify";
-import { useSession } from "next-auth/react";
 
-// types
-type PlaylistType = SpotifyApi.PlaylistObjectFull;
-type Tracks = SpotifyApi.TrackObjectFull[];
+// styling
+import styles from "./Playlist.module.scss";
+
+// hooks
+import { usePlaylistInfo } from "../../hooks/usePlaylistInfo";
+import { useImageColor } from "../../hooks/useImageColor";
 
 export const Playlist: React.FC<{}> = ({}) => {
-  const [playlist, setPlaylist] = useState<PlaylistType>({} as PlaylistType);
-  const [tracks, setTracks] = useState<Tracks>([] as Tracks);
-  const [background, setBackground] = useState("");
-
-  const { status } = useSession();
-  const spotifyApi = useSpotify();
-
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    const getData = async () => {
-      const data = await spotifyApi.getPlaylist(id as string);
-      const tracks = data.body.tracks.items.map((item) => item.track);
+  const { playlist, tracks } = usePlaylistInfo(id as string);
+  const background = useImageColor(playlist?.images[0]?.url);
 
-      setPlaylist(data.body);
-      setTracks(tracks);
-
-      const result = await analyze(data.body.images[0].url, { scale: 0.25 });
-      setBackground(result[0].color);
-    };
-    if (id && status === "authenticated") getData();
-  }, [id, spotifyApi, status]);
+  if (!playlist || !tracks) return <></>;
 
   return (
     <div>
@@ -55,7 +35,7 @@ export const Playlist: React.FC<{}> = ({}) => {
           }}
         >
           <Banner playlist={playlist} tracks={tracks} />
-          <Tracklist tracks={tracks!} stickyHeader />
+          <Tracklist tracks={tracks} stickyHeader />
         </div>
       )}
     </div>

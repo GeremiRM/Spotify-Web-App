@@ -23,7 +23,7 @@ export const Tracklist: React.FC<TracklistProps> = ({
 
   // stick header to the top
   const handleScroll = useCallback(() => {
-    if (window.scrollY > initialHeaderPos - 60) {
+    if (window.scrollY > initialHeaderPos - 90) {
       setScrollIntersect(true);
     } else {
       setScrollIntersect(false);
@@ -51,7 +51,7 @@ export const Tracklist: React.FC<TracklistProps> = ({
   const renderTracks = () =>
     tracks.map((track, idx) => (
       <Track
-        track={track}
+        id={track.id}
         key={track.id + idx}
         idx={idx + 1}
         hideAlbum={hideAlbum ? true : false}
@@ -62,6 +62,7 @@ export const Tracklist: React.FC<TracklistProps> = ({
 
   return (
     <div className={`${styles.tracklist}`}>
+      {/* header. Can be hidden or made sticky */}
       <div
         className={`${styles.tracklist__header} ${
           hideAlbum ? styles.tracklist__noAlbum : ""
@@ -72,6 +73,7 @@ export const Tracklist: React.FC<TracklistProps> = ({
           <p>#</p>
           <p>Title</p>
         </div>
+
         {!hideAlbum && <div className={styles.tracklist__album}>Album</div>}
         <div className={styles.tracklist__duration}>
           <BsClock />

@@ -1,24 +1,16 @@
-@mixin tablet {
-  @media (min-width: 1000px) {
-    @content;
-  }
-}
-
-@mixin mobile {
-  @media (min-width: 400px) {
-    @content;
-  }
-}
-
 .album {
   color: white;
 
   &__banner {
     min-height: 340px;
-    padding: 1rem 1rem 1.5rem 0.5rem;
+    padding: 1rem 1rem 1.5rem 1rem;
     display: flex;
     align-items: flex-end;
     font-family: "Proxima Nova", sans-serif;
+
+    @media (min-width: 1000px) {
+      padding-left: 2rem;
+    }
   }
 
   &__separator {
@@ -36,7 +28,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
     margin-right: 1.5rem;
 
-    @include tablet {
+    @media (min-width: 1000px) {
       min-height: 240px;
       min-width: 240px;
     }

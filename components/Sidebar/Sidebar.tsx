@@ -50,7 +50,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
         <Link href="/" passHref>
           <div className={styles.sidebar__logo}>
             <Image
-              src="/header/header_logo.png"
+              src="/spotify.svg"
               alt="spotify logo"
               layout="fill"
               priority
@@ -60,13 +60,13 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
         {/* home - search - library */}
         <div className={styles.sidebar__options}>
-          <div
+          {/* <div
             onClick={() =>
               signOut({ callbackUrl: "http://localhost:3000/login" })
             }
           >
             <SidebarOption>LogOut</SidebarOption>
-          </div>
+          </div> */}
           <Link href="/">
             <a>
               <SidebarOption icon={FiHome} active={location === "/dashboard"}>

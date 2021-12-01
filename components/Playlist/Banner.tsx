@@ -1,5 +1,6 @@
 // styling
 import styles from "./Playlist.module.scss";
+import { ImMusic } from "react-icons/im";
 
 //func
 import { convertMillisToMinutes } from "../../utils/utils";
@@ -21,8 +22,15 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
   return (
     <div className={styles.playlist__banner}>
       <div className={styles.playlist__cover}>
-        {/*eslint-disable-next-line @next/next/no-img-element  */}
-        <img src={playlist.images[0].url} alt={playlist.name} />
+        {playlist.images.length === 0 ? (
+          <ImMusic className={styles.playlist__cover__placeholder} />
+        ) : (
+          /*eslint-disable-next-line @next/next/no-img-element  */
+          <img
+            src={playlist.images[0]?.url ?? "/placeholder.png"}
+            alt={playlist.name}
+          />
+        )}
       </div>
       <div className={styles.playlist__info}>
         <div className={styles.playlist__name}>

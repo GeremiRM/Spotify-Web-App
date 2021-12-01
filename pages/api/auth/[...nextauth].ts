@@ -1,5 +1,4 @@
 //@ts-nocheck
-
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { SPOTIFY_URL, spotifyApi } from "../../../Spotify/SpotifyConfig";
@@ -41,29 +40,6 @@ export default NextAuth({
     signIn: "/login",
   },
 
-  events: {
-    async signIn(message) {
-      console.log(message, "hola");
-    },
-    async signIn(message) {
-      console.log(message, "hola");
-    },
-    async signOut(message) {
-      console.log(message, "hola");
-    },
-    async createUser(message) {
-      console.log(message, "hola");
-    },
-    async updateUser(message) {
-      console.log(message, "hola");
-    },
-    async linkAccount(message) {
-      console.log(message, "hola");
-    },
-    async session(message) {
-      console.log(message, "hola");
-    },
-  },
   callbacks: {
     async jwt({ account, token, user }) {
       // Initial sign in

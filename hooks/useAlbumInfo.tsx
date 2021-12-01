@@ -30,7 +30,7 @@ export const useAlbumInfo = (id: string) => {
         artistsAlbums: artistAlbums.body.items,
       });
     };
-    if (status === "authenticated") fetchAlbumData();
+    if (status === "authenticated" && id) fetchAlbumData();
   }, [id, spotifyApi, status]);
 
   return albumData;

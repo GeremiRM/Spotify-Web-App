@@ -10,10 +10,12 @@ import { Player } from "../Player/Player";
 
 export const Layout: React.FC<{}> = ({ children }) => {
   return (
-    <div className={styles.dashboard}>
-      <Sidebar />
-      <div className={styles.container}>{children}</div>
-      <Player />
+    <div className={styles.layout}>
+      <div className={styles.dashboard}>
+        <Sidebar />
+        <div className={styles.container}>{children}</div>
+        <Player />
+      </div>
     </div>
   );
 };

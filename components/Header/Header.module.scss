@@ -1,38 +1,80 @@
 .header {
   width: inherit;
   position: sticky;
-  top: 5px;
-  width: 100%;
+  top: 0px;
+  max-width: 100%;
   z-index: 1000;
+  color: white;
+  font-family: "Proxima Nova";
 
   .navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: absolute;
-    padding: 0 2rem;
+    padding: 0 1rem;
     background-color: transparent;
     transition: 0.25s all ease;
-    height: 50px;
+    height: 60px;
     width: 100%;
   }
 
-  .userMenu {
-    justify-self: flex-end;
-    position: absolute;
-    right: 1rem;
+  .scrolled {
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  .user {
+    margin-left: auto;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 1000px;
+    min-width: 140px;
+    max-width: 200px;
+    padding: 0.2rem;
+    padding-right: 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-align: center;
+
+    &:hover {
+      background: #222;
+    }
 
     &__avatar {
-      height: 1.75rem;
-      width: 1.75rem;
+      background: #444;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.25rem 0.25rem;
       border-radius: 50%;
-      background-color: gray;
-      cursor: pointer;
-      transition: 0.1s ease all;
+      margin-right: 0.5rem;
+      color: #bbb;
+    }
 
-      &:hover {
-        transform: scale(1.05);
+    &__name {
+      display: flex;
+      margin-right: 0.75rem;
+      font-weight: 700;
+      overflow: hidden;
+
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
+    }
+
+    &__caret {
+      display: flex;
+      padding-top: 0.1rem;
+      align-items: flex-end;
+      font-weight: 500;
+      transition: 0.25s all ease;
+    }
+
+    &__rotate {
+      transform: rotate(180deg);
     }
   }
 }

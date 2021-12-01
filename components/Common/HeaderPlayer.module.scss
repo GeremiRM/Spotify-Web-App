@@ -1,0 +1,47 @@
+.player {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  transition: 0.25s all ease;
+  flex: 1;
+  max-width: calc(100vw - 400px);
+  overflow: hidden;
+
+  &__button {
+    background: #1db954;
+    min-height: 40px;
+    min-width: 40px;
+    font-size: 1.25rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    padding-left: 5px;
+    align-items: center;
+    color: white;
+    margin-right: 1rem;
+    margin-left: 2rem;
+
+    &:hover {
+      background: lightgreen;
+      cursor: pointer;
+    }
+  }
+  &__title {
+    font-size: 1rem;
+    font-weight: 700;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+
+    h2 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.display {
+  opacity: 1;
+}

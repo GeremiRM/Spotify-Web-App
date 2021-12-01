@@ -1,11 +1,13 @@
-import Vibrant from "node-vibrant";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePalette } from "react-palette";
 
-export const useImageColor = async (image: string) => {
-  const [palette, setPalette] = useState<any>();
+export const useImageColor = (image: string) => {
+  const [palette, setPalette] = useState("");
+  const { data } = usePalette(image);
 
-  const colors = await Vibrant.from(image).getPalette();
-  setPalette(colors);
+  useEffect(() => {
+    setPalette(data.darkVibrant ?? "");
+  }, [data.darkVibrant]);
 
   return palette;
 };

@@ -17,10 +17,12 @@ const SCOPES = [
   "playlist-read-collaborative",
   "playlist-modify-private",
   "playlist-modify-public",
+  "user-read-currently-playing",
+  "user-read-playback-state",
 ].join("%20");
 
 // Whether or not to force the user to approve the app again
-const DIALOG = false;
+const DIALOG = true;
 
 const SPOTIFY_URL =
   AUTH_URL +
