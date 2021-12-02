@@ -17,6 +17,7 @@ export const useSongInfo = (id: string) => {
     const fetchTrackData = async () => {
       const track = await spotifyApi.getTrack(id);
       const isTrackSaved = await spotifyApi.containsMySavedTracks([id]);
+
       setTrackData({
         track: track.body,
         isTrackSaved: isTrackSaved.body[0],

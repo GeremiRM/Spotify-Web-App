@@ -55,13 +55,13 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
         {/* home - search - library */}
         <div className={styles.sidebar__options}>
-          {/* <div
+          <div
             onClick={() =>
               signOut({ callbackUrl: "http://localhost:3000/login" })
             }
           >
             <SidebarOption>LogOut</SidebarOption>
-          </div> */}
+          </div>
           <Link href="/">
             <a>
               <SidebarOption icon={FiHome} active={location === "/dashboard"}>
@@ -90,7 +90,12 @@ export const Sidebar: React.FC<{}> = ({}) => {
           {/* <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption> */}
           <Link href="/collection/tracks">
             <a>
-              <SidebarOption icon={AiFillHeart}>Liked Songs</SidebarOption>
+              <SidebarOption
+                icon={AiFillHeart}
+                active={location === "/collection/tracks"}
+              >
+                Liked Songs
+              </SidebarOption>
             </a>
           </Link>
         </div>

@@ -10,12 +10,16 @@ interface TracklistProps {
   tracks: SpotifyApi.TrackObjectSimplified[];
   hideAlbum?: boolean;
   stickyHeader?: boolean;
+  tracklistUri?: string;
+  hideHeader?: boolean;
 }
 
 export const Tracklist: React.FC<TracklistProps> = ({
   tracks,
   hideAlbum,
   stickyHeader,
+  tracklistUri,
+  hideHeader,
 }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const [initialHeaderPos, setInitialHeaderPos] = useState(0);
@@ -55,6 +59,7 @@ export const Tracklist: React.FC<TracklistProps> = ({
         key={track.id + idx}
         idx={idx + 1}
         hideAlbum={hideAlbum ? true : false}
+        tracklistUri={tracklistUri ? tracklistUri : ""}
       />
     ));
 
@@ -64,9 +69,11 @@ export const Tracklist: React.FC<TracklistProps> = ({
     <div className={`${styles.tracklist}`}>
       {/* header. Can be hidden or made sticky */}
       <div
-        className={`${styles.tracklist__header} ${
-          hideAlbum ? styles.tracklist__noAlbum : ""
-        } ${stickyHeader && scrollIntersect ? styles.tracklist__sticky : ""}`}
+        className={`${styles.tracklist__header} 
+        ${hideAlbum ? styles.tracklist__noAlbum : ""} 
+        ${stickyHeader && scrollIntersect ? styles.tracklist__sticky : ""}
+        ${hideHeader ? styles.tracklist__hide : ""}
+        `}
         ref={headerRef}
       >
         <div className={`${styles.tracklist__title}`}>

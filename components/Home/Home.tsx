@@ -1,38 +1,14 @@
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import { useSpotify } from "../../hooks/useSpotify";
-
 // components
 import { Header } from "../Header/Header";
 import { Cards } from "../Common/Cards";
 
 // styling
 import styles from "./Home.module.scss";
+
+// hook
 import { useHomeInfo } from "../../hooks/useHomeInfo";
-import Card from "../Common/Card";
-
-// types
-type User = SpotifyApi.CurrentUsersProfileResponse;
-type FeaturedPlaylists = SpotifyApi.PlaylistObjectSimplified[];
-type Tracks = SpotifyApi.TrackObjectFull[];
-type NewReleases = SpotifyApi.AlbumObjectSimplified[];
-type FavArtists = SpotifyApi.ArtistObjectFull[];
-
-type UserPlaylists = {
-  featured: FeaturedPlaylists;
-  recs: Tracks;
-  newReleases: NewReleases;
-  topArtists: FavArtists;
-  recentlyPlayed: Tracks;
-};
-
-const cardsTitles = {};
 
 export const Home: React.FC<{}> = ({}) => {
-  const [userPlaylists, setUserPlaylists] = useState<UserPlaylists>(
-    {} as UserPlaylists
-  );
-
   const {
     newReleases,
     featuredPlaylists,
@@ -59,6 +35,7 @@ export const Home: React.FC<{}> = ({}) => {
       <div className={styles.home}>
         <div className={styles.home__body}>
           <div className={styles.home__results}>
+            {/* <Posters data={newReleases} /> */}
             <Cards data={featuredPlaylists} title="Featured Playlists" />
             <Cards data={newReleases} title="New Releases" />
             <Cards data={topArtists} title="Your Favorite Artists" />

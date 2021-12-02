@@ -21,7 +21,8 @@ export const useAlbumInfo = (id: string) => {
         album.body.artists.map((artist) => artist.id)
       );
       const artistAlbums = await spotifyApi.getArtistAlbums(
-        artists.body.artists[0].id
+        artists.body.artists[0].id,
+        { include_groups: "album" }
       );
 
       setAlbumData({

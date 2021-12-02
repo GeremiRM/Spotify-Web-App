@@ -1,20 +1,23 @@
 // styling
 import styles from "./PlayBar.module.scss";
 import { ImPlay3 } from "react-icons/im";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useSpotify } from "../../hooks/useSpotify";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { usePlay } from "../../hooks/usePlay";
 
 interface PlaybarProps {
   id?: string;
+  uri: string;
 }
 
-export const PlayBar: React.FC<PlaybarProps> = ({ id }) => {
+export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
   const [isFollowing, setisFollowing] = useState(false);
 
   const spotifyApi = useSpotify();
   const { status } = useSession();
+
+  const play = usePlay(uri);
 
   useEffect(() => {
     const getData = async () => {

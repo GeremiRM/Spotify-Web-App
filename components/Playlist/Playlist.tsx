@@ -1,9 +1,12 @@
+import { useRef } from "react";
 import { useRouter } from "next/router";
 
 // components
 import { Header } from "../Header/Header";
+import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
+import { PlayBar } from "./PlayBar";
 
 // styling
 import styles from "./Playlist.module.scss";
@@ -11,9 +14,6 @@ import styles from "./Playlist.module.scss";
 // hooks
 import { usePlaylistInfo } from "../../hooks/usePlaylistInfo";
 import { useImageColor } from "../../hooks/useImageColor";
-import { useRef } from "react";
-import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
-import { PlayBar } from "./PlayBar";
 
 export const Playlist: React.FC<{}> = ({}) => {
   // playlist id
@@ -52,7 +52,7 @@ export const Playlist: React.FC<{}> = ({}) => {
             <PlayBar uri={playlist.uri} id={playlist.id} />
           </div>
         </div>
-        <Tracklist tracks={tracks} stickyHeader />
+        <Tracklist tracks={tracks} stickyHeader tracklistUri={playlist.uri} />
       </div>
     </div>
   );

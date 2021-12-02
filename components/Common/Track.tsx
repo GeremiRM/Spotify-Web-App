@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,16 +18,22 @@ import { useSongInfo } from "../../hooks/useSongInfo";
 interface TrackProps {
   id: string;
   idx: number;
+  tracklistUri?: string;
   hideAlbum?: boolean;
 }
 
-export const Track: React.FC<TrackProps> = ({ id, idx, hideAlbum }) => {
+export const Track: React.FC<TrackProps> = ({
+  id,
+  idx,
+  hideAlbum,
+  tracklistUri,
+}) => {
   const { track, isTrackSaved } = useSongInfo(id);
-  const [trackSaved, setTrackSaved] = useState(isTrackSaved);
-  const trackDuration = convertMillisToMinutes(track?.duration_ms);
+  const [trackSaved, setTrackSaved] = useState<boolean>(false);
+  const trackDuration = convertMillisToMinutes(track?.duration_ms!);
 
   const spotifyApi = useSpotify();
-  const play = usePlay([track?.uri]);
+  const play = usePlay([track?.uri], tracklistUri);
 
   const renderArtists = () => {
     return track.artists.map((artist, idx, array) => (
@@ -37,10 +43,13 @@ export const Track: React.FC<TrackProps> = ({ id, idx, hideAlbum }) => {
     ));
   };
 
+  useEffect(() => {
+    setTrackSaved(isTrackSaved);
+  }, [isTrackSaved]);
+
   const changeSavedState = async () => {
     if (trackSaved) spotifyApi.removeFromMySavedTracks([track.id]);
     else spotifyApi.addToMySavedTracks([track.id]);
-
     setTrackSaved(!trackSaved);
   };
 
@@ -60,7 +69,12 @@ export const Track: React.FC<TrackProps> = ({ id, idx, hideAlbum }) => {
         {/* image */}
         <div className={styles.track__img}>
           <Image
-            src={track.album.images[2].url}
+            src={
+              track.album.images[2]?.url ??
+              track.album.images[1]?.url ??
+              track.album.images[0]?.url ??
+              "/placeholder.png"
+            }
             alt={track.name}
             width="100%"
             height="100%"

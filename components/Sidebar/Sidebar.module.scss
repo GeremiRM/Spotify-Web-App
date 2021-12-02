@@ -13,7 +13,7 @@
 
   &__logo {
     position: relative;
-    height: 40px;
+    min-height: 40px;
     width: 135px;
     margin-left: 1.25rem;
     margin-bottom: 0.25rem;
@@ -37,7 +37,7 @@
     cursor: pointer;
     border-radius: 4px;
     padding: 1.25rem 1rem;
-    color: #bbb;
+    color: #777;
     transition: 0.25s all ease;
     height: 2.25rem;
     margin: 0.25rem 0;
@@ -49,16 +49,12 @@
 
   &__option.active {
     background: #222;
-  }
-
-  .active {
     color: white;
   }
 
   &__icon {
     font-size: 1.5rem;
     margin-right: 1rem;
-    color: #777;
   }
 
   &__text {

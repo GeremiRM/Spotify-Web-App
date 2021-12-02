@@ -23,16 +23,23 @@ export const Artist: React.FC<{}> = ({}) => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { albums, artist, otherArtists, topTracks } = useArtistInfo(
-    id as string
-  );
+  const { albums, artist, otherArtists, topTracks, appears_on, singles } =
+    useArtistInfo(id as string);
   const background = useImageColor(artist?.images[2]?.url);
 
   // playbar ref
   const playbarRef = useRef<HTMLDivElement>(null);
 
   // if data hasn't finished fetching, return nothing
-  if (!albums || !artist || !otherArtists || !topTracks) return <></>;
+  if (
+    !albums ||
+    !artist ||
+    !otherArtists ||
+    !topTracks ||
+    !singles ||
+    !appears_on
+  )
+    return <></>;
 
   return (
     <div>
@@ -59,14 +66,17 @@ export const Artist: React.FC<{}> = ({}) => {
         <div className={styles.body}>
           {/* Playbar */}
           <div ref={playbarRef}>
-            <PlayBar id={artist.id} />
+            <PlayBar id={artist.id} uri={artist.uri} />
           </div>
 
           {/* Tracklist */}
           <div className={styles.tracks}>
             <h2 className={styles.tracks__title}>Popular</h2>
             <div className={styles.tracks__tracklist}>
-              <Tracklist tracks={topTracks!.slice(0, seeMore ? 10 : 5)} />
+              <Tracklist
+                tracks={topTracks!.slice(0, seeMore ? 10 : 5)}
+                hideHeader
+              />
             </div>
 
             {/* See More */}
@@ -78,6 +88,8 @@ export const Artist: React.FC<{}> = ({}) => {
           {/* Cards */}
           <div className={styles.cards}>
             <Cards data={albums} title="Albums" />
+            <Cards data={singles} title="Singles" />
+            <Cards data={appears_on} title="Appears On" />
             <Cards data={otherArtists} title="Related Artists" />
           </div>
         </div>

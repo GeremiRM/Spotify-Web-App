@@ -34,9 +34,11 @@ export const useHomeInfo = () => {
     const fetchHomeData = async () => {
       const topArtists = await spotifyApi.getMyTopArtists();
       const newReleases = await spotifyApi.getNewReleases({ limit: 50 });
-      const featuredPlaylists = await spotifyApi.getFeaturedPlaylists();
+      const featuredPlaylists = await spotifyApi.getFeaturedPlaylists({
+        limit: 50,
+      });
 
-      const recentlyPlayed = await (
+      const recentlyPlayed = (
         await spotifyApi.getMyRecentlyPlayedTracks()
       ).body.items.map((item) => item.track);
 

@@ -54,11 +54,11 @@ const Card: React.FC<CardProps> = ({ info }) => {
   const cardImage = () => {
     switch (info?.type) {
       case "track":
-        return info?.album?.images[0]?.url;
+        return info?.album?.images[1]?.url;
       case "artist":
-        return info?.images[0]?.url;
+        return info?.images[1]?.url;
       case "album":
-        return info?.images[0]?.url;
+        return info?.images[1]?.url;
       case "playlist":
         return info?.images[0]?.url;
       default:
@@ -80,8 +80,6 @@ const Card: React.FC<CardProps> = ({ info }) => {
         return "";
     }
   };
-
-  if (info?.type === "album" && info.album_type === "single") return <></>;
 
   if (Object.keys(info).length === 0) return <></>;
 

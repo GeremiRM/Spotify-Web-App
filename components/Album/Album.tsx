@@ -1,5 +1,4 @@
-import { useContext, useRef } from "react";
-import { Context } from "../../context/context";
+import { useRef } from "react";
 import { useRouter } from "next/router";
 
 // components
@@ -32,8 +31,6 @@ export const Album: React.FC<{}> = () => {
   // if data hasn't finished fetching, return nothing
   if (!album || !artists || !otherAlbums) return <></>;
 
-  console.log(album);
-
   return (
     <div>
       {/* Header */}
@@ -62,7 +59,12 @@ export const Album: React.FC<{}> = () => {
             <PlayBar bg={background} id={album.id} uri={album.uri} />
           </div>
           {/* Tracklist */}
-          <Tracklist tracks={album.tracks.items} hideAlbum stickyHeader />
+          <Tracklist
+            tracks={album.tracks.items}
+            hideAlbum
+            stickyHeader
+            tracklistUri={album.uri}
+          />
 
           {/* Copyright */}
           <div className={styles.album__copyright}>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 // components
 import Card from "./Card";
 
@@ -25,6 +26,8 @@ export const Cards: React.FC<Cards> = ({
   hideLink,
   multirow,
 }) => {
+  const [seeAll, setSeeAll] = useState(false);
+
   const renderCards = () => {
     return data?.map((info, idx) => {
       if (info.id === ignoreCard) return "";
@@ -44,14 +47,17 @@ export const Cards: React.FC<Cards> = ({
           <h2>{title}</h2>
         </div>
         {!hideLink && (
-          <div className={styles.wrapper__link}>
-            <p>See All</p>
+          <div
+            className={styles.wrapper__link}
+            onClick={() => setSeeAll(!seeAll)}
+          >
+            <p>{seeAll ? "See less" : "See All"}</p>
           </div>
         )}
       </div>
       <div
         className={`${styles.wrapper__cards} ${
-          multirow ? styles.multirow : ""
+          multirow || seeAll ? styles.multirow : ""
         }`}
       >
         {renderCards()}

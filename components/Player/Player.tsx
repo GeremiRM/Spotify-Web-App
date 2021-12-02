@@ -1,7 +1,7 @@
 import styles from "./Player.module.scss";
 
 import { Context } from "../../context/context";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { usePlaybackInfo } from "../../hooks/usePlaybackInfo";
 import { useSession } from "next-auth/react";
 import { useSpotify } from "../../hooks/useSpotify";
@@ -9,13 +9,9 @@ import { useSpotify } from "../../hooks/useSpotify";
 import SpotifyPlayer from "react-spotify-web-playback";
 
 export const Player: React.FC<{}> = ({}) => {
-  const playback = usePlaybackInfo();
-  const { playingTrack } = useContext(Context);
-
-  const { data } = useSession();
   const spotifyApi = useSpotify();
 
-  let token = null;
+  let token = spotifyApi.getAccessToken();
 
   if (!token) return <></>;
 
@@ -26,6 +22,15 @@ export const Player: React.FC<{}> = ({}) => {
         syncExternalDevice
         showSaveIcon
         persistDeviceSelection
+        magnifySliderOnHover
+        styles={{
+          bgColor: "#181818",
+          color: "white",
+          sliderColor: "#ccc",
+          trackArtistColor: "white",
+          trackNameColor: "white",
+          sliderTrackColor: "gray",
+        }}
       />
     </div>
   );
