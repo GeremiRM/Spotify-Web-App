@@ -1,8 +1,11 @@
+import { useCallback, useEffect, useState } from "react";
+
+// styling and icons
+import styles from "./HeaderPlayer.module.scss";
 import { ImPlay3 } from "react-icons/im";
 
-import styles from "./HeaderPlayer.module.scss";
-import { useCallback, useEffect, useState } from "react";
-import { usePlay } from "../../hooks/usePlay";
+// hook
+import { usePlay } from "../../../hooks/usePlay";
 
 interface HeaderPlayerProps {
   // at what distance will it active

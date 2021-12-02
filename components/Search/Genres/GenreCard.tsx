@@ -7,7 +7,7 @@ interface CardProps {
   cover: string;
 }
 
-import styles from "./Genres.module.scss";
+import styles from "./GenreCard.module.scss";
 
 export const Card: React.FC<CardProps> = ({ id, title, cover }) => {
   const randomBackground = () => {

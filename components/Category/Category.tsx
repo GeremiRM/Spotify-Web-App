@@ -1,54 +1,34 @@
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 // components
-import { Banner } from "./Banner";
+import { Banner } from "./Banner/Banner";
 import { Cards } from "../Common/Cards";
 
 // styling
 import styles from "./Category.module.scss";
 
 // hook
-import { useSpotify } from "../../hooks/useSpotify";
-
-// types
-type Playlists = SpotifyApi.PlaylistObjectSimplified[];
+import { useCategoryInfo } from "../../hooks/useCategoryInfo";
 
 export const Category: React.FC<{}> = ({}) => {
-  const [playlists, setPlaylists] = useState<Playlists>({} as Playlists);
-  const [categoryTitle, setCategoryTitle] = useState("");
-
-  const spotifyApi = useSpotify();
-  const { status } = useSession();
-
+  //  category id
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        // get category name
-        const category = await spotifyApi.getCategory(id as string);
-        const data = await spotifyApi.getPlaylistsForCategory(id as string, {
-          limit: 50,
-        });
+  const { category, categoryPlaylists } = useCategoryInfo(id as string);
 
-        setPlaylists(data.body.playlists.items);
-        setCategoryTitle(category.body.name);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    if (status === "authenticated") getData();
-  }, [id, status, spotifyApi]);
+  if (!category || !categoryPlaylists) return <></>;
 
   return (
     <div className={styles.category}>
       <div>
-        <Banner title={categoryTitle} />
-        <Cards data={playlists} title="Featured Playlists" multirow hideLink />
+        <Banner title={category.name} />
+        <Cards
+          data={categoryPlaylists}
+          title="Featured Playlists"
+          multirow
+          hideLink
+        />
       </div>
     </div>
   );

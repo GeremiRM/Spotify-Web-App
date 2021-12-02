@@ -1,0 +1,51 @@
+.banner {
+  min-height: 340px;
+  padding: 1rem 1rem 1.5rem;
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  font-family: "Proxima Nova", sans-serif;
+
+  &__cover {
+    min-height: 200px;
+    min-width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
+    margin-right: 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #ccc;
+    padding-bottom: 2rem;
+  }
+
+  &__name {
+    color: white;
+
+    h1 {
+      font-weight: 800;
+      padding-right: 2rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__desc {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    flex-wrap: wrap;
+
+    > * {
+      margin-right: 0.35rem;
+    }
+  }
+}

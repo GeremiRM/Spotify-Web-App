@@ -1,23 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
 
+// components
+import { Header } from "../Header/Header";
+import { TopResult } from "./TopResult/TopResult";
+import { Tracklist } from "../Common/Tracklist";
+import { Cards } from "../Common/Cards";
+import { Genres } from "./Genres/Genres";
+import { PastSearches } from "./PastSearches";
+
 // styling and icons
 import styles from "./Search.module.scss";
 import { FiSearch } from "react-icons/fi";
-
-// components
-import { Header } from "../Header/Header";
-import { TopResult } from "./TopResult";
-import { Tracklist } from "../Common/Tracklist";
-import { Cards } from "../Common/Cards";
-import { Genres } from "./Genres";
 
 // hook
 import { useSpotify } from "../../hooks/useSpotify";
 
 // types
 import { Results } from "../../types/types";
-import { PastSearches } from "./PastSearches";
-import { useSession } from "next-auth/react";
 type Tracks = SpotifyApi.TrackObjectFull[];
 type Event = React.ChangeEvent<HTMLInputElement>;
 
@@ -28,9 +27,9 @@ export const Search: React.FC<{}> = ({}) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState<Results>({} as Results);
   const [trackResults, setTrackResults] = useState<Tracks>({} as Tracks);
+  const [topResult, setTopResult] = useState();
 
   const spotifyApi = useSpotify();
-  const { data, status } = useSession();
 
   // Get albums, artists and playlists results
   const searchAll = useCallback(async () => {
@@ -52,6 +51,7 @@ export const Search: React.FC<{}> = ({}) => {
     return data.body.tracks?.items;
   }, [searchInput, spotifyApi]);
 
+  //  Set search results
   useEffect(() => {
     const search = async () => {
       if (searchInput === "") return "";
@@ -74,13 +74,20 @@ export const Search: React.FC<{}> = ({}) => {
   };
 
   const renderCards = () => {
-    return Object.values(searchResults).map((result) => (
-      <Cards data={result!} title={result![0].type} key={result![0].type} />
-    ));
+    return Object.values(searchResults).map((result) => {
+      if (result!.length > 0)
+        return (
+          <Cards
+            data={result!}
+            title={result![0].type + "s"}
+            key={result![0].type}
+          />
+        );
+    });
   };
 
   return (
-    <div>
+    <>
       <Header>
         {/* Search Bar */}
         <div className={styles.searchBar}>
@@ -94,6 +101,8 @@ export const Search: React.FC<{}> = ({}) => {
           />
         </div>
       </Header>
+
+      {/* if no query, show recent searches and genres */}
       <div className={styles.search}>
         {searchInput === "" && (
           <div>
@@ -101,6 +110,7 @@ export const Search: React.FC<{}> = ({}) => {
             <Genres />
           </div>
         )}
+
         {/* Query empty? */}
         {searchInput !== "" && Object.keys(searchResults).length !== 0 && (
           <div className={styles.search__body}>
@@ -111,8 +121,10 @@ export const Search: React.FC<{}> = ({}) => {
                 <h2 className={styles.search__topResult__title}>Top Result</h2>
                 <TopResult data={searchResults.artists![0]} />
               </div>
+
               {/* Tracklist */}
               <div className={styles.search__tracklist}>
+                <h1 className={styles.search__tracklist__title}>Songs</h1>
                 <Tracklist tracks={trackResults} hideAlbum />
               </div>
             </div>
@@ -122,6 +134,6 @@ export const Search: React.FC<{}> = ({}) => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };

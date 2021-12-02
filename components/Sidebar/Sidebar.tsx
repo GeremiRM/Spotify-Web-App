@@ -49,12 +49,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
       <div className={styles.sidebar}>
         <Link href="/" passHref>
           <div className={styles.sidebar__logo}>
-            <Image
-              src="/spotify.svg"
-              alt="spotify logo"
-              layout="fill"
-              priority
-            />
+            <Image src="/spotify.png" alt="spotify logo" layout="fill" />
           </div>
         </Link>
 

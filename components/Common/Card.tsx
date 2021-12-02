@@ -2,8 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-// styling
+// styling and icons
 import styles from "./Card.module.scss";
+import { ImPlay3 } from "react-icons/im";
+
+// hook
+import { usePlay } from "../../hooks/usePlay";
 
 // types
 type Artist = SpotifyApi.ArtistObjectFull;
@@ -21,6 +25,8 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ info }) => {
   const router = useRouter();
   const { pathname } = router;
+
+  const play = usePlay(info.uri);
 
   // if the card is a search result, on click
   const saveSearch = () => {
@@ -83,9 +89,9 @@ const Card: React.FC<CardProps> = ({ info }) => {
     <Link href={`/${info?.type}/${info?.id}`} passHref>
       <div className={styles.card} onClick={() => saveSearch()}>
         <div
-          className={`${info?.type === "artist" ? styles.artist : ""} ${
-            styles.card__img
-          } `}
+          className={`${styles.card__img} ${
+            info?.type === "artist" ? styles.artist : ""
+          }  `}
         >
           {info?.type !== "playlist" ? (
             <Image
@@ -104,6 +110,9 @@ const Card: React.FC<CardProps> = ({ info }) => {
               className={styles.playlist}
             />
           )}
+          <div className={styles.card__play} onClick={play}>
+            <ImPlay3 />
+          </div>
         </div>
         <div className={styles.card__body}>
           <p className={styles.card__body__title}>{info?.name}</p>

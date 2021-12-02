@@ -7,15 +7,22 @@
   margin-top: 1rem;
   font-family: "Proxima Nova", sans-serif;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     background: #333;
+
+    .card__play {
+      opacity: 1;
+      bottom: 0.25rem;
+    }
   }
 
   &__img {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
     width: 100%;
     margin-bottom: 1.5rem;
+    position: relative;
 
     .playlist {
       max-height: 220px;
@@ -27,7 +34,28 @@
 
   .artist {
     border-radius: 50%;
-    overflow: hidden;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  &__play {
+    position: absolute;
+    background: #1db954;
+    right: 0.25rem;
+    bottom: -1rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25),
+      0px 0px 10px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transition: 0.25s all ease;
+    z-index: 1000;
   }
 
   &__body {

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 // components
 import { Header } from "../Header/Header";
-import { Banner } from "./Banner";
+import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { Cards } from "../Common/Cards";
 import { PlayBar } from "./PlayBar";
@@ -15,26 +15,24 @@ import styles from "./Album.module.scss";
 // hook
 import { useAlbumInfo } from "../../hooks/useAlbumInfo";
 import { useImageColor } from "../../hooks/useImageColor";
-import { HeaderPlayer } from "../Common/HeaderPlayer";
+import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 
 export const Album: React.FC<{}> = () => {
-  const playbarRef = useRef<HTMLDivElement>(null);
-
   // album id
   const router = useRouter();
   const { id } = router.query;
 
   // album data
-  const {
-    album,
-    artists,
-    artistsAlbums: otherAlbums,
-  } = useAlbumInfo(id as string);
-
+  const { album, artists, otherAlbums } = useAlbumInfo(id as string);
   const background = useImageColor(album?.images[2]?.url);
+
+  // playbar ref
+  const playbarRef = useRef<HTMLDivElement>(null);
 
   // if data hasn't finished fetching, return nothing
   if (!album || !artists || !otherAlbums) return <></>;
+
+  console.log(album);
 
   return (
     <div>

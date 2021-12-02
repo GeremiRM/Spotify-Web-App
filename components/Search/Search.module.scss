@@ -1,6 +1,6 @@
 .search {
   margin: 0;
-  padding: 0;
+  padding: 0 1rem;
   box-sizing: border-box;
   padding-top: 4rem;
   min-height: 100vh;
@@ -12,14 +12,27 @@
   &__tracks {
     display: grid;
     row-gap: 2rem;
+    margin-bottom: 2rem;
 
     @media (min-width: 1000px) {
       display: flex;
+      margin-bottom: 3rem;
     }
   }
 
   &__tracklist {
     flex: 3;
+
+    &__title {
+      font-size: 1.5rem;
+      margin-left: 1.5rem;
+      color: white;
+      margin-bottom: 1rem;
+
+      @media (min-width: 1000px) {
+        margin-left: 0;
+      }
+    }
   }
 
   &__topResult {
@@ -28,7 +41,7 @@
     @media (min-width: 800px) {
       min-width: 200px;
       max-width: 500px;
-      margin-right: 1rem;
+      margin-right: 2rem;
       width: 100%;
       flex: 1;
       overflow: hidden;

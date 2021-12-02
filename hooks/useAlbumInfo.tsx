@@ -5,7 +5,7 @@ import { useSpotify } from "./useSpotify";
 interface AlbumData {
   album: SpotifyApi.AlbumObjectFull;
   artists: SpotifyApi.ArtistObjectFull[];
-  artistsAlbums: SpotifyApi.AlbumObjectSimplified[];
+  otherAlbums: SpotifyApi.AlbumObjectSimplified[];
 }
 
 export const useAlbumInfo = (id: string) => {
@@ -27,7 +27,7 @@ export const useAlbumInfo = (id: string) => {
       setAlbumData({
         album: album.body,
         artists: artists.body.artists,
-        artistsAlbums: artistAlbums.body.items,
+        otherAlbums: artistAlbums.body.items,
       });
     };
     if (status === "authenticated" && id) fetchAlbumData();

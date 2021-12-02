@@ -1,83 +1,51 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 // components
 import { Header } from "../Header/Header";
 import { Selector } from "./Selector";
-import { Cards } from "./Playlists";
-import { SongsCard } from "./SongsCard";
+import { Cards } from "../Common/Cards";
+import { LikedSongs } from "./LikedSongs/LikedSongs";
 
 // styling
 import styles from "./Collection.module.scss";
 
-import { useSession } from "next-auth/react";
-import { useSpotify } from "../../hooks/useSpotify";
-
-type Playlists = SpotifyApi.PlaylistObjectSimplified[];
-type Artists = SpotifyApi.ArtistObjectFull[];
-type Albums = SpotifyApi.AlbumObjectFull[];
-type LikedSongs = SpotifyApi.TrackObjectFull[];
-
-type Library = {
-  playlists: Playlists;
-  artists: Artists;
-  albums: Albums;
-};
+// hooks
+import { useLibraryInfo } from "../../hooks/useLibraryInfo";
 
 export const Collection: React.FC<{}> = ({}) => {
-  const [userLibrary, setUserLibrary] = useState<Library>({} as Library);
-  const [likedSongs, setLikedSongs] = useState<LikedSongs>({} as LikedSongs);
   const [selector, setSelector] = useState(0);
 
-  const { status, data: session } = useSession();
-  const spotifyApi = useSpotify();
+  const { library, likedSongs } = useLibraryInfo();
 
-  console.log(session);
-
-  useEffect(() => {
-    const getData = async () => {
-      const playlists = await spotifyApi.getUserPlaylists();
-      const artists = await spotifyApi.getFollowedArtists();
-      const albums = await (
-        await spotifyApi.getMySavedAlbums()
-      ).body.items.map((item) => item.album);
-
-      const tracks = await (
-        await spotifyApi.getMySavedTracks()
-      ).body.items.map((item) => item.track);
-
-      const data = {
-        playlists: playlists.body.items,
-        artists: artists.body.artists.items,
-        albums: albums,
-      };
-
-      setUserLibrary(data);
-      setLikedSongs(tracks);
-    };
-    if (status === "authenticated") getData();
-  }, [spotifyApi, status]);
+  if (!library || !likedSongs) return <></>;
 
   return (
     <div>
-      <Header>
+      {/* header */}
+      <Header bg="rgba(0,0,0,0.75)">
         <Selector selector={selector} setSelector={setSelector} />
       </Header>
-      {Object.keys(userLibrary!).length !== 0 &&
-        Object.keys(likedSongs!).length !== 0 && (
-          <div className={styles.collection}>
-            <Cards
-              data={
-                selector === 0
-                  ? userLibrary!.playlists
-                  : selector === 1
-                  ? userLibrary!.artists
-                  : userLibrary!.albums
-              }
-            >
-              {selector === 0 && <SongsCard tracks={likedSongs} />}
-            </Cards>
-          </div>
-        )}
+
+      {/* playlists, artists or albums cards */}
+      <div className={styles.collection}>
+        <Cards
+          data={
+            selector === 0
+              ? library!.playlists
+              : selector === 1
+              ? library!.artists
+              : library!.albums
+          }
+          title={
+            selector === 0 ? "Playlists" : selector === 1 ? "Artists" : "Albums"
+          }
+          multirow
+          hideLink
+        >
+          {/* liked songs card */}
+          {selector === 0 && <LikedSongs tracks={likedSongs} />}
+        </Cards>
+      </div>
     </div>
   );
 };

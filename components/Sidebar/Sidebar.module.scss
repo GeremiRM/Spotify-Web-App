@@ -8,6 +8,8 @@
   position: sticky;
   top: 0;
   max-height: 100vh;
+  resize: horizontal;
+  overflow: auto;
 
   &__logo {
     position: relative;

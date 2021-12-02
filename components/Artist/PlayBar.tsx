@@ -35,12 +35,13 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id }) => {
       <div className={styles.playbar__button}>
         <ImPlay3 />
       </div>
-      <div onClick={() => changeSavedState()} className={styles.playbar__heart}>
-        {isFollowing ? (
-          <AiFillHeart style={{ color: "#1db954" }} />
-        ) : (
-          <AiOutlineHeart />
-        )}
+      <div
+        onClick={() => changeSavedState()}
+        className={`${styles.playbar__follow} ${
+          isFollowing ? styles.playbar__following : ""
+        }`}
+      >
+        <p>{isFollowing ? "Following" : "Follow"}</p>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useSpotify } from "../../hooks/useSpotify";
+import { useSpotify } from "../../../hooks/useSpotify";
 import { Card } from "./GenreCard";
 
 import styles from "./Genres.module.scss";

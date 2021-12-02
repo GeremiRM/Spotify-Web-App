@@ -1,26 +1,22 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
-
-// @ts-ignore
-import analyze from "rgbaster";
-import { usePalette } from "react-palette";
 
 // components
 import { Header } from "../Header/Header";
-import { Banner } from "./Banner";
+import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
+import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { Cards } from "../Common/Cards";
+import { PlayBar } from "./PlayBar";
 
 // styling
 import styles from "./Artist.module.scss";
 
 // hook
-import { PlayBar } from "./PlayBar";
 import { useArtistInfo } from "../../hooks/useArtistInfo";
 import { useImageColor } from "../../hooks/useImageColor";
 
 export const Artist: React.FC<{}> = ({}) => {
-  const [background, setBackground] = useState("");
   const [seeMore, setSeeMore] = useState(false);
 
   // artist id
@@ -30,12 +26,24 @@ export const Artist: React.FC<{}> = ({}) => {
   const { albums, artist, otherArtists, topTracks } = useArtistInfo(
     id as string
   );
+  const background = useImageColor(artist?.images[2]?.url);
 
+  // playbar ref
+  const playbarRef = useRef<HTMLDivElement>(null);
+
+  // if data hasn't finished fetching, return nothing
   if (!albums || !artist || !otherArtists || !topTracks) return <></>;
 
   return (
     <div>
-      <Header />
+      {/* header */}
+      <Header bg={background} activateDistance={playbarRef.current?.offsetTop}>
+        <HeaderPlayer
+          title={artist.name}
+          activateDistance={playbarRef.current?.offsetTop}
+          uri={artist.uri}
+        />
+      </Header>
       <div
         className={styles.artist}
         style={{
@@ -50,7 +58,9 @@ export const Artist: React.FC<{}> = ({}) => {
 
         <div className={styles.body}>
           {/* Playbar */}
-          <PlayBar id={artist.id} />
+          <div ref={playbarRef}>
+            <PlayBar id={artist.id} />
+          </div>
 
           {/* Tracklist */}
           <div className={styles.tracks}>

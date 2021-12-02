@@ -1,0 +1,39 @@
+.card {
+  padding: 1.25rem;
+  padding-bottom: 95%;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s all ease;
+
+  &:hover {
+    filter: brightness(110%);
+  }
+
+  &__image {
+    align-self: flex-end;
+    transform: rotate(25deg) translate(33%, -2%);
+    bottom: 0;
+    position: absolute;
+  }
+
+  &__title {
+    position: relative;
+    h3 {
+      font-size: 1.4rem;
+      position: absolute;
+      font-weight: 700;
+      overflow-wrap: break-word;
+    }
+    .ellipsis {
+      overflow: hidden;
+      max-width: 10ch;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: red;
+    }
+  }
+}

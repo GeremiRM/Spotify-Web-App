@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 // styling
-import styles from "./Album.module.scss";
+import styles from "./Banner.module.scss";
 
 // functions
-import { getAlbumDuration } from "../../Spotify/SpotifyApi";
-import { convertMillisToMinutes } from "../../utils/utils";
+import { getAlbumDuration } from "../../../Spotify/SpotifyApi";
+import { convertMillisToMinutes } from "../../../utils/utils";
 
 interface BannerProps {
   album: SpotifyApi.AlbumObjectFull;
@@ -31,8 +31,8 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
     return <></>;
 
   return (
-    <div className={styles.album__banner}>
-      <div className={styles.album__cover} ref={bannerRef}>
+    <div className={styles.banner}>
+      <div className={styles.banner__cover} ref={bannerRef}>
         <Image
           src={album?.images[0]?.url || "/placeholder.png"}
           width="100%"
@@ -41,8 +41,8 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
           alt={album.name}
         />
       </div>
-      <div className={styles.album__info}>
-        <div className={styles.album__name}>
+      <div className={styles.banner__info}>
+        <div className={styles.banner__info__name}>
           <h1
             style={{
               fontSize: `clamp(2.75rem,calc(5.75vw - ${album.name.length}px), 7rem)`,
@@ -51,11 +51,11 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
             {album.name}
           </h1>
         </div>
-        <div className={styles.album__desc}>
+        <div className={styles.banner__desc}>
           {/* if there's only one artist, display image */}
-          <div className={styles.album__desc__artist}>
+          <div className={styles.banner__desc__artist}>
             {artists?.length === 1 && (
-              <div className={styles.album__desc__artist__image}>
+              <div className={styles.banner__desc__artist__image}>
                 <Image
                   src={artists[0]?.images[2]?.url}
                   alt={album?.artists[0]?.name}
@@ -66,16 +66,16 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
               </div>
             )}
             <p>{renderArtists()}</p>
-            <div className={styles.album__separator}></div>
+            <div className={styles.banner__separator}></div>
           </div>
-          <div className={styles.album__year}>
+          <div className={styles.banner__year}>
             {album.release_date.substring(0, 4)}
           </div>
-          <div className={styles.album__separator}></div>
-          <div className={styles.album__tracks}>
+          <div className={styles.banner__separator}></div>
+          <div className={styles.banner__tracks}>
             {album.total_tracks} songs,{" "}
           </div>
-          <div className={styles.album__duration}>{albumDuration}</div>
+          <div className={styles.banner__duration}>{albumDuration}</div>
         </div>
       </div>
     </div>

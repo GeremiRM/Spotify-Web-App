@@ -1,9 +1,9 @@
 // styling
-import styles from "./Playlist.module.scss";
+import styles from "./Banner.module.scss";
 import { ImMusic } from "react-icons/im";
 
 //func
-import { convertMillisToMinutes } from "../../utils/utils";
+import { convertMillisToMinutes } from "../../../utils/utils";
 
 interface BannerProps {
   playlist: SpotifyApi.PlaylistObjectFull;
@@ -20,10 +20,10 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
   if (Object.keys(playlist).length === 0) return <></>;
 
   return (
-    <div className={styles.playlist__banner}>
-      <div className={styles.playlist__cover}>
+    <div className={styles.banner}>
+      <div className={styles.banner__cover}>
         {playlist.images.length === 0 ? (
-          <ImMusic className={styles.playlist__cover__placeholder} />
+          <ImMusic className={styles.banner__cover__placeholder} />
         ) : (
           /*eslint-disable-next-line @next/next/no-img-element  */
           <img
@@ -32,8 +32,8 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
           />
         )}
       </div>
-      <div className={styles.playlist__info}>
-        <div className={styles.playlist__name}>
+      <div className={styles.banner__info}>
+        <div className={styles.banner__name}>
           <h1
             style={{
               fontSize: `clamp(2.75rem,calc(5.75vw - ${playlist.name.length}px), 7rem)`,
@@ -42,24 +42,22 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
             {playlist.name}
           </h1>
         </div>
-        <div className={styles.playlist__desc}>
+        <div className={styles.banner__desc}>
           <p>{playlist.description}</p>
         </div>
-        <div className={styles.playlist__desc}>
-          <div className={styles.playlist__desc__owner}>
+        <div className={styles.banner__desc}>
+          <div className={styles.banner__desc__owner}>
             <p>{playlist.owner.display_name}</p>
-            <div className={styles.playlist__separator}></div>
+            <div className={styles.banner__separator}></div>
           </div>
-          <div className={styles.playlist__year}>
+          <div className={styles.banner__year}>
             {playlist.followers.total.toLocaleString()} likes
           </div>
-          <div className={styles.playlist__separator}></div>
-          <div className={styles.playlist__tracks}>
+          <div className={styles.banner__separator}></div>
+          <div className={styles.banner__tracks}>
             {playlist.tracks.items.length} songs,{" "}
           </div>
-          <div className={styles.playlist__duration}>
-            {getPlaylistDuration()}
-          </div>
+          <div className={styles.banner__duration}>{getPlaylistDuration()}</div>
         </div>
       </div>
     </div>
