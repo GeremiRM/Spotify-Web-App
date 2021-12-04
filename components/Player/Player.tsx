@@ -1,7 +1,7 @@
 import styles from "./Player.module.scss";
 
 import { Context } from "../../context/context";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePlaybackInfo } from "../../hooks/usePlaybackInfo";
 import { useSession } from "next-auth/react";
 import { useSpotify } from "../../hooks/useSpotify";
@@ -10,6 +10,23 @@ import SpotifyPlayer from "react-spotify-web-playback";
 
 export const Player: React.FC<{}> = ({}) => {
   const spotifyApi = useSpotify();
+  const { status } = useSession();
+
+  const [currentTrack, setCurrentTrack] = useState<string>("");
+  const { playingTrack, setPlayingTrack } = useContext(Context);
+
+  useEffect(() => {
+    const fetchPlayingTrackData = async () => {
+      const data = await spotifyApi.getTrack(currentTrack);
+      setPlayingTrack(data.body);
+    };
+    if (
+      currentTrack !== "" &&
+      currentTrack !== playingTrack.id &&
+      status === "authenticated"
+    )
+      fetchPlayingTrackData();
+  }, [currentTrack, playingTrack, setPlayingTrack, spotifyApi, status]);
 
   let token = spotifyApi.getAccessToken();
 
@@ -30,6 +47,9 @@ export const Player: React.FC<{}> = ({}) => {
           trackArtistColor: "white",
           trackNameColor: "white",
           sliderTrackColor: "gray",
+        }}
+        callback={(state) => {
+          setCurrentTrack(state.track.id);
         }}
       />
     </div>

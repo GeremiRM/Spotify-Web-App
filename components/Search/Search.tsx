@@ -27,7 +27,6 @@ export const Search: React.FC<{}> = ({}) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState<Results>({} as Results);
   const [trackResults, setTrackResults] = useState<Tracks>({} as Tracks);
-  const [topResult, setTopResult] = useState();
 
   const spotifyApi = useSpotify();
 
@@ -89,12 +88,12 @@ export const Search: React.FC<{}> = ({}) => {
   return (
     <>
       <Header>
-        {/* Search Bar */}
-        <div className={styles.searchBar}>
-          <FiSearch className={styles.searchBar__icon} />
+        {/* Search Bar Desktop */}
+        <div className={styles.searchBarDesktop}>
+          <FiSearch className={styles.searchBarDesktop__icon} />
           <input
             type="search"
-            className={styles.searchBar__input}
+            className={styles.searchBarDesktop__input}
             placeholder="Artists, albums, or songs"
             onChange={handleInputChange}
             value={searchInput}
@@ -104,6 +103,17 @@ export const Search: React.FC<{}> = ({}) => {
 
       {/* if no query, show recent searches and genres */}
       <div className={styles.search}>
+        <div className={styles.searchBarMobile}>
+          <FiSearch className={styles.searchBarMobile__icon} />
+          <input
+            type="search"
+            className={styles.searchBarMobile__input}
+            placeholder="Artists, albums, or songs"
+            onChange={handleInputChange}
+            value={searchInput}
+          />
+        </div>
+
         {searchInput === "" && (
           <div>
             <PastSearches />
@@ -125,7 +135,7 @@ export const Search: React.FC<{}> = ({}) => {
               {/* Tracklist */}
               <div className={styles.search__tracklist}>
                 <h1 className={styles.search__tracklist__title}>Songs</h1>
-                <Tracklist tracks={trackResults} hideAlbum />
+                <Tracklist tracks={trackResults} hideAlbum hideHeader />
               </div>
             </div>
 

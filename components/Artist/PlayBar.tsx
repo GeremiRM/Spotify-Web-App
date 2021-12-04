@@ -1,10 +1,16 @@
+import { useContext, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+
 // styling
 import styles from "./PlayBar.module.scss";
-import { ImPlay3 } from "react-icons/im";
-import { useSpotify } from "../../hooks/useSpotify";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { FaPlay } from "react-icons/fa";
+import { GiPauseButton } from "react-icons/gi";
+
+// hooks
 import { usePlay } from "../../hooks/usePlay";
+import { useSpotify } from "../../hooks/useSpotify";
+
+import { Context } from "../../context/context";
 
 interface PlaybarProps {
   id?: string;
@@ -12,12 +18,20 @@ interface PlaybarProps {
 }
 
 export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
+  const { playingTrack } = useContext(Context);
+
   const [isFollowing, setisFollowing] = useState(false);
+  const [isPlayingArtist, setIsPlayingArtist] = useState(false);
 
   const spotifyApi = useSpotify();
   const { status } = useSession();
 
   const play = usePlay(uri);
+
+  useEffect(() => {
+    if (Object.keys(playingTrack).length > 0)
+      setIsPlayingArtist(playingTrack.artists[0].id === id);
+  }, [id, playingTrack]);
 
   useEffect(() => {
     const getData = async () => {
@@ -36,7 +50,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
   return (
     <div className={styles.playbar}>
       <div className={styles.playbar__button}>
-        <ImPlay3 />
+        {isPlayingArtist ? <GiPauseButton /> : <FaPlay onClick={play} />}
       </div>
       <div
         onClick={() => changeSavedState()}

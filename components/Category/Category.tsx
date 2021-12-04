@@ -9,6 +9,8 @@ import styles from "./Category.module.scss";
 
 // hook
 import { useCategoryInfo } from "../../hooks/useCategoryInfo";
+import { Loading } from "../Common/Loading";
+import { Header } from "../Header/Header";
 
 export const Category: React.FC<{}> = ({}) => {
   //  category id
@@ -20,16 +22,21 @@ export const Category: React.FC<{}> = ({}) => {
   if (!category || !categoryPlaylists) return <></>;
 
   return (
-    <div className={styles.category}>
-      <div>
-        <Banner title={category.name} />
-        <Cards
-          data={categoryPlaylists}
-          title="Featured Playlists"
-          multirow
-          hideLink
-        />
+    <>
+      <Header />
+      <div className={styles.category}>
+        <div className={styles.banner}>
+          <Banner title={category.name} />
+        </div>
+        <div className={styles.body}>
+          <Cards
+            data={categoryPlaylists}
+            title="Featured Playlists"
+            multirow
+            hideLink
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };

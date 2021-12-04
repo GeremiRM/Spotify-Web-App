@@ -1,15 +1,18 @@
 .playbar {
   display: flex;
   padding: 2rem 1rem;
-  padding-left: 2.5rem;
   align-items: center;
   position: relative;
+
+  @media (min-width: 1000px) {
+    padding-left: 2.5rem;
+  }
 
   &__button {
     background: #1db954;
     height: 60px;
     width: 60px;
-    font-size: 1.5rem;
+    font-size: 2rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;

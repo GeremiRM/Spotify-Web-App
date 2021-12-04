@@ -1,9 +1,8 @@
 // styling
 import styles from "./Banner.module.scss";
-import { ImMusic } from "react-icons/im";
 
 //func
-import { convertMillisToMinutes } from "../../../utils/utils";
+import { converMillisBanners } from "../../../utils/utils";
 
 interface BannerProps {
   playlist: SpotifyApi.PlaylistObjectFull;
@@ -14,7 +13,7 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
   const getPlaylistDuration = () => {
     let totalDuration = 0;
     tracks.map((track) => (totalDuration += track.duration_ms));
-    return convertMillisToMinutes(totalDuration);
+    return converMillisBanners(totalDuration);
   };
 
   if (Object.keys(playlist).length === 0) return <></>;
@@ -22,21 +21,17 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
   return (
     <div className={styles.banner}>
       <div className={styles.banner__cover}>
-        {playlist.images.length === 0 ? (
-          <ImMusic className={styles.banner__cover__placeholder} />
-        ) : (
-          /*eslint-disable-next-line @next/next/no-img-element  */
-          <img
-            src={playlist.images[0]?.url ?? "/placeholder.png"}
-            alt={playlist.name}
-          />
-        )}
+        {/*eslint-disable-next-line @next/next/no-img-element  */}
+        <img
+          src={playlist.images[0]?.url ?? "/music-placeholder.png"}
+          alt={playlist.name}
+        />
       </div>
       <div className={styles.banner__info}>
         <div className={styles.banner__name}>
           <h1
             style={{
-              fontSize: `clamp(2.75rem,calc(5.75vw - ${playlist.name.length}px), 7rem)`,
+              fontSize: `clamp(2.75rem,calc(8vw - ${playlist.name.length}px), 96px)`,
             }}
           >
             {playlist.name}

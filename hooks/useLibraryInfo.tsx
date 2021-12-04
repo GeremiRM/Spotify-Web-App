@@ -19,14 +19,14 @@ export const useLibraryInfo = () => {
 
   useEffect(() => {
     const fetchLibraryData = async () => {
-      const playlists = await spotifyApi.getUserPlaylists({ limit: 50 });
-      const artists = await spotifyApi.getFollowedArtists({ limit: 50 });
+      const playlists = await spotifyApi.getUserPlaylists();
+      const artists = await spotifyApi.getFollowedArtists();
       const albums = await (
-        await spotifyApi.getMySavedAlbums({ limit: 50 })
+        await spotifyApi.getMySavedAlbums()
       ).body.items.map((item) => item.album);
 
       const tracks = await (
-        await spotifyApi.getMySavedTracks({ limit: 50 })
+        await spotifyApi.getMySavedTracks()
       ).body.items.map((item) => item.track);
 
       setLibraryData({

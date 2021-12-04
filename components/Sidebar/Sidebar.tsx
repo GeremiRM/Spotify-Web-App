@@ -2,22 +2,27 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 // styling and icons
 import styles from "./Sidebar.module.scss";
 import { FiHome, FiSearch } from "react-icons/fi";
 import { BiLibrary } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
+import { BsSpotify } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
 
 // components
 import { SidebarOption } from "./SidebarOption";
+
+// hook
 import { useSpotify } from "../../hooks/useSpotify";
-import { signOut, useSession } from "next-auth/react";
 
 type Playlists = SpotifyApi.PlaylistObjectSimplified[];
 
 export const Sidebar: React.FC<{}> = ({}) => {
   const [playlists, setPlaylists] = useState<Playlists>([] as Playlists);
+  const [displaySidebar, setDisplaySidebar] = useState(false);
 
   const router = useRouter();
   const location = router.pathname;
@@ -46,7 +51,22 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sidebar}>
+      {/* Mobile sidebar button */}
+      <div
+        className={styles.sidebarButton}
+        onClick={() => setDisplaySidebar(!displaySidebar)}
+      >
+        {displaySidebar ? (
+          <ImCross className={styles.sidebarButton__cross} />
+        ) : (
+          <BsSpotify />
+        )}
+      </div>
+
+      <div
+        className={styles.sidebar}
+        style={{ display: `${displaySidebar ? "flex" : "none"}` }}
+      >
         <Link href="/" passHref>
           <div className={styles.sidebar__logo}>
             <Image src="/spotify.png" alt="spotify logo" layout="fill" />
@@ -55,16 +75,9 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
         {/* home - search - library */}
         <div className={styles.sidebar__options}>
-          <div
-            onClick={() =>
-              signOut({ callbackUrl: "http://localhost:3000/login" })
-            }
-          >
-            <SidebarOption>LogOut</SidebarOption>
-          </div>
           <Link href="/">
             <a>
-              <SidebarOption icon={FiHome} active={location === "/dashboard"}>
+              <SidebarOption icon={FiHome} active={location === "/"}>
                 Home
               </SidebarOption>
             </a>

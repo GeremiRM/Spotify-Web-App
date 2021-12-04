@@ -19,8 +19,7 @@ export const useCategoryInfo = (id: string) => {
     const fetchCategoryData = async () => {
       const category = await spotifyApi.getCategory(id);
       const categoryPlaylists = await spotifyApi.getPlaylistsForCategory(
-        category.body.id,
-        { limit: 50 }
+        category.body.id
       );
 
       setCategoryData({

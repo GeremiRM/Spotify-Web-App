@@ -1,6 +1,7 @@
 // components
 import { Header } from "../Header/Header";
 import { Cards } from "../Common/Cards";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Home.module.scss";
@@ -8,12 +9,14 @@ import styles from "./Home.module.scss";
 // hook
 import { useHomeInfo } from "../../hooks/useHomeInfo";
 
+const LIMIT = 10;
+
 export const Home: React.FC<{}> = ({}) => {
   const {
     newReleases,
     featuredPlaylists,
     recentlyPlayed,
-    recommendations,
+    // recommendations,
     topArtists,
   } = useHomeInfo();
 
@@ -23,7 +26,7 @@ export const Home: React.FC<{}> = ({}) => {
     !newReleases ||
     !featuredPlaylists ||
     !recentlyPlayed ||
-    !recommendations ||
+    // !recommendations ||
     !topArtists
   )
     return <></>;
@@ -31,15 +34,29 @@ export const Home: React.FC<{}> = ({}) => {
   return (
     <div>
       <Header />
-
       <div className={styles.home}>
         <div className={styles.home__body}>
           <div className={styles.home__results}>
-            {/* <Posters data={newReleases} /> */}
-            <Cards data={featuredPlaylists} title="Featured Playlists" />
-            <Cards data={newReleases} title="New Releases" />
-            <Cards data={topArtists} title="Your Favorite Artists" />
-            <Cards data={recentlyPlayed} title="Recently Played" />
+            <Cards
+              data={featuredPlaylists.slice(0, LIMIT)}
+              title="Featured Playlists"
+              linkType="featured"
+            />
+            <Cards
+              data={newReleases.slice(0, LIMIT)}
+              title="New Releases"
+              linkType="newReleases"
+            />
+            <Cards
+              data={topArtists.slice(0, LIMIT)}
+              title="Your Favorite Artists"
+              linkType="topArtists"
+            />
+            <Cards
+              data={recentlyPlayed.slice(0, LIMIT)}
+              title="Recently Played"
+              linkType="recentlyPlayed"
+            />
           </div>
         </div>
       </div>

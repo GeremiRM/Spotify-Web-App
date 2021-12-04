@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Link from "next/link";
+
 // components
 import Card from "./Card";
 
@@ -9,7 +11,7 @@ import styles from "./Cards.module.scss";
 import { filterRepeated } from "../../utils/utils";
 
 // types
-import { CardsData } from "../../types/types";
+import { CardsData, LinkType } from "../../types/types";
 
 interface Cards {
   data: CardsData;
@@ -17,6 +19,8 @@ interface Cards {
   ignoreCard?: string;
   hideLink?: boolean;
   multirow?: boolean;
+  linkType?: LinkType;
+  cardsId?: string;
 }
 
 export const Cards: React.FC<Cards> = ({
@@ -25,9 +29,9 @@ export const Cards: React.FC<Cards> = ({
   ignoreCard,
   hideLink,
   multirow,
+  linkType,
+  cardsId,
 }) => {
-  const [seeAll, setSeeAll] = useState(false);
-
   const renderCards = () => {
     return data?.map((info, idx) => {
       if (info.id === ignoreCard) return "";
@@ -47,17 +51,19 @@ export const Cards: React.FC<Cards> = ({
           <h2>{title}</h2>
         </div>
         {!hideLink && (
-          <div
-            className={styles.wrapper__link}
-            onClick={() => setSeeAll(!seeAll)}
+          <Link
+            href={`/all/${linkType}${cardsId ? "/" + cardsId : ""}`}
+            passHref
           >
-            <p>{seeAll ? "See less" : "See All"}</p>
-          </div>
+            <div className={styles.wrapper__link}>
+              <p>See All</p>
+            </div>
+          </Link>
         )}
       </div>
       <div
         className={`${styles.wrapper__cards} ${
-          multirow || seeAll ? styles.multirow : ""
+          multirow ? styles.multirow : ""
         }`}
       >
         {renderCards()}

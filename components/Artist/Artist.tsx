@@ -15,6 +15,7 @@ import styles from "./Artist.module.scss";
 // hook
 import { useArtistInfo } from "../../hooks/useArtistInfo";
 import { useImageColor } from "../../hooks/useImageColor";
+import { Loading } from "../Common/Loading";
 
 export const Artist: React.FC<{}> = ({}) => {
   const [seeMore, setSeeMore] = useState(false);
@@ -30,7 +31,7 @@ export const Artist: React.FC<{}> = ({}) => {
   // playbar ref
   const playbarRef = useRef<HTMLDivElement>(null);
 
-  // if data hasn't finished fetching, return nothing
+  // if data hasn't finished fetching
   if (
     !albums ||
     !artist ||
@@ -63,7 +64,7 @@ export const Artist: React.FC<{}> = ({}) => {
         {/* Banner */}
         <Banner artist={artist} />
 
-        <div className={styles.body}>
+        <div className={styles.artist__body}>
           {/* Playbar */}
           <div ref={playbarRef}>
             <PlayBar id={artist.id} uri={artist.uri} />
@@ -87,10 +88,30 @@ export const Artist: React.FC<{}> = ({}) => {
 
           {/* Cards */}
           <div className={styles.cards}>
-            <Cards data={albums} title="Albums" />
-            <Cards data={singles} title="Singles" />
-            <Cards data={appears_on} title="Appears On" />
-            <Cards data={otherArtists} title="Related Artists" />
+            <Cards
+              data={albums.slice(0, 8)}
+              title="Albums"
+              cardsId={artist.id}
+              linkType="albums"
+            />
+            <Cards
+              data={singles.slice(0, 8)}
+              title="Singles"
+              cardsId={artist.id}
+              linkType="singles"
+            />
+            <Cards
+              data={appears_on.slice(0, 8)}
+              title="Appears On"
+              cardsId={artist.id}
+              linkType="appears_on"
+            />
+            <Cards
+              data={otherArtists.slice(0, 8)}
+              title="Related Artists"
+              cardsId={artist.id}
+              linkType="related"
+            />
           </div>
         </div>
       </div>

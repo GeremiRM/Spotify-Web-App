@@ -1,25 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 // styling and icons
 import styles from "./Track.module.scss";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { GiPauseButton } from "react-icons/gi";
+
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 // util
-import { convertMillisToMinutes } from "../../utils/utils";
+import { convertMillisTracks } from "../../utils/utils";
 
 // hooks
 import { useSpotify } from "../../hooks/useSpotify";
 import { usePlay } from "../../hooks/usePlay";
 import { useSongInfo } from "../../hooks/useSongInfo";
+import { Context } from "../../context/context";
 
 interface TrackProps {
   id: string;
   idx: number;
   tracklistUri?: string;
   hideAlbum?: boolean;
+  saved: boolean;
 }
 
 export const Track: React.FC<TrackProps> = ({
@@ -27,10 +31,14 @@ export const Track: React.FC<TrackProps> = ({
   idx,
   hideAlbum,
   tracklistUri,
+  saved,
 }) => {
-  const { track, isTrackSaved } = useSongInfo(id);
+  const { playingTrack } = useContext(Context);
+
+  const { track } = useSongInfo(id);
+  const [isPlayingTrack, setIsPlayingTrack] = useState(false);
   const [trackSaved, setTrackSaved] = useState<boolean>(false);
-  const trackDuration = convertMillisToMinutes(track?.duration_ms!);
+  const trackDuration = convertMillisTracks(track?.duration_ms!);
 
   const spotifyApi = useSpotify();
   const play = usePlay([track?.uri], tracklistUri);
@@ -43,9 +51,21 @@ export const Track: React.FC<TrackProps> = ({
     ));
   };
 
+  const renderSoundBars = () => {
+    let bars = [];
+    for (let i = 0; i < 6; i++) {
+      bars.push(<div className={styles.track__soundbars__bar}></div>);
+    }
+    return <div className={styles.track__soundbars}>{bars}</div>;
+  };
   useEffect(() => {
-    setTrackSaved(isTrackSaved);
-  }, [isTrackSaved]);
+    if (Object.keys(playingTrack).length > 0 && track)
+      setIsPlayingTrack(playingTrack.id === id);
+  }, [id, playingTrack, track]);
+
+  useEffect(() => {
+    setTrackSaved(saved);
+  }, [saved]);
 
   const changeSavedState = async () => {
     if (trackSaved) spotifyApi.removeFromMySavedTracks([track.id]);
@@ -57,13 +77,13 @@ export const Track: React.FC<TrackProps> = ({
 
   return (
     <div
-      className={`${styles.track} ${hideAlbum ? styles.track__noAlbum : ""}`}
+      className={`${styles.track} ${hideAlbum ? styles.track__noAlbum : ""} `}
       onDoubleClick={play}
     >
       <div className={styles.track__header}>
         {/* index */}
         <div className={styles.track__index}>
-          <p>{idx}</p>
+          {isPlayingTrack ? renderSoundBars() : <p>{idx}</p>}
         </div>
 
         {/* image */}
@@ -73,7 +93,7 @@ export const Track: React.FC<TrackProps> = ({
               track.album.images[2]?.url ??
               track.album.images[1]?.url ??
               track.album.images[0]?.url ??
-              "/placeholder.png"
+              "/music-placeholder.png"
             }
             alt={track.name}
             width="100%"
@@ -84,7 +104,10 @@ export const Track: React.FC<TrackProps> = ({
 
         {/* name and artists*/}
         <div className={styles.track__desc}>
-          <div className={styles.track__desc__title}>
+          <div
+            className={styles.track__desc__title}
+            style={{ color: `${isPlayingTrack ? "#1db954" : "white"}` }}
+          >
             <p>{track.name}</p>
           </div>
           <div className={styles.track__desc__artists}>

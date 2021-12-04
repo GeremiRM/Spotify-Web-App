@@ -21,16 +21,16 @@ export const useArtistInfo = (id: string) => {
     const fetchArtistData = async () => {
       const artist = await spotifyApi.getArtist(id as string);
       const albums = await spotifyApi.getArtistAlbums(id as string, {
-        limit: 50,
         include_groups: "album",
+        limit: 50,
       });
       const singles = await spotifyApi.getArtistAlbums(id as string, {
-        limit: 50,
         include_groups: "single",
+        limit: 50,
       });
       const appears_on = await spotifyApi.getArtistAlbums(id as string, {
-        limit: 50,
         include_groups: "appears_on",
+        limit: 50,
       });
       const topTracks = await spotifyApi.getArtistTopTracks(id as string, "US");
       const otherArtists = await spotifyApi.getArtistRelatedArtists(

@@ -11,7 +11,7 @@ interface HeaderPlayerProps {
   // at what distance will it active
   activateDistance: number | undefined;
   title: string;
-  uri: string;
+  uri: string | string[];
 }
 
 export const HeaderPlayer: React.FC<HeaderPlayerProps> = ({

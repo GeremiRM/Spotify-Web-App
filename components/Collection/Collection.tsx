@@ -11,6 +11,7 @@ import styles from "./Collection.module.scss";
 
 // hooks
 import { useLibraryInfo } from "../../hooks/useLibraryInfo";
+import { Loading } from "../Common/Loading";
 
 export const Collection: React.FC<{}> = ({}) => {
   const [selector, setSelector] = useState(0);
@@ -43,7 +44,7 @@ export const Collection: React.FC<{}> = ({}) => {
           hideLink
         >
           {/* liked songs card */}
-          {selector === 0 && <LikedSongs tracks={likedSongs} />}
+          {selector === 0 && <LikedSongs numberOfTracks={likedSongs.length} />}
         </Cards>
       </div>
     </div>

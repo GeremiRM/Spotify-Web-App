@@ -1,15 +1,51 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
+.sidebarButton {
+  position: fixed;
+  top: 0;
+  color: #ccc;
+  font-size: 2rem;
+  z-index: 100;
+  margin-top: 0.75rem;
+  margin-left: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+  }
+
+  @include tablet {
+    display: none;
+  }
+
+  &__cross {
+    font-size: 1.25rem;
+  }
+}
+
 .sidebar {
   height: 100vh;
   width: 235px;
   padding-top: 1.5rem;
   background-color: black;
-  display: flex;
+  display: none;
   flex-direction: column;
-  position: sticky;
-  top: 0;
+  position: fixed;
   max-height: 100vh;
-  resize: horizontal;
   overflow: auto;
+  z-index: 1;
+  padding-top: 2rem;
+  top: 0;
+  z-index: 20;
+
+  @include tablet {
+    display: flex !important;
+    position: sticky;
+  }
 
   &__logo {
     position: relative;
@@ -20,6 +56,11 @@
     display: flex;
     align-self: flex-start;
     cursor: pointer;
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
   }
 
   &__links {
@@ -27,7 +68,11 @@
   }
 
   &__options {
-    margin: 1rem 0.5rem 0;
+    margin: 2rem 0.5rem 0;
+
+    @include tablet {
+      margin-top: 1rem;
+    }
   }
 
   &__option {

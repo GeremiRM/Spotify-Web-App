@@ -4,10 +4,10 @@ import Link from "next/link";
 import styles from "./LikedSongs.module.scss";
 
 interface LikedSongsProps {
-  tracks: SpotifyApi.TrackObjectFull[];
+  numberOfTracks: number;
 }
 
-export const LikedSongs: React.FC<LikedSongsProps> = ({ tracks }) => {
+export const LikedSongs: React.FC<LikedSongsProps> = ({ numberOfTracks }) => {
   return (
     <Link href={`/collection/tracks`} passHref>
       <div className={styles.likedSongs}>
@@ -16,7 +16,7 @@ export const LikedSongs: React.FC<LikedSongsProps> = ({ tracks }) => {
             <h2>Liked Songs</h2>
           </div>
           <div className={styles.likedSongs__body__desc}>
-            {tracks.length} liked songs
+            {numberOfTracks} liked songs
           </div>
         </div>
       </div>

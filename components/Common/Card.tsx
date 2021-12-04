@@ -54,15 +54,15 @@ const Card: React.FC<CardProps> = ({ info }) => {
   const cardImage = () => {
     switch (info?.type) {
       case "track":
-        return info?.album?.images[1]?.url;
+        return info?.album?.images[1]?.url ?? "/music-placeholder.png";
       case "artist":
-        return info?.images[1]?.url;
+        return info?.images[1]?.url ?? "/music-placeholder.png";
       case "album":
-        return info?.images[1]?.url;
+        return info?.images[1]?.url ?? "/music-placeholder.png";
       case "playlist":
-        return info?.images[0]?.url;
+        return info?.images[0]?.url ?? "/music-placeholder.png";
       default:
-        return "/placeholder.png";
+        return "/music-placeholder.png";
     }
   };
 
@@ -93,7 +93,7 @@ const Card: React.FC<CardProps> = ({ info }) => {
         >
           {info?.type !== "playlist" ? (
             <Image
-              src={cardImage() || "/placeholder.png"}
+              src={cardImage() ?? "/music-placeholder.png"}
               width="100%"
               height="100%"
               alt={info?.name}
@@ -103,7 +103,7 @@ const Card: React.FC<CardProps> = ({ info }) => {
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={cardImage() || "placeholder.png"}
+              src={cardImage() || "/music-placeholder.png"}
               alt={info.name}
               className={styles.playlist}
             />

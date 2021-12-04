@@ -4,7 +4,7 @@ import { useSpotify } from "./useSpotify";
 
 interface TrackData {
   track: SpotifyApi.TrackObjectFull;
-  isTrackSaved: boolean;
+  // isTrackSaved: boolean;
 }
 
 export const useSongInfo = (id: string) => {
@@ -16,11 +16,11 @@ export const useSongInfo = (id: string) => {
   useEffect(() => {
     const fetchTrackData = async () => {
       const track = await spotifyApi.getTrack(id);
-      const isTrackSaved = await spotifyApi.containsMySavedTracks([id]);
+      // const isTrackSaved = await spotifyApi.containsMySavedTracks([id]);
 
       setTrackData({
         track: track.body,
-        isTrackSaved: isTrackSaved.body[0],
+        // isTrackSaved: isTrackSaved.body[0],
       });
     };
     if (status === "authenticated" && id) fetchTrackData();

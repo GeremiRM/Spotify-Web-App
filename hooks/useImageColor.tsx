@@ -6,8 +6,8 @@ export const useImageColor = (image: string) => {
   const { data } = usePalette(image);
 
   useEffect(() => {
-    setPalette(data.darkVibrant ?? "");
-  }, [data.darkVibrant]);
+    if (image) setPalette(data.darkVibrant ?? "");
+  }, [data, image]);
 
   return palette;
 };

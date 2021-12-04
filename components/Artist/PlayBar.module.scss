@@ -14,6 +14,12 @@
     justify-content: center;
     align-items: center;
     color: white;
+    transition: 0.25s all ease;
+
+    &:hover {
+      background: lightgreen;
+      cursor: pointer;
+    }
   }
 
   &__follow {

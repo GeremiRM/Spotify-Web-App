@@ -21,6 +21,11 @@
 
   &:hover {
     background: #333;
+
+    .card__button {
+      opacity: 1;
+      bottom: -0.5rem;
+    }
   }
 
   &__img {
@@ -36,6 +41,7 @@
 
   &__info {
     margin-left: 0.5rem;
+    position: relative;
   }
 
   &__title {
@@ -48,6 +54,34 @@
 
     @media (min-width: 1000px) {
       font-size: 2rem;
+    }
+  }
+
+  &__button {
+    background: #1db954;
+    height: 40px;
+    width: 40px;
+    font-size: 0.85rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: 0.25s all ease;
+    position: absolute;
+    bottom: -1.5rem;
+    right: 0;
+    opacity: 0;
+
+    &:hover {
+      background: lightgreen;
+      cursor: pointer;
+    }
+
+    @media (min-width: 1400px) {
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
     }
   }
 

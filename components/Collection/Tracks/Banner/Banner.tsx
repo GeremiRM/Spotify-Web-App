@@ -1,8 +1,7 @@
-import React from "react";
 import Image from "next/image";
 
 // styling
-import styles from "./Tracks.module.scss";
+import styles from "./Banner.module.scss";
 
 interface BannerProps {
   amountSongs: number;
@@ -10,16 +9,8 @@ interface BannerProps {
 
 export const Banner: React.FC<BannerProps> = ({ amountSongs }) => {
   return (
-    <div
-      className={styles.playlist__banner}
-      style={{
-        background: `linear-gradient(
-      0deg,
-      #121212 0%,
-      rgb(80, 56, 160) 95%)`,
-      }}
-    >
-      <div className={styles.playlist__cover}>
+    <div className={styles.banner}>
+      <div className={styles.banner__cover}>
         <Image
           src="/likedSongs.png"
           alt="Liked songs"
@@ -30,8 +21,8 @@ export const Banner: React.FC<BannerProps> = ({ amountSongs }) => {
           objectPosition="center"
         />
       </div>
-      <div className={styles.playlist__info}>
-        <div className={styles.playlist__title}>
+      <div className={styles.banner__info}>
+        <div className={styles.banner__title}>
           <h1
             style={{
               fontSize: `clamp(4rem,5vw, 7rem)`,
@@ -40,8 +31,8 @@ export const Banner: React.FC<BannerProps> = ({ amountSongs }) => {
             Liked Songs
           </h1>
         </div>
-        <div className={styles.playlist__desc}>
-          <div className={styles.playlist__tracks}>{amountSongs} songs </div>
+        <div className={styles.banner__desc}>
+          <div className={styles.banner__tracks}>{amountSongs} songs </div>
         </div>
       </div>
     </div>

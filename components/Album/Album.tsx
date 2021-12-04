@@ -15,6 +15,7 @@ import styles from "./Album.module.scss";
 import { useAlbumInfo } from "../../hooks/useAlbumInfo";
 import { useImageColor } from "../../hooks/useImageColor";
 import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
+import { Loading } from "../Common/Loading";
 
 export const Album: React.FC<{}> = () => {
   // album id
@@ -28,7 +29,7 @@ export const Album: React.FC<{}> = () => {
   // playbar ref
   const playbarRef = useRef<HTMLDivElement>(null);
 
-  // if data hasn't finished fetching, return nothing
+  // if data hasn't finished fetching
   if (!album || !artists || !otherAlbums) return <></>;
 
   return (
@@ -76,6 +77,8 @@ export const Album: React.FC<{}> = () => {
               data={otherAlbums}
               title={`More by ${artists[0]?.name}`}
               ignoreCard={album.id}
+              cardsId={album.artists[0].id}
+              linkType="albums"
             />
           </div>
         </div>

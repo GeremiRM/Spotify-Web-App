@@ -1,8 +1,13 @@
-import React from "react";
 import Image from "next/image";
-
-import styles from "./TopResult.module.scss";
 import Link from "next/link";
+
+// styling and icons
+import styles from "./TopResult.module.scss";
+import { FaPlay } from "react-icons/fa";
+import { GiPauseButton } from "react-icons/gi";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../../context/context";
+import { usePlay } from "../../../hooks/usePlay";
 
 type TopResult =
   | SpotifyApi.AlbumObjectSimplified
@@ -14,6 +19,18 @@ interface TopResultProps {
 }
 
 export const TopResult: React.FC<TopResultProps> = ({ data }) => {
+  const { playingTrack } = useContext(Context);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const play = usePlay(data.uri);
+
+  useEffect(() => {
+    if (Object.keys(playingTrack).length > 0)
+      playingTrack.artists[0]?.id === data.id
+        ? setIsPlaying(true)
+        : setIsPlaying(false);
+  }, [data.id, playingTrack]);
+
   const saveSearch = () => {
     const search = data;
 
@@ -46,7 +63,7 @@ export const TopResult: React.FC<TopResultProps> = ({ data }) => {
             } `}
           >
             <Image
-              src={data?.images[1]?.url || "/placeholder.png"}
+              src={data?.images[1]?.url || "/music-placeholder.png"}
               width="100%"
               height="100%"
               alt={data?.name}
@@ -58,6 +75,10 @@ export const TopResult: React.FC<TopResultProps> = ({ data }) => {
         <div className={styles.card__info}>
           <h2 className={styles.card__title}>{data?.name}</h2>
           <p className={`${styles.card__desc}`}>{data.type}</p>
+
+          <div className={styles.card__button}>
+            {isPlaying ? <GiPauseButton /> : <FaPlay onClick={play} />}
+          </div>
         </div>
       </div>
     </Link>

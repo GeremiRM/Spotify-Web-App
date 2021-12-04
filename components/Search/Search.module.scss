@@ -1,9 +1,14 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .search {
   margin: 0;
   padding: 0 1rem;
   box-sizing: border-box;
   padding-top: 4rem;
-  min-height: 100vh;
 
   &__body {
     padding: 1.5rem 0;
@@ -37,9 +42,9 @@
 
   &__topResult {
     margin-left: 1.5rem;
+    min-width: 200px;
 
-    @media (min-width: 800px) {
-      min-width: 200px;
+    @media (min-width: 1000px) {
       max-width: 500px;
       margin-right: 2rem;
       width: 100%;
@@ -54,16 +59,52 @@
   }
 }
 
-.searchBar {
+.searchBarDesktop {
+  display: none;
+  height: 2.25rem;
+  align-items: center;
+  background: white;
+  color: gray;
+  width: 50%;
+  border-radius: 20px;
+  padding: 1.3rem 0;
+  padding-left: 1rem;
+
+  @include tablet {
+    display: flex;
+    width: 400px;
+  }
+
+  &__icon {
+    margin-right: 0.75rem;
+    font-size: 1.25rem;
+  }
+
+  &__input {
+    border: none;
+    font-size: 0.85rem;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.searchBarMobile {
   display: flex;
   height: 2.25rem;
   align-items: center;
   background: white;
   color: gray;
-  width: 350px;
+  width: 100%;
   border-radius: 20px;
   padding: 1.3rem 0;
   padding-left: 1rem;
+
+  @include tablet {
+    display: none;
+  }
 
   &__icon {
     margin-right: 0.75rem;

@@ -7,7 +7,7 @@ import styles from "./Banner.module.scss";
 
 // functions
 import { getAlbumDuration } from "../../../Spotify/SpotifyApi";
-import { convertMillisToMinutes } from "../../../utils/utils";
+import { converMillisBanners } from "../../../utils/utils";
 
 interface BannerProps {
   album: SpotifyApi.AlbumObjectFull;
@@ -17,7 +17,7 @@ interface BannerProps {
 export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
   const bannerRef = useRef<HTMLDivElement>(null);
 
-  const albumDuration = convertMillisToMinutes(getAlbumDuration(album));
+  const albumDuration = converMillisBanners(getAlbumDuration(album));
 
   const renderArtists = () => {
     return artists?.map((artist, idx, array) => (
@@ -31,10 +31,10 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
     return <></>;
 
   return (
-    <div className={styles.banner}>
-      <div className={styles.banner__cover} ref={bannerRef}>
+    <div className={styles.banner} ref={bannerRef}>
+      <div className={styles.banner__cover}>
         <Image
-          src={album?.images[0]?.url || "/placeholder.png"}
+          src={album?.images[0]?.url || "/music-placeholder.png"}
           width="100%"
           height="100%"
           layout="responsive"
@@ -45,7 +45,7 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
         <div className={styles.banner__info__name}>
           <h1
             style={{
-              fontSize: `clamp(2.75rem,calc(5.75vw - ${album.name.length}px), 7rem)`,
+              fontSize: `clamp(2.75rem,calc(8vw - ${album.name.length}px), 96px)`,
             }}
           >
             {album.name}

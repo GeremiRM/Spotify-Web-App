@@ -11,3 +11,14 @@ export type CardsData =
   | SpotifyApi.PlaylistObjectSimplified[]
   | SpotifyApi.TrackObjectFull[]
   | undefined;
+
+export type LinkType =
+  | "albums"
+  | "singles"
+  | "appears_on"
+  | "playlists"
+  | "related"
+  | "featured"
+  | "topArtists"
+  | "recentlyPlayed"
+  | "newReleases";

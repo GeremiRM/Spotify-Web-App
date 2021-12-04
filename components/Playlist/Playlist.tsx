@@ -7,6 +7,7 @@ import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { PlayBar } from "./PlayBar";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Playlist.module.scss";
@@ -25,7 +26,7 @@ export const Playlist: React.FC<{}> = ({}) => {
 
   const playbarRef = useRef<HTMLDivElement>(null);
 
-  if (!playlist || !tracks) return <></>;
+  if (!playlist || !tracks) return <> </>;
 
   return (
     <div>
@@ -38,21 +39,25 @@ export const Playlist: React.FC<{}> = ({}) => {
         />
       </Header>
       <div className={styles.playlist}>
-        <div
-          className=""
-          style={{
-            background: `linear-gradient(
+        <div>
+          <div
+            style={{
+              background: `linear-gradient(
       0deg,
       #121212 0%,
       ${background} 100%)`,
-          }}
-        >
-          <Banner playlist={playlist} tracks={tracks} />
-          <div ref={playbarRef}>
-            <PlayBar uri={playlist.uri} id={playlist.id} />
+            }}
+          >
+            <Banner playlist={playlist} tracks={tracks} />
+
+            <div ref={playbarRef}>
+              <PlayBar uri={playlist.uri} id={playlist.id} />
+            </div>
           </div>
         </div>
-        <Tracklist tracks={tracks} stickyHeader tracklistUri={playlist.uri} />
+        <div className={styles.body}>
+          <Tracklist tracks={tracks} stickyHeader tracklistUri={playlist.uri} />
+        </div>
       </div>
     </div>
   );

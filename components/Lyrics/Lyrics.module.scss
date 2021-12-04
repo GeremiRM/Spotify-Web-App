@@ -1,0 +1,40 @@
+.lyrics {
+  padding: 7rem 2rem 3rem;
+  color: #dddddd;
+  font-family: "Proxima Nova", sans-serif;
+  min-height: 100vh;
+  font-weight: 700;
+  text-align: center;
+
+  @media (min-width: 1400px) {
+    padding: 7rem 4rem 3rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    color: white;
+
+    @media (min-width: 1400px) {
+      font-size: 5rem;
+      margin-bottom: 5rem;
+    }
+  }
+
+  div {
+    margin-bottom: 2rem;
+
+    @media (min-width: 1200px) {
+      margin-bottom: 3rem;
+    }
+
+    p {
+      font-size: clamp(1.25rem, 5vw, 1.75rem);
+      @media (min-width: 1400px) {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}

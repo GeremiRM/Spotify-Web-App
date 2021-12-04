@@ -1,0 +1,61 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  color: gray;
+  height: 100vh;
+
+  &__dots {
+    &__first {
+      animation: firstDot 1s ease-in-out 0s infinite alternate;
+      opacity: 0;
+      position: relative;
+
+      @keyframes firstDot {
+        from {
+          transform: translateY(-25px);
+          color: white;
+          opacity: 1;
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &__second {
+      animation: secondDot 1s ease-in-out 0.1s infinite alternate;
+      opacity: 0;
+      position: relative;
+
+      @keyframes secondDot {
+        from {
+          transform: translateY(-25px);
+          color: #ccc;
+          opacity: 1;
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &__third {
+      animation: thirdDot 1s ease-in-out 0.25s infinite alternate;
+      opacity: 0;
+      position: relative;
+
+      @keyframes thirdDot {
+        from {
+          transform: translateY(-25px);
+          color: white;
+          opacity: 1;
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}

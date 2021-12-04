@@ -5,4 +5,15 @@
   color: white;
   padding-bottom: 2.5rem;
   font-family: "Proxima Nova", sans-serif;
+
+  .banner {
+    background: linear-gradient(0deg, #121212 0%, #6e174a 100%);
+  }
+
+  .body {
+    margin-top: 3rem;
+    @media (min-width: 1000px) {
+      padding-left: 2.5rem;
+    }
+  }
 }

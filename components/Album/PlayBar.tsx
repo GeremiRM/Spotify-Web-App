@@ -1,11 +1,17 @@
+import { useContext, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+
 // styling
 import styles from "./PlayBar.module.scss";
-import { ImPlay3 } from "react-icons/im";
+import { FaPlay } from "react-icons/fa";
+import { GiPauseButton } from "react-icons/gi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { useSpotify } from "../../hooks/useSpotify";
-import { useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+
+// hooks
 import { usePlay } from "../../hooks/usePlay";
+import { useSpotify } from "../../hooks/useSpotify";
+
+import { Context } from "../../context/context";
 
 interface PlaybarProps {
   id?: string;
@@ -14,12 +20,21 @@ interface PlaybarProps {
 }
 
 export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
+  const { playingTrack } = useContext(Context);
+
+  const [isPlayingAlbum, setIsPlayingAlbum] = useState(false);
   const [isSavedAlbum, setisSavedAlbum] = useState(false);
 
   const spotifyApi = useSpotify();
   const { status } = useSession();
 
   const play = usePlay(uri);
+
+  useEffect(() => {
+    playingTrack.album?.id === id
+      ? setIsPlayingAlbum(true)
+      : setIsPlayingAlbum(false);
+  }, [id, playingTrack]);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,7 +53,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
   return (
     <div className={styles.playbar}>
       <div className={styles.playbar__button}>
-        <ImPlay3 onClick={play} />
+        {isPlayingAlbum ? <GiPauseButton /> : <FaPlay onClick={play} />}
       </div>
       <div onClick={() => changeSavedState()} className={styles.playbar__heart}>
         {isSavedAlbum ? (

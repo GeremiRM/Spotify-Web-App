@@ -9,6 +9,8 @@ module.exports = {
       "mosaic.scdn.co",
       "mixed-media-images.spotifycdn.com",
       "t.scdn.co",
+      "www.theaudiodb.co",
+      "www.theaudiodb.com",
     ],
   },
 };
