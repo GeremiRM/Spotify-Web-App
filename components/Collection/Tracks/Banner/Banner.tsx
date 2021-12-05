@@ -32,7 +32,9 @@ export const Banner: React.FC<BannerProps> = ({ amountSongs }) => {
           </h1>
         </div>
         <div className={styles.banner__desc}>
-          <div className={styles.banner__tracks}>{amountSongs} songs </div>
+          <div className={styles.banner__tracks}>
+            <p>{amountSongs} songs </p>
+          </div>
         </div>
       </div>
     </div>

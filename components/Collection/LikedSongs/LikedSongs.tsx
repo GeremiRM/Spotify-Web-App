@@ -8,6 +8,8 @@ interface LikedSongsProps {
 }
 
 export const LikedSongs: React.FC<LikedSongsProps> = ({ numberOfTracks }) => {
+  console.log("hola");
+
   return (
     <Link href={`/collection/tracks`} passHref>
       <div className={styles.likedSongs}>

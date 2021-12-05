@@ -23,6 +23,14 @@ export function converMillisBanners(millis: number) {
   }
 }
 
+export const getAlbumDuration = (album: SpotifyApi.AlbumObjectFull) => {
+  let totalDuration = 0;
+  for (let i = 0; i < album.total_tracks; i++) {
+    totalDuration += album.tracks.items[i]?.duration_ms;
+  }
+  return totalDuration;
+};
+
 export const filterRepeated = (list: any) => {
   return list?.filter(
     (v: { name: any }, i: any, a: any[]) =>
@@ -32,4 +40,3 @@ export const filterRepeated = (list: any) => {
       ) === i
   );
 };
-``;

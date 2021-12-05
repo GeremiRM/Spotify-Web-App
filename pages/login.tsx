@@ -8,6 +8,7 @@ import {
 } from "next-auth/react";
 
 import styles from "../styles/Login.module.scss";
+import { BsSpotify } from "react-icons/bs";
 
 type Providers = Record<
   LiteralUnion<BuiltInProviderType, string>,
@@ -21,6 +22,9 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ providers }) => {
   return (
     <div className={styles.login}>
+      <div className={styles.login__logo}>
+        <BsSpotify />
+      </div>
       <div>
         {Object.values(providers!).map((provider) => (
           <button

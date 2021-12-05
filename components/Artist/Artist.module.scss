@@ -1,8 +1,16 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .artist {
   color: white;
 
   &__body {
-    padding-left: 1.5rem;
+    @media (min-width: 1000px) {
+      padding-left: 1.5rem;
+    }
   }
 
   .tracks {
@@ -15,7 +23,11 @@
     }
 
     &__tracklist {
-      margin: 0 1rem;
+      margin: 0 0.5rem;
+
+      @media (min-width: 1000px) {
+        margin: 0 1rem;
+      }
     }
 
     .seeMore {

@@ -1,16 +1,32 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .track {
   display: grid;
-  grid-template-columns: 45% 25% 18%;
   gap: 4%;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem;
   margin-bottom: 0.25rem;
   color: #777;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   border-radius: 5px;
   font-weight: 500;
   transition: 0.1s all ease;
   font-family: "Gilroy-Bold", sans-serif;
   position: relative;
+  grid-template-columns: 72% 20%;
+
+  @include tablet {
+    padding: 0.75rem 1.5rem;
+    grid-template-columns: 45% 25% 18%;
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 1000px) {
+    padding-left: 2.5rem;
+  }
 
   &__noAlbum {
     grid-template-columns: 72% 20%;
@@ -36,9 +52,13 @@
     overflow: hidden;
 
     &__title {
-      margin-bottom: 0.25rem;
       color: white;
-      font-size: 0.9rem;
+      font-size: 1rem;
+
+      @include tablet {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+      }
 
       p {
         text-overflow: ellipsis;
@@ -66,12 +86,16 @@
   &__index {
     min-height: 20px;
     min-width: 20px;
-    margin-right: 1rem;
+    margin-right: 0.75rem;
     font-size: 1rem;
     display: flex;
     position: relative;
     justify-content: center;
     font-weight: 900;
+
+    @include tablet {
+      margin-right: 1rem;
+    }
   }
 
   &__soundbars {
@@ -123,13 +147,20 @@
   }
 
   &__img {
-    min-height: 40px;
-    min-width: 40px;
-    width: 40px;
-    height: 40px;
+    min-height: 50px;
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
     margin-right: 1rem;
-    border-radius: 3px;
+    border-radius: 1px;
     overflow: hidden;
+
+    @include tablet {
+      min-height: 40px;
+      min-width: 40px;
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &__duration {
@@ -139,6 +170,7 @@
     justify-content: flex-end;
     letter-spacing: 2px;
     font-weight: 700;
+    font-size: 0.85rem;
   }
 
   &__album {
@@ -157,6 +189,20 @@
         text-decoration: underline;
         cursor: pointer;
       }
+    }
+  }
+
+  &__album__mobile {
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__album__desktop {
+    display: none;
+
+    @include tablet {
+      display: flex;
     }
   }
 

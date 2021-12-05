@@ -6,9 +6,12 @@
 
 .search {
   margin: 0;
-  padding: 0 1rem;
   box-sizing: border-box;
   padding-top: 4rem;
+
+  @include tablet {
+    padding: 4rem 1rem;
+  }
 
   &__body {
     padding: 1.5rem 0;
@@ -41,8 +44,8 @@
   }
 
   &__topResult {
-    margin-left: 1.5rem;
     min-width: 200px;
+    padding: 0 1rem;
 
     @media (min-width: 1000px) {
       max-width: 500px;
@@ -97,10 +100,11 @@
   align-items: center;
   background: white;
   color: gray;
-  width: 100%;
+  width: 90%;
   border-radius: 20px;
   padding: 1.3rem 0;
   padding-left: 1rem;
+  margin: 1rem auto;
 
   @include tablet {
     display: none;

@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 
 // components
 import { Header } from "../Header/Header";
+import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { Cards } from "../Common/Cards";
-import { PlayBar } from "./PlayBar";
+import { PlayBar } from "./Playbar/PlayBar";
 
 // styling
 import styles from "./Album.module.scss";
@@ -14,8 +15,6 @@ import styles from "./Album.module.scss";
 // hook
 import { useAlbumInfo } from "../../hooks/useAlbumInfo";
 import { useImageColor } from "../../hooks/useImageColor";
-import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
-import { Loading } from "../Common/Loading";
 
 export const Album: React.FC<{}> = () => {
   // album id
@@ -54,11 +53,13 @@ export const Album: React.FC<{}> = () => {
         {/* Banner */}
         <Banner album={album} artists={artists} />
 
+        {/* Body  */}
         <div className={styles.album__body}>
+          {/* Playbar */}
           <div ref={playbarRef}>
-            {/* Playbar */}
             <PlayBar bg={background} id={album.id} uri={album.uri} />
           </div>
+
           {/* Tracklist */}
           <Tracklist
             tracks={album.tracks.items}
@@ -71,13 +72,14 @@ export const Album: React.FC<{}> = () => {
           <div className={styles.album__copyright}>
             &copy; {album?.copyrights[0]?.text}
           </div>
+
           {/* Cards */}
           <div className={styles.album__otherAlbums}>
             <Cards
               data={otherAlbums}
               title={`More by ${artists[0]?.name}`}
               ignoreCard={album.id}
-              cardsId={album.artists[0].id}
+              linkId={album.artists[0].id}
               linkType="albums"
             />
           </div>

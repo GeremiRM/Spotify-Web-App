@@ -46,8 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  if (!user
-     return <></>;
+  if (!user) return <></>;
 
   return (
     <header className={styles.header}>

@@ -1,11 +1,33 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .login {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  background-color: black;
+  font-family: "Proxima Nova", sans-serif;
+
+  &__logo {
+    color: white;
+    font-size: 10rem;
+
+    @include tablet {
+      padding-bottom: 2rem;
+    }
+  }
 
   &__btn {
-    padding: 0.75rem 2.5rem;
+    padding: 0.75rem 1.5rem;
     background: green;
     color: white;
     border: none;
@@ -13,7 +35,16 @@
     font-family: "Proxima Nova", sans-serif;
     text-transform: uppercase;
     cursor: pointer;
-    font-size: 1.25rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    margin-bottom: 8rem;
+
+    @include tablet {
+      padding: 1rem 2.5rem;
+      font-size: 1.5rem;
+    }
 
     &:hover {
       background: lightgreen;

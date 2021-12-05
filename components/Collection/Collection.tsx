@@ -11,7 +11,6 @@ import styles from "./Collection.module.scss";
 
 // hooks
 import { useLibraryInfo } from "../../hooks/useLibraryInfo";
-import { Loading } from "../Common/Loading";
 
 export const Collection: React.FC<{}> = ({}) => {
   const [selector, setSelector] = useState(0);
@@ -24,11 +23,16 @@ export const Collection: React.FC<{}> = ({}) => {
     <div>
       {/* header */}
       <Header bg="rgba(0,0,0,0.75)">
-        <Selector selector={selector} setSelector={setSelector} />
+        <div className={styles.selector__desktop}>
+          <Selector selector={selector} setSelector={setSelector} />
+        </div>
       </Header>
 
       {/* playlists, artists or albums cards */}
       <div className={styles.collection}>
+        <div className={styles.selector__mobile}>
+          <Selector selector={selector} setSelector={setSelector} />
+        </div>
         <Cards
           data={
             selector === 0
@@ -42,10 +46,9 @@ export const Collection: React.FC<{}> = ({}) => {
           }
           multirow
           hideLink
-        >
-          {/* liked songs card */}
-          {selector === 0 && <LikedSongs numberOfTracks={likedSongs.length} />}
-        </Cards>
+        ></Cards>
+        {/* liked songs card */}
+        {/* {selector === 0 && <LikedSongs numberOfTracks={likedSongs.length} />} */}
       </div>
     </div>
   );

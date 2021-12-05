@@ -8,10 +8,10 @@ import { GiPauseButton } from "react-icons/gi";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 // hooks
-import { usePlay } from "../../hooks/usePlay";
-import { useSpotify } from "../../hooks/useSpotify";
+import { usePlay } from "../../../hooks/usePlay";
+import { useSpotify } from "../../../hooks/useSpotify";
 
-import { Context } from "../../context/context";
+import { Context } from "../../../context/context";
 
 interface PlaybarProps {
   id?: string;

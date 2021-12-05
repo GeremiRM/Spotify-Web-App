@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 
 // components
+import { Header } from "../Header/Header";
 import { Banner } from "./Banner/Banner";
 import { Cards } from "../Common/Cards";
 
@@ -9,8 +10,6 @@ import styles from "./Category.module.scss";
 
 // hook
 import { useCategoryInfo } from "../../hooks/useCategoryInfo";
-import { Loading } from "../Common/Loading";
-import { Header } from "../Header/Header";
 
 export const Category: React.FC<{}> = ({}) => {
   //  category id

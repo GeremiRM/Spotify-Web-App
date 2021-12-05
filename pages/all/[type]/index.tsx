@@ -1,13 +1,17 @@
-// libraries
-import router, { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useArtistInfo } from "../../../hooks/useArtistInfo";
+import { useRouter } from "next/router";
+
+// components
 import { Header } from "../../../components/Header/Header";
 import { Cards } from "../../../components/Common/Cards";
-import { useLibraryInfo } from "../../../hooks/useLibraryInfo";
-import { useHomeInfo } from "../../../hooks/useHomeInfo";
 
+// styling
+import styles from "../../../styles/All.module.scss";
+
+//types
 import { CardsData } from "../../../types/types";
+
+// hook
+import { useHomeInfo } from "../../../hooks/useHomeInfo";
 
 interface Data {
   featured: { title: string; data: CardsData };
@@ -37,11 +41,11 @@ export const HomepageAll: React.FC<{}> = ({}) => {
   return (
     <>
       <Header />
-      <div style={{ padding: "5rem 2rem 2rem" }}>
-        <div>
-          <h1 style={{ color: "white", fontSize: "2.5rem" }}>
-            {Data[type as keyof Data].title}
-          </h1>
+      <div className={styles.all}>
+        <div className={styles.all__title}>
+          <h1>{Data[type as keyof Data].title}</h1>
+        </div>
+        <div className={styles.all__cards}>
           <Cards
             data={Data[type as keyof Data].data}
             title=""

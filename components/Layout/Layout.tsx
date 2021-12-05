@@ -45,8 +45,7 @@ export const Layout: React.FC<{}> = ({ children }) => {
         <div className={styles.dashboard}>
           <Sidebar />
           <div className={styles.container}>
-            {pageLoading && <Loading />}
-            {displayLyrics ? <Lyrics /> : children}
+            {pageLoading ? <Loading /> : displayLyrics ? <Lyrics /> : children}
           </div>
           <Player />
         </div>

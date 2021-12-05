@@ -22,14 +22,14 @@ export const TopResult: React.FC<TopResultProps> = ({ data }) => {
   const { playingTrack } = useContext(Context);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const play = usePlay(data.uri);
+  const play = usePlay(data?.uri);
 
   useEffect(() => {
-    if (Object.keys(playingTrack).length > 0)
+    if (Object.keys(playingTrack).length > 0 && data)
       playingTrack.artists[0]?.id === data.id
         ? setIsPlaying(true)
         : setIsPlaying(false);
-  }, [data.id, playingTrack]);
+  }, [data, playingTrack]);
 
   const saveSearch = () => {
     const search = data;
@@ -51,6 +51,7 @@ export const TopResult: React.FC<TopResultProps> = ({ data }) => {
         );
     }
   };
+
   if (!data) return <></>;
 
   return (

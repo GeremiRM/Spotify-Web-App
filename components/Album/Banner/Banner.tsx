@@ -5,9 +5,8 @@ import Link from "next/link";
 // styling
 import styles from "./Banner.module.scss";
 
-// functions
-import { getAlbumDuration } from "../../../Spotify/SpotifyApi";
-import { converMillisBanners } from "../../../utils/utils";
+// func
+import { converMillisBanners, getAlbumDuration } from "../../../utils/utils";
 
 interface BannerProps {
   album: SpotifyApi.AlbumObjectFull;
@@ -32,6 +31,7 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
 
   return (
     <div className={styles.banner} ref={bannerRef}>
+      {/* Banner image */}
       <div className={styles.banner__cover}>
         <Image
           src={album?.images[0]?.url || "/music-placeholder.png"}
@@ -41,7 +41,10 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
           alt={album.name}
         />
       </div>
+
+      {/* Banner info */}
       <div className={styles.banner__info}>
+        {/* Title */}
         <div className={styles.banner__info__name}>
           <h1
             style={{
@@ -51,6 +54,8 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
             {album.name}
           </h1>
         </div>
+
+        {/* Description */}
         <div className={styles.banner__desc}>
           {/* if there's only one artist, display image */}
           <div className={styles.banner__desc__artist}>
@@ -65,17 +70,28 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
                 />
               </div>
             )}
+
+            {/* Render all artists */}
             <p>{renderArtists()}</p>
             <div className={styles.banner__separator}></div>
           </div>
+
+          {/* Year of release */}
           <div className={styles.banner__year}>
-            {album.release_date.substring(0, 4)}
+            <p>{album.release_date.substring(0, 4)}</p>
           </div>
+
           <div className={styles.banner__separator}></div>
+
+          {/* Number of tracks */}
           <div className={styles.banner__tracks}>
-            {album.total_tracks} songs,{" "}
+            <p>{album.total_tracks} songs, </p>
           </div>
-          <div className={styles.banner__duration}>{albumDuration}</div>
+
+          {/* Album Duration */}
+          <div className={styles.banner__duration}>
+            <p>{albumDuration}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,20 +1,41 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .playbar {
   display: flex;
-  padding: 2rem 1rem;
   align-items: center;
   position: relative;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+
+  @include tablet {
+    padding: 2rem 1rem;
+    padding-left: 2.5rem;
+    justify-content: flex-start;
+    margin: 0;
+  }
 
   &__button {
     background: #1db954;
-    height: 65px;
-    width: 65px;
-    font-size: 2rem;
+    height: 40px;
+    width: 40px;
+    font-size: 1rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     transition: 0.25s all ease;
+
+    @include tablet {
+      height: 60px;
+      width: 60px;
+      font-size: 1.5rem;
+    }
 
     &:hover {
       background: lightgreen;

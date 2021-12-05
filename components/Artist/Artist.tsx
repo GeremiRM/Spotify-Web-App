@@ -15,7 +15,6 @@ import styles from "./Artist.module.scss";
 // hook
 import { useArtistInfo } from "../../hooks/useArtistInfo";
 import { useImageColor } from "../../hooks/useImageColor";
-import { Loading } from "../Common/Loading";
 
 export const Artist: React.FC<{}> = ({}) => {
   const [seeMore, setSeeMore] = useState(false);
@@ -64,6 +63,7 @@ export const Artist: React.FC<{}> = ({}) => {
         {/* Banner */}
         <Banner artist={artist} />
 
+        {/* Body */}
         <div className={styles.artist__body}>
           {/* Playbar */}
           <div ref={playbarRef}>
@@ -88,28 +88,35 @@ export const Artist: React.FC<{}> = ({}) => {
 
           {/* Cards */}
           <div className={styles.cards}>
+            {/* Albums */}
             <Cards
               data={albums.slice(0, 8)}
               title="Albums"
-              cardsId={artist.id}
+              linkId={artist.id}
               linkType="albums"
             />
+
+            {/* Singles */}
             <Cards
               data={singles.slice(0, 8)}
               title="Singles"
-              cardsId={artist.id}
+              linkId={artist.id}
               linkType="singles"
             />
+
+            {/* Appears on */}
             <Cards
               data={appears_on.slice(0, 8)}
               title="Appears On"
-              cardsId={artist.id}
+              linkId={artist.id}
               linkType="appears_on"
             />
+
+            {/* Related Artists */}
             <Cards
               data={otherArtists.slice(0, 8)}
               title="Related Artists"
-              cardsId={artist.id}
+              linkId={artist.id}
               linkType="related"
             />
           </div>

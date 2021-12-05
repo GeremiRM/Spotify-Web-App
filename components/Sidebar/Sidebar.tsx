@@ -42,7 +42,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
     if (playlists.length !== 0)
       return playlists?.map((playlist) => (
         <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
-          <a>
+          <a onClick={() => setDisplaySidebar(false)}>
             <p className={styles.sidebar__playlistName}>{playlist.name}</p>
           </a>
         </Link>
@@ -76,21 +76,21 @@ export const Sidebar: React.FC<{}> = ({}) => {
         {/* home - search - library */}
         <div className={styles.sidebar__options}>
           <Link href="/">
-            <a>
+            <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption icon={FiHome} active={location === "/"}>
                 Home
               </SidebarOption>
             </a>
           </Link>
           <Link href="/search">
-            <a>
+            <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption icon={FiSearch} active={location === "/search"}>
                 Search
               </SidebarOption>
             </a>
           </Link>
           <Link href="/collection">
-            <a>
+            <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption icon={BiLibrary} active={location === "/library"}>
                 Your Library
               </SidebarOption>
@@ -102,7 +102,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
         <div className={styles.sidebar__options}>
           {/* <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption> */}
           <Link href="/collection/tracks">
-            <a>
+            <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption
                 icon={AiFillHeart}
                 active={location === "/collection/tracks"}

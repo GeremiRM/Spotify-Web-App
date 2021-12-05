@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from "next/link";
 
 // components
@@ -20,7 +19,7 @@ interface Cards {
   hideLink?: boolean;
   multirow?: boolean;
   linkType?: LinkType;
-  cardsId?: string;
+  linkId?: string;
 }
 
 export const Cards: React.FC<Cards> = ({
@@ -30,7 +29,7 @@ export const Cards: React.FC<Cards> = ({
   hideLink,
   multirow,
   linkType,
-  cardsId,
+  linkId,
 }) => {
   const renderCards = () => {
     return data?.map((info, idx) => {
@@ -39,6 +38,7 @@ export const Cards: React.FC<Cards> = ({
     });
   };
 
+  // If no data, return nothing
   if (Object.keys(data!).length === 0) return <></>;
 
   // if data are albums, filter repeated albums
@@ -46,21 +46,24 @@ export const Cards: React.FC<Cards> = ({
 
   return (
     <div className={styles.wrapper}>
+      {/* Cards Header */}
       <div className={styles.wrapper__header}>
+        {/* Title */}
         <div className={styles.wrapper__title}>
           <h2>{title}</h2>
         </div>
+
+        {/* See all Link */}
         {!hideLink && (
-          <Link
-            href={`/all/${linkType}${cardsId ? "/" + cardsId : ""}`}
-            passHref
-          >
+          <Link href={`/all/${linkType}${linkId ? `/${linkId}` : ""}`} passHref>
             <div className={styles.wrapper__link}>
               <p>See All</p>
             </div>
           </Link>
         )}
       </div>
+
+      {/* Cards */}
       <div
         className={`${styles.wrapper__cards} ${
           multirow ? styles.multirow : ""

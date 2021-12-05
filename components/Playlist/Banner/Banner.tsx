@@ -50,7 +50,7 @@ export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
           </div>
           <div className={styles.banner__separator}></div>
           <div className={styles.banner__tracks}>
-            {playlist.tracks.items.length} songs,{" "}
+            {playlist.tracks.items.length} songs,
           </div>
           <div className={styles.banner__duration}>{getPlaylistDuration()}</div>
         </div>

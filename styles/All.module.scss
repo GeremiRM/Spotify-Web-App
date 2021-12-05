@@ -1,0 +1,19 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
+.all {
+  padding: 6rem 0.5rem 3rem;
+
+  &__title {
+    color: white;
+    font-size: 1.25rem;
+    padding: 0 1rem;
+
+    @include tablet {
+      font-size: 1.5rem;
+    }
+  }
+}

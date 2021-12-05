@@ -12,9 +12,13 @@
   &__cards {
     display: grid;
     margin-top: 1.5rem;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     grid-template-rows: 1fr;
     grid-auto-rows: auto;
     gap: 1.5rem;
+
+    @media (min-width: 700px) {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
   }
 }

@@ -7,7 +7,6 @@ import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { PlayBar } from "./PlayBar";
-import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Playlist.module.scss";
@@ -48,7 +47,10 @@ export const Playlist: React.FC<{}> = ({}) => {
       ${background} 100%)`,
             }}
           >
-            <Banner playlist={playlist} tracks={tracks} />
+            <Banner
+              playlist={playlist}
+              tracks={tracks.slice(0, tracks.length > 50 ? 50 : tracks.length)}
+            />
 
             <div ref={playbarRef}>
               <PlayBar uri={playlist.uri} id={playlist.id} />
@@ -56,7 +58,11 @@ export const Playlist: React.FC<{}> = ({}) => {
           </div>
         </div>
         <div className={styles.body}>
-          <Tracklist tracks={tracks} stickyHeader tracklistUri={playlist.uri} />
+          <Tracklist
+            tracks={tracks.slice(0, tracks.length > 50 ? 50 : tracks.length)}
+            stickyHeader
+            tracklistUri={playlist.uri}
+          />
         </div>
       </div>
     </div>

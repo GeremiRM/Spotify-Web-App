@@ -1,16 +1,28 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .card {
-  background: #181818;
-  padding: 1.25rem;
   transition: 0.25s all ease;
-  border-radius: 5px;
   overflow: hidden;
   margin-top: 1rem;
   font-family: "Proxima Nova", sans-serif;
   cursor: pointer;
   position: relative;
+  background: transparent;
+
+  @include tablet {
+    background: #181818;
+    padding: 1.25rem;
+    border-radius: 5px;
+  }
 
   &:hover {
-    background: #333;
+    @include tablet {
+      background: #333;
+    }
 
     .card__play {
       opacity: 1;
@@ -21,8 +33,12 @@
   &__img {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
     width: 100%;
-    margin-bottom: 1.5rem;
     position: relative;
+    margin-bottom: 0.5rem;
+
+    @include tablet {
+      margin-bottom: 1.5rem;
+    }
 
     .playlist {
       max-height: 220px;
@@ -45,8 +61,8 @@
     background: #1db954;
     right: 0.25rem;
     bottom: -1rem;
-    width: 40px;
-    height: 40px;
+    height: 30px;
+    width: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,10 +72,14 @@
     opacity: 0;
     transition: 0.25s all ease;
     z-index: 1;
+
+    @include tablet {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   &__body {
-    margin-top: 1rem;
     padding-bottom: 0.5rem;
     color: #ccc;
     font-size: 0.8rem;
@@ -71,11 +91,22 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.1rem;
+
+      @include tablet {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
     }
 
     &__desc {
+      font-size: 0.7rem;
+
+      @include tablet {
+        font-size: 0.8rem;
+      }
+
       a:hover {
         text-decoration: underline;
         color: white;

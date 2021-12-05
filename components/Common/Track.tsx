@@ -113,12 +113,25 @@ export const Track: React.FC<TrackProps> = ({
           <div className={styles.track__desc__artists}>
             <p>{renderArtists()}</p>
           </div>
+
+          {/* album name desktop. Can be hidden*/}
+          {!hideAlbum && (
+            <div
+              className={`${styles.track__album} ${styles.track__album__mobile}`}
+            >
+              <Link href={`/album/${track.album.id}`} passHref>
+                <p>{track.album.name}</p>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
       {/* album name. Can be hidden*/}
       {!hideAlbum && (
-        <div className={styles.track__album}>
+        <div
+          className={`${styles.track__album} ${styles.track__album__desktop}`}
+        >
           <Link href={`/album/${track.album.id}`} passHref>
             <p>{track.album.name}</p>
           </Link>

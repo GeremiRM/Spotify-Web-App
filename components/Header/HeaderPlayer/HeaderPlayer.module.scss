@@ -1,3 +1,9 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .player {
   display: flex;
   height: 100%;
@@ -6,21 +12,33 @@
   opacity: 0;
   transition: 0.25s all ease;
   flex: 1;
-  max-width: calc(100vw - 400px);
+  max-width: 40vw;
   overflow: hidden;
+  margin-left: auto;
+  justify-content: flex-end;
+
+  @include tablet {
+    max-width: calc(100vw - 400px);
+    justify-content: flex-start;
+  }
 
   &__button {
     background: #1db954;
     min-height: 40px;
     min-width: 40px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     padding-left: 5px;
     align-items: center;
     color: white;
-    margin-right: 1rem;
+    margin-right: 2rem;
+
+    @include tablet {
+      margin-right: 1rem;
+      font-size: 1.25rem;
+    }
 
     &:hover {
       background: lightgreen;
@@ -33,6 +51,11 @@
     flex: 1;
     overflow: hidden;
     white-space: nowrap;
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
 
     h2 {
       overflow: hidden;

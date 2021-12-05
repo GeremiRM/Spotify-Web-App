@@ -29,7 +29,7 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
     >
       <div className={styles.banner__cover}>
         <Image
-          src={artist.images[0].url || "/music-placeholder.png"}
+          src={artist?.images[0]?.url ?? "/music-placeholder.png"}
           width="100%"
           height="100%"
           layout="responsive"

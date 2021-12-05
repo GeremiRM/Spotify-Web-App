@@ -1,8 +1,13 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .selector {
   display: flex;
   color: white;
   font-size: 0.85rem;
-  margin-left: 2rem;
 
   .selection {
     margin: 0.25rem 0.5rem;
@@ -13,28 +18,30 @@
   }
 }
 
+.selector__desktop {
+  display: none;
+
+  @include tablet {
+    display: block;
+    margin-left: 2rem;
+  }
+}
+
+.selector__mobile {
+  width: 100%;
+  margin-bottom: 2.5rem;
+
+  @include tablet {
+    display: none;
+  }
+}
+
 .active {
   background: #333;
 }
 
 .collection {
-  padding: 5.5rem 1rem 2rem;
+  padding: 4.5rem 1rem 2rem;
   color: white;
   font-family: "Proxima Nova", sans-serif;
-
-  .wrapper {
-    &__header {
-      margin-bottom: 1rem;
-
-      h3 {
-        font-size: 1.5rem;
-      }
-    }
-
-    &__body {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      column-gap: 1.5rem;
-    }
-  }
 }

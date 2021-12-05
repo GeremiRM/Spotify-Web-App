@@ -1,6 +1,13 @@
+@mixin tablet {
+  @media (min-width: 45em) {
+    @content;
+  }
+}
+
 .card {
   color: white;
-  width: 60%;
+  width: 100%;
+  margin: auto;
   background: #181818;
   padding: 1.25rem;
   transition: 0.25s all ease;
@@ -9,6 +16,11 @@
   margin-top: 1rem;
   font-family: "Proxima Nova", sans-serif;
   cursor: pointer;
+
+  @include tablet {
+    width: 60%;
+    margin: 0;
+  }
 
   @media (min-width: 1000px) {
     width: 100%;
