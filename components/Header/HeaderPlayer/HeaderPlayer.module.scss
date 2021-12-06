@@ -14,8 +14,6 @@
   flex: 1;
   max-width: 40vw;
   overflow: hidden;
-  margin-left: auto;
-  justify-content: flex-end;
 
   @include tablet {
     max-width: calc(100vw - 400px);
@@ -24,20 +22,21 @@
 
   &__button {
     background: #1db954;
-    min-height: 40px;
-    min-width: 40px;
-    font-size: 1.5rem;
+    min-height: 35px;
+    min-width: 35px;
+    font-size: 0.75rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    padding-left: 5px;
     align-items: center;
     color: white;
     margin-right: 2rem;
 
     @include tablet {
       margin-right: 1rem;
-      font-size: 1.25rem;
+      font-size: 1rem;
+      min-height: 40px;
+      min-width: 40px;
     }
 
     &:hover {

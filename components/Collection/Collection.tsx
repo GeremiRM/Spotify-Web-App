@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Header } from "../Header/Header";
 import { Selector } from "./Selector";
 import { Cards } from "../Common/Cards";
-import { LikedSongs } from "./LikedSongs/LikedSongs";
+import { SavedTracksCard } from "./SavedTracksCard/SavedTracksCard";
 
 // styling
 import styles from "./Collection.module.scss";

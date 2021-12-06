@@ -12,10 +12,8 @@
   border-radius: 10px;
   cursor: pointer;
   transition: 0.25s all ease;
-  padding: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  white-space: pre;
+  padding: 1rem 0.5rem;
+  padding-bottom: 25%;
 
   @include tablet {
     padding: 1.25rem;
@@ -33,35 +31,37 @@
     align-self: flex-end;
     transform: rotate(25deg) translate(33%, -2%);
     bottom: 0;
+    right: 0;
     position: absolute;
-
-    display: none;
+    width: 70px;
+    height: 70px;
 
     @include tablet {
       display: block;
+      width: auto;
+      height: auto;
+      right: auto;
     }
   }
 
   &__title {
     position: relative;
+    max-width: 75%;
+
+    @include tablet {
+      max-width: none;
+    }
 
     h3 {
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       font-weight: 700;
       overflow-wrap: break-word;
 
       @include tablet {
         position: absolute;
         font-size: 1.4rem;
+        margin-right: 0;
       }
-    }
-
-    .ellipsis {
-      overflow: hidden;
-      max-width: 10ch;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      color: red;
     }
   }
 }

@@ -9,6 +9,7 @@ interface ArtistData {
   appears_on: SpotifyApi.AlbumObjectSimplified[];
   topTracks: SpotifyApi.TrackObjectFull[];
   otherArtists: SpotifyApi.ArtistObjectFull[];
+  isFollowingArtist: boolean;
 }
 
 export const useArtistInfo = (id: string) => {
@@ -37,6 +38,8 @@ export const useArtistInfo = (id: string) => {
         id as string
       );
 
+      const isFollowing = await spotifyApi.isFollowingArtists([id]);
+
       setArtistData({
         artist: artist.body,
         albums: albums.body.items,
@@ -44,6 +47,7 @@ export const useArtistInfo = (id: string) => {
         appears_on: appears_on.body.items,
         topTracks: topTracks.body.tracks,
         otherArtists: otherArtists.body.artists,
+        isFollowingArtist: isFollowing.body[0],
       });
     };
     if (id && status === "authenticated") fetchArtistData();

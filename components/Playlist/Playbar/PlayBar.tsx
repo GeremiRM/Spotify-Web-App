@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 // styling
@@ -7,42 +6,35 @@ import { ImPlay3 } from "react-icons/im";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 // hooks
-import { useSpotify } from "../../hooks/useSpotify";
-import { usePlay } from "../../hooks/usePlay";
+import { useSpotify } from "../../../hooks/useSpotify";
+import { usePlay } from "../../../hooks/usePlay";
 
 interface PlaybarProps {
   id: string;
   uri: string;
+  isFollowing: boolean;
 }
 
-export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
+export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isFollowing }) => {
   const [isFollowingPlaylist, setisFollowingPlaylist] = useState(false);
 
   const spotifyApi = useSpotify();
-  const { status } = useSession();
 
   const play = usePlay(uri);
 
-  useEffect(() => {
-    const getData = async () => {
-      const playlist = await spotifyApi.getPlaylist(id);
-      const user = await spotifyApi.getMe();
-      const data = await spotifyApi.areFollowingPlaylist(
-        playlist.body.owner.id,
-        id,
-        [user.body.id]
-      );
-
-      setisFollowingPlaylist(data.body[0]);
-    };
-    if (status === "authenticated") getData();
-  }, [id, spotifyApi, status]);
-
+  // Change playlist's followed state
   const changeSavedState = async () => {
     if (isFollowingPlaylist) spotifyApi.unfollowPlaylist(id!);
     else spotifyApi.followPlaylist(id!);
     setisFollowingPlaylist(!isFollowingPlaylist);
   };
+
+  // Is the user following the playlist?
+  useEffect(() => {
+    if (id && uri) {
+      setisFollowingPlaylist(isFollowing);
+    }
+  }, [id, isFollowing, uri]);
 
   return (
     <div className={styles.playbar}>

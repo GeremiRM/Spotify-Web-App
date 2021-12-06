@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 // styling and icons
 import styles from "./HeaderPlayer.module.scss";
-import { ImPlay3 } from "react-icons/im";
+import { FaPlay } from "react-icons/fa";
 
 // hook
 import { usePlay } from "../../../hooks/usePlay";
@@ -22,22 +22,26 @@ export const HeaderPlayer: React.FC<HeaderPlayerProps> = ({
   const [display, setDisplay] = useState(false);
   const play = usePlay(uri);
 
+  // Display player
   const handleScroll = useCallback(() => {
-    if (window.scrollY > activateDistance) setDisplay(true);
-    else setDisplay(false);
+    setDisplay(window.scrollY > activateDistance);
   }, [activateDistance]);
 
   useEffect(() => {
     if (typeof window !== "undefined")
       window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   return (
     <div className={`${styles.player} ${display ? styles.display : ""}`}>
+      {/* Play button */}
       <div className={styles.player__button}>
-        <ImPlay3 onClick={play} />
+        <FaPlay onClick={play} />
       </div>
+
+      {/* Title -> Not shown on mobile */}
       <div className={styles.player__title}>
         <h2>{title}</h2>
       </div>

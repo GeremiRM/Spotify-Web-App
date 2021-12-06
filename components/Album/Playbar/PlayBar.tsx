@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 
 // styling
 import styles from "./PlayBar.module.scss";
@@ -17,44 +16,46 @@ interface PlaybarProps {
   id?: string;
   bg?: string;
   uri: string;
+  isSaved: boolean;
 }
 
-export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
+export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isSaved }) => {
   const { playingTrack } = useContext(Context);
 
   const [isPlayingAlbum, setIsPlayingAlbum] = useState(false);
-  const [isSavedAlbum, setisSavedAlbum] = useState(false);
+  const [isSavedAlbum, setIsSavedAlbum] = useState(false);
 
   const spotifyApi = useSpotify();
-  const { status } = useSession();
 
   const play = usePlay(uri);
 
-  useEffect(() => {
-    playingTrack.album?.id === id
-      ? setIsPlayingAlbum(true)
-      : setIsPlayingAlbum(false);
-  }, [id, playingTrack]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const savedAlbum = await spotifyApi.containsMySavedAlbums([id!]);
-      setisSavedAlbum(savedAlbum.body[0]);
-    };
-    if (status === "authenticated") getData();
-  }, [id, spotifyApi, status]);
-
+  // Change album's save state
   const changeSavedState = async () => {
     if (isSavedAlbum) spotifyApi.removeFromMySavedAlbums([id!]);
     else spotifyApi.addToMySavedAlbums([id!]);
-    setisSavedAlbum(!isSavedAlbum);
+    setIsSavedAlbum(!isSavedAlbum);
   };
+
+  // Is a track from the album currently playing?
+  useEffect(() => {
+    setIsPlayingAlbum(playingTrack.album?.id === id);
+  }, [id, playingTrack]);
+
+  // Is the album saved in the User's library?
+  useEffect(() => {
+    if (id && uri) {
+      setIsSavedAlbum(isSaved);
+    }
+  }, [id, isSaved, uri]);
 
   return (
     <div className={styles.playbar}>
+      {/* Play button */}
       <div className={styles.playbar__button}>
         {isPlayingAlbum ? <GiPauseButton /> : <FaPlay onClick={play} />}
       </div>
+
+      {/* Save button */}
       <div onClick={() => changeSavedState()} className={styles.playbar__heart}>
         {isSavedAlbum ? (
           <AiFillHeart style={{ color: "#1db954" }} />

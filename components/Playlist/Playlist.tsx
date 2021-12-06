@@ -6,7 +6,7 @@ import { Header } from "../Header/Header";
 import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
-import { PlayBar } from "./PlayBar";
+import { PlayBar } from "./Playbar/PlayBar";
 
 // styling
 import styles from "./Playlist.module.scss";
@@ -20,7 +20,9 @@ export const Playlist: React.FC<{}> = ({}) => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { playlist, tracks } = usePlaylistInfo(id as string);
+  const { playlist, tracks, isFollowingPlaylist } = usePlaylistInfo(
+    id as string
+  );
   const background = useImageColor(playlist?.images[0]?.url);
 
   const playbarRef = useRef<HTMLDivElement>(null);
@@ -28,7 +30,7 @@ export const Playlist: React.FC<{}> = ({}) => {
   if (!playlist || !tracks) return <> </>;
 
   return (
-    <div>
+    <>
       {/* header */}
       <Header bg={background} activateDistance={playbarRef.current?.offsetTop}>
         <HeaderPlayer
@@ -37,6 +39,7 @@ export const Playlist: React.FC<{}> = ({}) => {
           uri={playlist.uri}
         />
       </Header>
+
       <div className={styles.playlist}>
         <div>
           <div
@@ -47,17 +50,24 @@ export const Playlist: React.FC<{}> = ({}) => {
       ${background} 100%)`,
             }}
           >
+            {/* Banner */}
             <Banner
               playlist={playlist}
               tracks={tracks.slice(0, tracks.length > 50 ? 50 : tracks.length)}
             />
-
-            <div ref={playbarRef}>
-              <PlayBar uri={playlist.uri} id={playlist.id} />
+            {/* Body */}
+            <div className={styles.playlist__body}>
+              {/* Playbar */}
+              <div ref={playbarRef}>
+                <PlayBar
+                  uri={playlist.uri}
+                  id={playlist.id}
+                  isFollowing={isFollowingPlaylist}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.body}>
+
           <Tracklist
             tracks={tracks.slice(0, tracks.length > 50 ? 50 : tracks.length)}
             stickyHeader
@@ -65,6 +75,6 @@ export const Playlist: React.FC<{}> = ({}) => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };

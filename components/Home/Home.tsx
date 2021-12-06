@@ -1,7 +1,6 @@
 // components
 import { Header } from "../Header/Header";
 import { Cards } from "../Common/Cards";
-import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Home.module.scss";
@@ -33,25 +32,35 @@ export const Home: React.FC<{}> = ({}) => {
 
   return (
     <div>
+      {/* Header */}
       <Header />
       <div className={styles.home}>
+        {/* Body */}
         <div className={styles.home__body}>
+          {/* Result Cards */}
           <div className={styles.home__results}>
+            {/* Featured Playlists */}
             <Cards
               data={featuredPlaylists.slice(0, LIMIT)}
               title="Featured Playlists"
               linkType="featured"
             />
+
+            {/* New Releases */}
             <Cards
               data={newReleases.slice(0, LIMIT)}
               title="New Releases"
               linkType="newReleases"
             />
+
+            {/* Favorite Artists */}
             <Cards
               data={topArtists.slice(0, LIMIT)}
               title="Your Favorite Artists"
               linkType="topArtists"
             />
+
+            {/* Recently Played */}
             <Cards
               data={recentlyPlayed.slice(0, LIMIT)}
               title="Recently Played"

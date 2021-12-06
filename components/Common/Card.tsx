@@ -1,6 +1,6 @@
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 // styling and icons
 import styles from "./Card.module.scss";
@@ -56,7 +56,6 @@ const Card: React.FC<CardProps> = ({ info }) => {
       case "track":
         return info?.album?.images[1]?.url ?? "/music-placeholder.png";
       case "artist":
-        return info?.images[1]?.url ?? "/music-placeholder.png";
       case "album":
         return info?.images[1]?.url ?? "/music-placeholder.png";
       case "playlist":
@@ -83,8 +82,16 @@ const Card: React.FC<CardProps> = ({ info }) => {
 
   if (Object.keys(info).length === 0) return <></>;
 
+  // If the card is a track, on click send the user to the track's album page
+  // otherwise, simply go to the artist/track/album page
+
+  const cardLink =
+    info?.type === "track"
+      ? `/album/${info.album.id}`
+      : `/${info?.type}/${info?.id}`;
+
   return (
-    <Link href={`/${info?.type}/${info?.id}`} passHref>
+    <Link href={cardLink} passHref>
       <div className={styles.card} onClick={() => saveSearch()}>
         <div
           className={`${styles.card__img} ${

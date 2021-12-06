@@ -5,7 +5,6 @@ import { useBannerImage } from "../../../hooks/useBannerImage";
 // styling
 import styles from "./Banner.module.scss";
 
-// interface
 interface BannerProps {
   artist: SpotifyApi.ArtistObjectFull;
 }
@@ -27,6 +26,7 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
         background: `url(${bannerBg}) center/cover no-repeat `,
       }}
     >
+      {/* Banner image */}
       <div className={styles.banner__cover}>
         <Image
           src={artist?.images[0]?.url ?? "/music-placeholder.png"}
@@ -37,7 +37,10 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
           objectFit="cover"
         />
       </div>
+
+      {/* Banner info */}
       <div className={styles.banner__info}>
+        {/* Title */}
         <div className={styles.banner__name}>
           <h1
             style={{
@@ -47,6 +50,8 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
             {artist.name}
           </h1>
         </div>
+
+        {/* Description */}
         <div className={styles.banner__desc}>
           <p>{artist.followers.total.toLocaleString()} followers</p>
         </div>

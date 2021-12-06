@@ -10,6 +10,7 @@ interface CardProps {
 import styles from "./GenreCard.module.scss";
 
 export const Card: React.FC<CardProps> = ({ id, title, cover }) => {
+  // Random color background
   const randomBackground = () => {
     return `rgb(${Math.floor(Math.random() * 225)},${Math.floor(
       Math.random() * 175

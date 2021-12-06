@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+
+// compoonents
 import Card from "../Common/Card";
 
+// styling
 import styles from "../Common/Cards.module.scss";
 
 // types
@@ -20,6 +23,7 @@ export const PastSearches: React.FC<{}> = ({}) => {
     ));
   };
 
+  // Get the past results from the local storage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const pastSearches = localStorage.getItem("searches");
@@ -28,13 +32,17 @@ export const PastSearches: React.FC<{}> = ({}) => {
   }, []);
 
   if (!pastResults) return <></>;
+
   return (
     <div className={styles.wrapper}>
+      {/* Title */}
       <div className={styles.wrapper__header}>
         <div className={styles.wrapper__title}>
           <h2>Recent Searches</h2>
         </div>
       </div>
+
+      {/* Past searches Cards */}
       <div className={`${styles.wrapper__cards}`}>{renderCards()}</div>
     </div>
   );

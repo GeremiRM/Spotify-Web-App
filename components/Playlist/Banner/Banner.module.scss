@@ -72,7 +72,6 @@
     justify-content: flex-end;
     color: #ccc;
     margin-top: 1rem;
-    text-align: center;
     padding: 0 1rem;
   }
 
@@ -108,7 +107,7 @@
     font-size: 0.9rem;
     justify-content: center;
     display: flex;
-    margin: 0.5rem 0;
+    margin: 0.25rem 0 0.75rem;
 
     @include tablet {
       justify-content: flex-start;

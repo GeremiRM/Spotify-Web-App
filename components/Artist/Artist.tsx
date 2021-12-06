@@ -7,7 +7,7 @@ import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { Cards } from "../Common/Cards";
-import { PlayBar } from "./PlayBar";
+import { PlayBar } from "./Playbar/PlayBar";
 
 // styling
 import styles from "./Artist.module.scss";
@@ -23,8 +23,15 @@ export const Artist: React.FC<{}> = ({}) => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { albums, artist, otherArtists, topTracks, appears_on, singles } =
-    useArtistInfo(id as string);
+  const {
+    albums,
+    artist,
+    otherArtists,
+    topTracks,
+    appears_on,
+    singles,
+    isFollowingArtist,
+  } = useArtistInfo(id as string);
   const background = useImageColor(artist?.images[2]?.url);
 
   // playbar ref
@@ -67,7 +74,11 @@ export const Artist: React.FC<{}> = ({}) => {
         <div className={styles.artist__body}>
           {/* Playbar */}
           <div ref={playbarRef}>
-            <PlayBar id={artist.id} uri={artist.uri} />
+            <PlayBar
+              id={artist.id}
+              uri={artist.uri}
+              isFollowing={isFollowingArtist}
+            />
           </div>
 
           {/* Tracklist */}

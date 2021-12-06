@@ -75,6 +75,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
 
         {/* home - search - library */}
         <div className={styles.sidebar__options}>
+          {/* Home */}
           <Link href="/">
             <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption icon={FiHome} active={location === "/"}>
@@ -82,6 +83,8 @@ export const Sidebar: React.FC<{}> = ({}) => {
               </SidebarOption>
             </a>
           </Link>
+
+          {/* Search */}
           <Link href="/search">
             <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption icon={FiSearch} active={location === "/search"}>
@@ -89,6 +92,8 @@ export const Sidebar: React.FC<{}> = ({}) => {
               </SidebarOption>
             </a>
           </Link>
+
+          {/* Library */}
           <Link href="/collection">
             <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption icon={BiLibrary} active={location === "/library"}>
@@ -101,11 +106,11 @@ export const Sidebar: React.FC<{}> = ({}) => {
         {/* create playlist - liked songs */}
         <div className={styles.sidebar__options}>
           {/* <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption> */}
-          <Link href="/collection/tracks">
+          <Link href="/collection/savedtracks">
             <a onClick={() => setDisplaySidebar(false)}>
               <SidebarOption
                 icon={AiFillHeart}
-                active={location === "/collection/tracks"}
+                active={location === "/collection/savedtracks"}
               >
                 Liked Songs
               </SidebarOption>

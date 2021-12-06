@@ -24,10 +24,14 @@ export const Category: React.FC<{}> = ({}) => {
     <>
       <Header />
       <div className={styles.category}>
+        {/* Banner */}
         <div className={styles.banner}>
           <Banner title={category.name} />
         </div>
+
+        {/* Body */}
         <div className={styles.body}>
+          {/* Cards */}
           <Cards
             data={categoryPlaylists}
             title="Featured Playlists"

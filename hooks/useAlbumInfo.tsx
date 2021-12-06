@@ -6,6 +6,7 @@ interface AlbumData {
   album: SpotifyApi.AlbumObjectFull;
   artists: SpotifyApi.ArtistObjectFull[];
   otherAlbums: SpotifyApi.AlbumObjectSimplified[];
+  isSavedAlbum: boolean;
 }
 
 export const useAlbumInfo = (id: string) => {
@@ -25,10 +26,13 @@ export const useAlbumInfo = (id: string) => {
         { include_groups: "album" }
       );
 
+      const isSaved = await spotifyApi.containsMySavedAlbums([id]);
+
       setAlbumData({
         album: album.body,
         artists: artists.body.artists,
         otherAlbums: artistAlbums.body.items,
+        isSavedAlbum: isSaved.body[0],
       });
     };
     if (status === "authenticated" && id) fetchAlbumData();

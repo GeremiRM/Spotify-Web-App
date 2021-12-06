@@ -6,14 +6,14 @@ import Image from "next/image";
 import styles from "./Header.module.scss";
 import { AiOutlineUser, AiFillCaretDown } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
-
-// hook
-import { useUserInfo } from "../../hooks/useUserInfo";
+import { GiMicrophone } from "react-icons/gi";
 
 import { Context } from "../../context/context";
 
 interface HeaderProps {
   bg?: string;
+
+  // at what distance to change bg color
   activateDistance?: number | undefined;
 }
 
@@ -31,6 +31,7 @@ export const Header: React.FC<HeaderProps> = ({
   const handleScroll = useCallback(() => {
     if (typeof window === "undefined") return;
 
+    // handle scroll event
     if (window.scrollY) {
       setScrolled(true);
       setChangeBg(window.scrollY >= activateDistance - 100);
@@ -55,12 +56,13 @@ export const Header: React.FC<HeaderProps> = ({
         className={`${styles.navigation} ${scrolled ? styles.scrolled : ""}`}
         style={{ background: `${changeBg ? bg : ""}` }}
       >
+        {/* Lyrics Button */}
         <div
           className={`${styles.header__lyrics} 
           ${displayLyrics ? styles.header__lyricsActive : ""}`}
           onClick={() => setDisplayLyrics(!displayLyrics)}
         >
-          <p>{displayLyrics ? "Close Lyrics" : "Lyrics"}</p>
+          <GiMicrophone />
         </div>
 
         {/* Header add-ons */}
@@ -104,7 +106,6 @@ export const Header: React.FC<HeaderProps> = ({
               }
             >
               <p className={styles.user__menu__text}>Log out</p>
-
               <BiLogOut className={styles.user__menu__icon} />
             </div>
           )}

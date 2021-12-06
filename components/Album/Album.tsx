@@ -22,7 +22,9 @@ export const Album: React.FC<{}> = () => {
   const { id } = router.query;
 
   // album data
-  const { album, artists, otherAlbums } = useAlbumInfo(id as string);
+  const { album, artists, otherAlbums, isSavedAlbum } = useAlbumInfo(
+    id as string
+  );
   const background = useImageColor(album?.images[2]?.url);
 
   // playbar ref
@@ -57,7 +59,12 @@ export const Album: React.FC<{}> = () => {
         <div className={styles.album__body}>
           {/* Playbar */}
           <div ref={playbarRef}>
-            <PlayBar bg={background} id={album.id} uri={album.uri} />
+            <PlayBar
+              bg={background}
+              id={album.id}
+              uri={album.uri}
+              isSaved={isSavedAlbum}
+            />
           </div>
 
           {/* Tracklist */}

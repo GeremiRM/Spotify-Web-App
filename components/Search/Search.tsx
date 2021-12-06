@@ -50,7 +50,7 @@ export const Search: React.FC<{}> = ({}) => {
     return data.body.tracks?.items;
   }, [searchInput, spotifyApi]);
 
-  //  Set search results
+  //  Set all search results
   useEffect(() => {
     const search = async () => {
       if (searchInput === "") return "";
@@ -103,6 +103,7 @@ export const Search: React.FC<{}> = ({}) => {
 
       {/* if no query, show recent searches and genres */}
       <div className={styles.search}>
+        {/* Search bar mobile */}
         <div className={styles.searchBarMobile}>
           <FiSearch className={styles.searchBarMobile__icon} />
           <input
@@ -114,6 +115,7 @@ export const Search: React.FC<{}> = ({}) => {
           />
         </div>
 
+        {/* If no input, display past searches and genres */}
         {searchInput === "" && (
           <div>
             <PastSearches />
@@ -121,7 +123,7 @@ export const Search: React.FC<{}> = ({}) => {
           </div>
         )}
 
-        {/* Query empty? */}
+        {/* If input and data is done fetching, display results */}
         {searchInput !== "" && Object.keys(searchResults).length !== 0 && (
           <div className={styles.search__body}>
             {/* Tracks Results */}

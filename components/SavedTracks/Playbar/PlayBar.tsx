@@ -1,7 +1,6 @@
 // styling and icons
 import styles from "./PlayBar.module.scss";
 import { ImPlay3 } from "react-icons/im";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 // hooks
 import { usePlay } from "../../../hooks/usePlay";

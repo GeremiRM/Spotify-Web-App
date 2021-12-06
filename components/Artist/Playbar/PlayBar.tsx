@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 
 // styling
 import styles from "./PlayBar.module.scss";
@@ -7,58 +6,62 @@ import { FaPlay } from "react-icons/fa";
 import { GiPauseButton } from "react-icons/gi";
 
 // hooks
-import { usePlay } from "../../hooks/usePlay";
-import { useSpotify } from "../../hooks/useSpotify";
+import { usePlay } from "../../../hooks/usePlay";
+import { useSpotify } from "../../../hooks/useSpotify";
 
-import { Context } from "../../context/context";
+import { Context } from "../../../context/context";
 
 interface PlaybarProps {
   id?: string;
   uri: string;
+  isFollowing: boolean;
 }
 
-export const PlayBar: React.FC<PlaybarProps> = ({ id, uri }) => {
+export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isFollowing }) => {
   const { playingTrack } = useContext(Context);
 
-  const [isFollowing, setisFollowing] = useState(false);
+  const [isFollowingArtist, setisFollowingArtist] = useState(false);
   const [isPlayingArtist, setIsPlayingArtist] = useState(false);
 
   const spotifyApi = useSpotify();
-  const { status } = useSession();
 
   const play = usePlay(uri);
 
+  // Is a track from the artist currently playing
   useEffect(() => {
     if (Object.keys(playingTrack).length > 0)
       setIsPlayingArtist(playingTrack.artists[0].id === id);
   }, [id, playingTrack]);
 
+  // Is the user following the artist?
   useEffect(() => {
-    const getData = async () => {
-      const isFollowingArtist = await spotifyApi.isFollowingArtists([id!]);
-      setisFollowing(isFollowingArtist.body[0]);
-    };
-    if (status === "authenticated") getData();
-  }, [id, spotifyApi, status]);
+    if (id && uri) {
+      setisFollowingArtist(isFollowing);
+    }
+  }, [id, isFollowing, uri]);
 
+  // Change follow state
   const changeSavedState = async () => {
-    if (isFollowing) spotifyApi.unfollowArtists([id!]);
+    if (isFollowingArtist) spotifyApi.unfollowArtists([id!]);
     else spotifyApi.followArtists([id!]);
-    setisFollowing(!isFollowing);
+    setisFollowingArtist(!isFollowingArtist);
   };
 
   return (
     <div className={styles.playbar}>
+      {/* Play button */}
       <div className={styles.playbar__button}>
         {isPlayingArtist ? <GiPauseButton /> : <FaPlay onClick={play} />}
       </div>
+
+      {/* Follow button */}
       <div
         onClick={() => changeSavedState()}
         className={`${styles.playbar__follow} ${
-          isFollowing ? styles.playbar__following : ""
+          isFollowingArtist ? styles.playbar__following : ""
         }`}
       >
-        <p>{isFollowing ? "Following" : "Follow"}</p>
+        <p>{isFollowingArtist ? "Following" : "Follow"}</p>
       </div>
     </div>
   );

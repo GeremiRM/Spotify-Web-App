@@ -1,12 +1,14 @@
+import { useContext, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import SpotifyPlayer from "react-spotify-web-playback";
+
+// styling
 import styles from "./Player.module.scss";
 
-import { Context } from "../../context/context";
-import { useContext, useEffect, useState } from "react";
-import { usePlaybackInfo } from "../../hooks/usePlaybackInfo";
-import { useSession } from "next-auth/react";
+// hook
 import { useSpotify } from "../../hooks/useSpotify";
 
-import SpotifyPlayer from "react-spotify-web-playback";
+import { Context } from "../../context/context";
 
 export const Player: React.FC<{}> = ({}) => {
   const spotifyApi = useSpotify();
@@ -15,11 +17,13 @@ export const Player: React.FC<{}> = ({}) => {
   const [currentTrack, setCurrentTrack] = useState<string>("");
   const { playingTrack, setPlayingTrack } = useContext(Context);
 
+  // Get the full data of the currently playing tack
   useEffect(() => {
     const fetchPlayingTrackData = async () => {
       const data = await spotifyApi.getTrack(currentTrack);
       setPlayingTrack(data.body);
     };
+
     if (
       currentTrack !== "" &&
       currentTrack !== playingTrack.id &&
