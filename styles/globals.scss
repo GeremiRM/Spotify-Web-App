@@ -34,45 +34,17 @@ a {
   src: local("Gilroy-Bold"),
     url("https://fonts.cdnfonts.com/s/16219/Gilroy-Bold.woff") format("woff");
 }
-@font-face {
-  font-family: "Gilroy-Heavy";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Gilroy-Heavy"),
-    url("https://fonts.cdnfonts.com/s/16219/Gilroy-Heavy.woff") format("woff");
-}
-@font-face {
-  font-family: "Gilroy-Light";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Gilroy-Light"),
-    url("https://fonts.cdnfonts.com/s/16219/Gilroy-Light.woff") format("woff");
-}
-@font-face {
-  font-family: "Gilroy-Medium";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Gilroy-Medium"),
-    url("https://fonts.cdnfonts.com/s/16219/Gilroy-Medium.woff") format("woff");
-}
-@font-face {
-  font-family: "Gilroy-Regular";
-  font-style: normal;
-  font-weight: 400;
-  src: local("Gilroy-Regular"),
-    url("https://fonts.cdnfonts.com/s/16219/Gilroy-Regular.woff") format("woff");
-}
 
-// Proxima Nova
-
+//Proxima Nova
 @font-face {
   font-family: "Proxima Nova";
-  font-style: normal;
+  font-style: italic;
   font-weight: 400;
   src: local("Proxima Nova"),
     url("https://fonts.cdnfonts.com/s/27118/Mark Simonson  Proxima Nova Regular Italic.woff")
       format("woff");
 }
+
 @font-face {
   font-family: "Proxima Nova";
   font-style: normal;
@@ -81,38 +53,7 @@ a {
     url("https://fonts.cdnfonts.com/s/27118/Mark Simonson  Proxima Nova Regular.woff")
       format("woff");
 }
-@font-face {
-  font-family: "Proxima Nova";
-  font-style: normal;
-  font-weight: 250;
-  src: local("Proxima Nova"),
-    url("https://fonts.cdnfonts.com/s/27118/Mark Simonson  Proxima Nova Thin Italic.woff")
-      format("woff");
-}
-@font-face {
-  font-family: "Proxima Nova";
-  font-style: normal;
-  font-weight: 250;
-  src: local("Proxima Nova"),
-    url("https://fonts.cdnfonts.com/s/27118/Mark Simonson  Proxima Nova Thin.woff")
-      format("woff");
-}
-@font-face {
-  font-family: "Proxima Nova";
-  font-style: normal;
-  font-weight: 300;
-  src: local("Proxima Nova"),
-    url("https://fonts.cdnfonts.com/s/27118/Mark Simonson  Proxima Nova Light.woff")
-      format("woff");
-}
-@font-face {
-  font-family: "Proxima Nova";
-  font-style: italic;
-  font-weight: 300;
-  src: local("Proxima Nova"),
-    url("https://fonts.cdnfonts.com/s/27118/Mark Simonson  Proxima Nova Light Italic.woff")
-      format("woff");
-}
+
 @font-face {
   font-family: "Proxima Nova";
   font-style: normal;

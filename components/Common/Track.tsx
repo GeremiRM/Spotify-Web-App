@@ -90,9 +90,9 @@ export const Track: React.FC<TrackProps> = ({
         <div className={styles.track__img}>
           <Image
             src={
-              // track.album.images[2]?.url ??
               track.album.images[1]?.url ??
               track.album.images[0]?.url ??
+              track.album.images[2]?.url ??
               "/music-placeholder.png"
             }
             alt={track.name}
