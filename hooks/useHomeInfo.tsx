@@ -39,9 +39,13 @@ export const useHomeInfo = () => {
           limit: 50,
         });
 
-        const recentlyPlayed = (
+        const tracks = (
           await spotifyApi.getMyRecentlyPlayedTracks({ limit: 50 })
         ).body.items.map((item) => item.track);
+
+        const recentlyPlayed = await spotifyApi.getTracks(
+          tracks.map((track) => track.id)
+        );
 
         // const recommendations = await Promise.all(
         //   categories.map(async (category) => {
@@ -60,7 +64,7 @@ export const useHomeInfo = () => {
 
         setHomeData({
           // recommendations: recommendations,
-          recentlyPlayed: recentlyPlayed,
+          recentlyPlayed: recentlyPlayed.body.tracks,
           featuredPlaylists: featuredPlaylists.body.playlists.items,
           newReleases: newReleases.body.albums.items,
           topArtists: topArtists.body.items,
