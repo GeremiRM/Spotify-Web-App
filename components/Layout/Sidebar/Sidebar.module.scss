@@ -24,27 +24,30 @@
 
   &__cross {
     font-size: 1.25rem;
+    margin-left: 0.5rem;
   }
 }
 
 .sidebar {
   height: 100vh;
   width: 235px;
-  padding-top: 1.5rem;
-  background-color: black;
+  background: rgba($color: #000000, $alpha: 0.8);
+  backdrop-filter: blur(20px);
   display: none;
   flex-direction: column;
   position: fixed;
   max-height: 100vh;
   overflow: auto;
   z-index: 1;
-  padding-top: 2rem;
+  padding-top: 3rem;
   top: 0;
   z-index: 20;
 
   @include tablet {
     display: flex !important;
     position: sticky;
+    padding-top: 2rem;
+    background-color: black;
   }
 
   &__logo {
@@ -68,11 +71,7 @@
   }
 
   &__options {
-    margin: 2rem 0.5rem 0;
-
-    @include tablet {
-      margin-top: 1rem;
-    }
+    margin: 1rem 0.5rem 0;
   }
 
   &__option {
@@ -81,11 +80,15 @@
     font-size: 0.9rem;
     cursor: pointer;
     border-radius: 4px;
-    padding: 1.25rem 1rem;
+    padding: 1rem;
     color: #777;
     transition: 0.25s all ease;
     height: 2.25rem;
     margin: 0.25rem 0;
+
+    @include tablet {
+      padding: 1.25rem 1rem;
+    }
 
     &:hover {
       color: white;

@@ -16,7 +16,7 @@ import { ImCross } from "react-icons/im";
 import { SidebarOption } from "./SidebarOption";
 
 // hook
-import { useSpotify } from "../../hooks/useSpotify";
+import { useSpotify } from "../../../hooks/useSpotify";
 
 type Playlists = SpotifyApi.PlaylistObjectSimplified[];
 

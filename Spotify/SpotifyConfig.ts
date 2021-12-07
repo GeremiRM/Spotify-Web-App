@@ -22,7 +22,7 @@ const SCOPES = [
 ].join("%20");
 
 // Whether or not to force the user to approve the app again
-const DIALOG = true;
+const DIALOG = false;
 
 const SPOTIFY_URL =
   AUTH_URL +

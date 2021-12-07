@@ -39,7 +39,7 @@ export const SavedTracks: React.FC<{}> = ({}) => {
           uri={trackUris}
         ></HeaderPlayer>
       </Header>
-      <div className={styles.tracks}>
+      <div className={styles.savedTracks}>
         <div
           style={{
             background: backgroundGradient,
@@ -56,7 +56,7 @@ export const SavedTracks: React.FC<{}> = ({}) => {
       </div>
 
       {/* Tracklist */}
-      <div>
+      <div className={styles.savedTracks__tracklist}>
         <Tracklist tracks={savedSongsData} stickyHeader />
       </div>
     </div>

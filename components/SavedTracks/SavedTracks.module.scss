@@ -1,6 +1,8 @@
-.tracks {
+.savedTracks {
   max-width: 100vw;
   overflow: hidden;
-  color: white;
-  padding-bottom: 2.5rem;
+
+  &__tracklist {
+    padding-bottom: 3rem;
+  }
 }

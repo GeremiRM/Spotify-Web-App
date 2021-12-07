@@ -2,7 +2,7 @@
 import styles from "./Sidebar.module.scss";
 import { IconType } from "react-icons";
 import { useContext } from "react";
-import { Context } from "../../context/context";
+import { Context } from "../../../context/context";
 
 interface SidebarOptionProps {
   icon?: IconType;

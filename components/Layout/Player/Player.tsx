@@ -6,9 +6,9 @@ import SpotifyPlayer from "react-spotify-web-playback";
 import styles from "./Player.module.scss";
 
 // hook
-import { useSpotify } from "../../hooks/useSpotify";
+import { useSpotify } from "../../../hooks/useSpotify";
 
-import { Context } from "../../context/context";
+import { Context } from "../../../context/context";
 
 export const Player: React.FC<{}> = ({}) => {
   const spotifyApi = useSpotify();
@@ -53,6 +53,7 @@ export const Player: React.FC<{}> = ({}) => {
           sliderTrackColor: "gray",
         }}
         callback={(state) => {
+          console.log(state);
           setCurrentTrack(state.track.id);
         }}
       />

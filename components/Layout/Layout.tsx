@@ -6,8 +6,8 @@ import router from "next/router";
 import styles from "./Layout.module.scss";
 
 // components
-import { Sidebar } from "../Sidebar/Sidebar";
-import { Player } from "../Player/Player";
+import { Sidebar } from "./Sidebar/Sidebar";
+import { Player } from "./Player/Player";
 import { Lyrics } from "../Lyrics/Lyrics";
 import { Loading } from "../Common/Loading";
 
@@ -53,6 +53,8 @@ export const Layout: React.FC<{}> = ({ children }) => {
           <div className={styles.container}>
             {pageLoading ? <Loading /> : displayLyrics ? <Lyrics /> : children}
           </div>
+
+          {/* Player */}
           <Player />
         </div>
       </div>

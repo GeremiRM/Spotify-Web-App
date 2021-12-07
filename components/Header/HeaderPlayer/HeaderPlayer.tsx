@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 // styling and icons
 import styles from "./HeaderPlayer.module.scss";
@@ -6,6 +6,7 @@ import { FaPlay } from "react-icons/fa";
 
 // hook
 import { usePlay } from "../../../hooks/usePlay";
+import { Context } from "../../../context/context";
 
 interface HeaderPlayerProps {
   // at what distance will it active
@@ -19,6 +20,8 @@ export const HeaderPlayer: React.FC<HeaderPlayerProps> = ({
   activateDistance = 0,
   uri,
 }) => {
+  const { playingTrack } = useContext(Context);
+
   const [display, setDisplay] = useState(false);
   const play = usePlay(uri);
 
