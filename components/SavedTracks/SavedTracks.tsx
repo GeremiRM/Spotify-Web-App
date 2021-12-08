@@ -5,6 +5,7 @@ import styles from "./SavedTracks.module.scss";
 import { Header } from "../Header/Header";
 import { Tracklist } from "../Common/Tracklist";
 import { Banner } from "./Banner/Banner";
+import { Loading } from "../Common/Loading";
 
 // hooks
 import { useSavedSongsInfo } from "../../hooks/useSavedSongsInfo";
@@ -27,7 +28,7 @@ export const SavedTracks: React.FC<{}> = ({}) => {
     }
   }, [savedSongsData]);
 
-  if (savedSongsData.length === 0) return <></>;
+  if (savedSongsData.length === 0) return <Loading />;
 
   return (
     <div>

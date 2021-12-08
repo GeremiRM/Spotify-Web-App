@@ -80,6 +80,8 @@ export const Search: React.FC<{}> = ({}) => {
             data={result!}
             title={result![0].type + "s"}
             key={result![0].type}
+            linkType={`search/${result![0].type}`}
+            linkId={searchInput}
           />
         );
     });

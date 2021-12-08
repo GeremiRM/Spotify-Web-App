@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Header } from "../Header/Header";
 import { Banner } from "./Banner/Banner";
 import { Cards } from "../Common/Cards";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Category.module.scss";
@@ -18,7 +19,7 @@ export const Category: React.FC<{}> = ({}) => {
 
   const { category, categoryPlaylists } = useCategoryInfo(id as string);
 
-  if (!category || !categoryPlaylists) return <></>;
+  if (!category || !categoryPlaylists) return <Loading />;
 
   return (
     <>

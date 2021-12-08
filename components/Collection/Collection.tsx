@@ -5,6 +5,7 @@ import { Header } from "../Header/Header";
 import { Selector } from "./Selector";
 import { Cards } from "../Common/Cards";
 import { SavedTracksCard } from "./SavedTracksCard/SavedTracksCard";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Collection.module.scss";
@@ -17,7 +18,7 @@ export const Collection: React.FC<{}> = ({}) => {
 
   const { library, likedSongs } = useLibraryInfo();
 
-  if (!library || !likedSongs) return <></>;
+  if (!library || !likedSongs) return <Loading />;
 
   return (
     <div>

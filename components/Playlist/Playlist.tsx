@@ -7,6 +7,7 @@ import { HeaderPlayer } from "../Header/HeaderPlayer/HeaderPlayer";
 import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { PlayBar } from "./Playbar/PlayBar";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Playlist.module.scss";
@@ -27,7 +28,7 @@ export const Playlist: React.FC<{}> = ({}) => {
 
   const playbarRef = useRef<HTMLDivElement>(null);
 
-  if (!playlist || !tracks) return <> </>;
+  if (!playlist || !tracks) return <Loading />;
 
   return (
     <>

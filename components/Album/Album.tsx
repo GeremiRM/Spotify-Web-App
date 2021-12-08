@@ -8,6 +8,7 @@ import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { Cards } from "../Common/Cards";
 import { PlayBar } from "./Playbar/PlayBar";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Album.module.scss";
@@ -31,7 +32,7 @@ export const Album: React.FC<{}> = () => {
   const playbarRef = useRef<HTMLDivElement>(null);
 
   // if data hasn't finished fetching
-  if (!album || !artists || !otherAlbums) return <></>;
+  if (!album || !artists || !otherAlbums) return <Loading />;
 
   return (
     <div>

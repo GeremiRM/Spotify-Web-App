@@ -8,6 +8,7 @@ import { Banner } from "./Banner/Banner";
 import { Tracklist } from "../Common/Tracklist";
 import { Cards } from "../Common/Cards";
 import { PlayBar } from "./Playbar/PlayBar";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Artist.module.scss";
@@ -46,7 +47,7 @@ export const Artist: React.FC<{}> = ({}) => {
     !singles ||
     !appears_on
   )
-    return <></>;
+    return <Loading />;
 
   return (
     <div>

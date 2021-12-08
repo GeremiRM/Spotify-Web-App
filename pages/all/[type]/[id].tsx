@@ -12,7 +12,6 @@ import { useArtistInfo } from "../../../hooks/useArtistInfo";
 
 // types
 import { CardsData } from "../../../types/types";
-import { useImageColor } from "../../../hooks/useImageColor";
 
 interface Data {
   albums: { title: string; data: CardsData };
@@ -21,7 +20,7 @@ interface Data {
   related: { title: string; data: CardsData };
 }
 
-export const Artist: React.FC<{}> = ({}) => {
+export const All: React.FC<{}> = ({}) => {
   const router = useRouter();
   const { type, id } = router.query;
 
@@ -62,4 +61,4 @@ export const Artist: React.FC<{}> = ({}) => {
   );
 };
 
-export default Artist;
+export default All;

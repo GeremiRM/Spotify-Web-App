@@ -21,4 +21,8 @@ export type LinkType =
   | "featured"
   | "topArtists"
   | "recentlyPlayed"
-  | "newReleases";
+  | "newReleases"
+  | "search/album"
+  | "search/artist"
+  | "search/playlist"
+  | "undefined";

@@ -1,6 +1,7 @@
 // components
 import { Header } from "../Header/Header";
 import { Cards } from "../Common/Cards";
+import { Loading } from "../Common/Loading";
 
 // styling
 import styles from "./Home.module.scss";
@@ -28,7 +29,7 @@ export const Home: React.FC<{}> = ({}) => {
     // !recommendations ||
     !topArtists
   )
-    return <></>;
+    return <Loading />;
 
   return (
     <div>
