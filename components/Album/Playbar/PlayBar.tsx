@@ -67,7 +67,11 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isSaved }) => {
     <div className={styles.playbar}>
       {/* Play button */}
       <div className={styles.playbar__button}>
-        {isPlayingAlbum ? <GiPauseButton /> : <FaPlay onClick={play} />}
+        {isPlayingAlbum ? (
+          <GiPauseButton onClick={() => spotifyApi.pause()} />
+        ) : (
+          <FaPlay onClick={play} />
+        )}
       </div>
 
       {/* Save button */}

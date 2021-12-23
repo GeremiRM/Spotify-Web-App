@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 // styling
 import styles from "./PlayBar.module.scss";
-import { ImPlay3 } from "react-icons/im";
+import { FaPlay } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 // hooks
@@ -54,7 +54,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isFollowing }) => {
   return (
     <div className={styles.playbar}>
       <div className={styles.playbar__button}>
-        <ImPlay3 onClick={play} />
+        <FaPlay onClick={play} />
       </div>
       <div onClick={() => changeSavedState()} className={styles.playbar__heart}>
         {isFollowingPlaylist ? (
