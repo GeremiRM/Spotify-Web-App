@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 // styling
 import styles from "./PlayBar.module.scss";
@@ -31,8 +32,22 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isSaved }) => {
 
   // Change album's save state
   const changeSavedState = async () => {
-    if (isSavedAlbum) spotifyApi.removeFromMySavedAlbums([id!]);
-    else spotifyApi.addToMySavedAlbums([id!]);
+    if (isSavedAlbum) {
+      spotifyApi.removeFromMySavedAlbums([id!]);
+      toast.error(`Removed album from your library`, {
+        position: "bottom-center",
+        style: {
+          background: "rgb(100,0,0)",
+          color: "white",
+        },
+      });
+    } else {
+      spotifyApi.addToMySavedAlbums([id!]);
+      toast.success("Saved album to your library", {
+        position: "bottom-center",
+        style: { color: "white", background: "green" },
+      });
+    }
     setIsSavedAlbum(!isSavedAlbum);
   };
 

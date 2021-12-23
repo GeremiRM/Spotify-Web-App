@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 // styling
 import styles from "./PlayBar.module.scss";
@@ -42,8 +43,22 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isFollowing }) => {
 
   // Change follow state
   const changeSavedState = async () => {
-    if (isFollowingArtist) spotifyApi.unfollowArtists([id!]);
-    else spotifyApi.followArtists([id!]);
+    if (isFollowingArtist) {
+      spotifyApi.unfollowArtists([id!]);
+      toast.error(`Removed from your library`, {
+        position: "bottom-center",
+        style: {
+          background: "rgb(100,0,0)",
+          color: "white",
+        },
+      });
+    } else {
+      spotifyApi.followArtists([id!]);
+      toast.success("Saved to your library", {
+        position: "bottom-center",
+        style: { color: "white", background: "green" },
+      });
+    }
     setisFollowingArtist(!isFollowingArtist);
   };
 

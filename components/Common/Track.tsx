@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 // styling and icons
 import styles from "./Track.module.scss";
@@ -16,6 +17,7 @@ import { convertMillisTracks } from "../../utils/utils";
 import { useSpotify } from "../../hooks/useSpotify";
 import { usePlay } from "../../hooks/usePlay";
 import { useSongInfo } from "../../hooks/useSongInfo";
+
 import { Context } from "../../context/context";
 
 interface TrackProps {
@@ -40,6 +42,8 @@ export const Track: React.FC<TrackProps> = ({
   const [trackSaved, setTrackSaved] = useState<boolean>(false);
   const trackDuration = convertMillisTracks(track?.duration_ms!);
 
+  const [displaySavedMsg, setDisplaySavedMsg] = useState<boolean>(false);
+
   const spotifyApi = useSpotify();
   const play = usePlay([track?.uri], tracklistUri);
 
@@ -58,18 +62,35 @@ export const Track: React.FC<TrackProps> = ({
     }
     return <div className={styles.track__soundbars}>{bars}</div>;
   };
+
+  // Check if the track is the one currently playing
   useEffect(() => {
     if (Object.keys(playingTrack).length > 0 && track)
       setIsPlayingTrack(playingTrack.id === id);
   }, [id, playingTrack, track]);
 
+  // Set if the track is saved or not
   useEffect(() => {
     setTrackSaved(saved);
   }, [saved]);
 
   const changeSavedState = async () => {
-    if (trackSaved) spotifyApi.removeFromMySavedTracks([track.id]);
-    else spotifyApi.addToMySavedTracks([track.id]);
+    if (trackSaved) {
+      spotifyApi.removeFromMySavedTracks([track.id]);
+      toast.error("Track removed from saved", {
+        position: "bottom-center",
+        style: {
+          background: "rgb(100,0,0)",
+          color: "white",
+        },
+      });
+    } else {
+      spotifyApi.addToMySavedTracks([track.id]);
+      toast.success("Track saved", {
+        position: "bottom-center",
+        style: { color: "white", background: "green" },
+      });
+    }
     setTrackSaved(!trackSaved);
   };
 

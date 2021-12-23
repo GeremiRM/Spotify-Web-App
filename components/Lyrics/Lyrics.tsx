@@ -32,10 +32,10 @@ export const Lyrics: React.FC<{}> = ({}) => {
       <div className={styles.lyrics} style={{ background: background }}>
         {/* Mo song is playing */}
         {Object.keys(playingTrack).length === 0 && !lyrics && (
-          <h1>No song playing</h1>
+          <h1>No song is playing</h1>
         )}
 
-        {/* If lyrics are featching, display Loading comp */}
+        {/* If lyrics are getting fetched, display Loading comp */}
         {!lyrics && <Loading />}
 
         {/* Otherwise display lyrics */}

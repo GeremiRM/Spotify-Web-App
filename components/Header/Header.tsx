@@ -101,9 +101,7 @@ export const Header: React.FC<HeaderProps> = ({
           {isMenuOpen && (
             <div
               className={styles.user__menu}
-              onClick={() =>
-                signOut({ callbackUrl: "http://localhost:3000/login" })
-              }
+              onClick={() => signOut({ callbackUrl: "/login" })}
             >
               <p className={styles.user__menu__text}>Log out</p>
               <BiLogOut className={styles.user__menu__icon} />
