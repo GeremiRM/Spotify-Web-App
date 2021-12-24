@@ -10,7 +10,8 @@ export type CardsData =
   | SpotifyApi.ArtistObjectFull[]
   | SpotifyApi.PlaylistObjectSimplified[]
   | SpotifyApi.TrackObjectFull[]
-  | undefined;
+  | undefined
+  | null;
 
 export type LinkType =
   | "albums"

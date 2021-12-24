@@ -21,13 +21,12 @@ export const Home: React.FC<{}> = ({}) => {
   } = useHomeInfo();
 
   // if data hasn't finished fetching, return nothing
-
   if (
     !newReleases ||
-    !featuredPlaylists ||
-    !recentlyPlayed ||
+    !featuredPlaylists
+    // !recentlyPlayed ||
     // !recommendations ||
-    !topArtists
+    // !topArtists
   )
     return <Loading />;
 
@@ -48,6 +47,7 @@ export const Home: React.FC<{}> = ({}) => {
             />
 
             {/* New Releases */}
+
             <Cards
               data={newReleases.slice(0, LIMIT)}
               title="New Releases"
@@ -56,17 +56,19 @@ export const Home: React.FC<{}> = ({}) => {
 
             {/* Favorite Artists */}
             <Cards
-              data={topArtists.slice(0, LIMIT)}
+              data={topArtists!.slice(0, LIMIT)}
               title="Your Favorite Artists"
               linkType="topArtists"
             />
 
             {/* Recently Played */}
-            <Cards
-              data={recentlyPlayed.slice(0, LIMIT)}
-              title="Recently Played"
-              linkType="recentlyPlayed"
-            />
+            {recentlyPlayed && (
+              <Cards
+                data={recentlyPlayed!.slice(0, LIMIT)}
+                title="Recently Played"
+                linkType="recentlyPlayed"
+              />
+            )}
           </div>
         </div>
       </div>

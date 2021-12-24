@@ -20,6 +20,11 @@ interface Data {
   topArtists: { title: string; data: CardsData };
 }
 
+interface Test {
+  title: string;
+  data: CardsData;
+}
+
 // See all for home page
 export const HomepageAll: React.FC<{}> = ({}) => {
   const router = useRouter();
@@ -35,8 +40,7 @@ export const HomepageAll: React.FC<{}> = ({}) => {
     topArtists: { title: "Your favorite artists", data: topArtists },
   };
 
-  if (!featuredPlaylists || !newReleases || !recentlyPlayed || !topArtists)
-    return <></>;
+  if (Data[type as keyof Data] === null) return <></>;
 
   return (
     <>

@@ -23,7 +23,7 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
     <div
       className={styles.banner}
       style={{
-        background: `url(${bannerBg}) center/cover no-repeat `,
+        backgroundImage: `url(${bannerBg}) `,
       }}
     >
       {/* Banner image */}

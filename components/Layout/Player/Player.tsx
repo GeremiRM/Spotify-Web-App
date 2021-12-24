@@ -53,7 +53,6 @@ export const Player: React.FC<{}> = ({}) => {
           sliderTrackColor: "gray",
         }}
         callback={(state) => {
-          console.log(state);
           setCurrentTrack(state.track.id);
         }}
       />

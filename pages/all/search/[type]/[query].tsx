@@ -24,8 +24,6 @@ export const All: React.FC<{}> = ({}) => {
   const spotifyApi = useSpotify();
   const { status } = useSession();
 
-  console.log(status);
-
   useEffect(() => {
     const fetchData = async () => {
       switch (type) {

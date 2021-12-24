@@ -6,10 +6,10 @@ interface HomeData {
   // recommendations: {
   //   [x: string]: SpotifyApi.TrackObjectFull[];
   // }[];
-  recentlyPlayed: SpotifyApi.TrackObjectFull[];
+  recentlyPlayed: SpotifyApi.TrackObjectFull[] | null;
   featuredPlaylists: SpotifyApi.PlaylistObjectSimplified[];
   newReleases: SpotifyApi.AlbumObjectSimplified[];
-  topArtists: SpotifyApi.ArtistObjectFull[];
+  topArtists: SpotifyApi.ArtistObjectFull[] | null;
 }
 
 // const categories = [
@@ -43,9 +43,10 @@ export const useHomeInfo = () => {
           await spotifyApi.getMyRecentlyPlayedTracks({ limit: 50 })
         ).body.items.map((item) => item.track);
 
-        const recentlyPlayed = await spotifyApi.getTracks(
-          tracks.map((track) => track.id)
-        );
+        const recentlyPlayed =
+          Object.keys(tracks).length > 0
+            ? await spotifyApi.getTracks(tracks.map((track) => track.id))
+            : null;
 
         // const recommendations = await Promise.all(
         //   categories.map(async (category) => {
@@ -64,7 +65,7 @@ export const useHomeInfo = () => {
 
         setHomeData({
           // recommendations: recommendations,
-          recentlyPlayed: recentlyPlayed.body.tracks,
+          recentlyPlayed: recentlyPlayed ? recentlyPlayed.body.tracks : null,
           featuredPlaylists: featuredPlaylists.body.playlists.items,
           newReleases: newReleases.body.albums.items,
           topArtists: topArtists.body.items,

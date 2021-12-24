@@ -39,7 +39,7 @@ export const Cards: React.FC<Cards> = ({
   };
 
   // If no data, return nothing
-  if (Object.keys(data!).length === 0) return <></>;
+  if (!data || Object.keys(data!).length === 0) return <></>;
 
   // if data are albums, filter repeated albums
   if (data![0]?.type === "album") data = filterRepeated(data!);
