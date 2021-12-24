@@ -40,7 +40,7 @@ export const HomepageAll: React.FC<{}> = ({}) => {
     topArtists: { title: "Your favorite artists", data: topArtists },
   };
 
-  if (Data[type as keyof Data] === null) return <></>;
+  if (!Data || typeof Data[type as keyof Data] === "undefined") return <></>;
 
   return (
     <>
