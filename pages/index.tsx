@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { Home } from "../components/Home/Home";
 
 import type { NextPage } from "next";
