@@ -66,7 +66,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isSaved }) => {
   return (
     <div className={styles.playbar}>
       {/* Play button */}
-      <div className={styles.playbar__button}>
+      <div className={styles.button}>
         {isPlayingAlbum ? (
           <GiPauseButton onClick={() => spotifyApi.pause()} />
         ) : (
@@ -75,7 +75,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isSaved }) => {
       </div>
 
       {/* Save button */}
-      <div onClick={() => changeSavedState()} className={styles.playbar__heart}>
+      <div onClick={() => changeSavedState()} className={styles.heart}>
         {isSavedAlbum ? (
           <AiFillHeart style={{ color: "#1db954" }} />
         ) : (

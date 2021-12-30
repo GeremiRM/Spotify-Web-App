@@ -32,7 +32,11 @@ export const Lyrics: React.FC<{}> = ({}) => {
 
   return (
     <>
-      <Header />
+      <Header>
+        <div className={styles.song}>
+          <h2>{playingTrack.name}</h2>
+        </div>
+      </Header>
       <div className={styles.lyrics} style={{ background: background }}>
         {/* Mo song is playing */}
         {Object.keys(playingTrack).length === 0 && !lyrics && (
@@ -43,12 +47,7 @@ export const Lyrics: React.FC<{}> = ({}) => {
         {!lyrics && <Loading />}
 
         {/* Otherwise display lyrics */}
-        {lyrics && playingTrack && (
-          <h1>
-            {playingTrack.name} - {playingTrack.artists[0].name}
-          </h1>
-        )}
-        <div>{renderLyrics()}</div>
+        {lyrics && playingTrack && <div>{renderLyrics()}</div>}
       </div>
     </>
   );

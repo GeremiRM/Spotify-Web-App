@@ -5,7 +5,6 @@ import Link from "next/link";
 // styling
 import styles from "./Banner.module.scss";
 
-// func
 import { converMillisBanners, getAlbumDuration } from "../../../utils/utils";
 
 interface BannerProps {
@@ -26,13 +25,12 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
     ));
   };
 
-  if (Object.keys(album).length === 0 || Object.keys(artists).length === 0)
-    return <></>;
+  if (!Object.keys(album).length || !Object.keys(artists).length) return <></>;
 
   return (
     <div className={styles.banner} ref={bannerRef}>
       {/* Banner image */}
-      <div className={styles.banner__cover}>
+      <div className={styles.cover}>
         <Image
           src={album?.images[0]?.url || "/music-placeholder.png"}
           width="100%"
@@ -43,9 +41,9 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
       </div>
 
       {/* Banner info */}
-      <div className={styles.banner__info}>
+      <div className={styles.info}>
         {/* Title */}
-        <div className={styles.banner__info__name}>
+        <div className={styles.name}>
           <h1
             style={{
               fontSize: `clamp(2.75rem,calc(8vw - ${album.name.length}px), 96px)`,
@@ -56,11 +54,11 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
         </div>
 
         {/* Description */}
-        <div className={styles.banner__desc}>
+        <div className={styles.desc}>
           {/* if there's only one artist, display image */}
-          <div className={styles.banner__desc__artist}>
+          <div className={styles.artist}>
             {artists?.length === 1 && (
-              <div className={styles.banner__desc__artist__image}>
+              <div className={styles.artist__img}>
                 <Image
                   src={artists[0]?.images[2]?.url}
                   alt={album?.artists[0]?.name}
@@ -73,25 +71,18 @@ export const Banner: React.FC<BannerProps> = ({ album, artists }) => {
 
             {/* Render all artists */}
             <p>{renderArtists()}</p>
-            <div className={styles.banner__separator}></div>
+            <div className={styles.desc__separator}></div>
           </div>
 
           {/* Year of release */}
-          <div className={styles.banner__year}>
-            <p>{album.release_date.substring(0, 4)}</p>
-          </div>
-
-          <div className={styles.banner__separator}></div>
+          <p>{album.release_date.substring(0, 4)}</p>
+          <div className={styles.desc__separator}></div>
 
           {/* Number of tracks */}
-          <div className={styles.banner__tracks}>
-            <p>{album.total_tracks} songs, </p>
-          </div>
+          <p>{album.total_tracks} songs, </p>
 
           {/* Album Duration */}
-          <div className={styles.banner__duration}>
-            <p>{albumDuration}</p>
-          </div>
+          <p>{albumDuration}</p>
         </div>
       </div>
     </div>

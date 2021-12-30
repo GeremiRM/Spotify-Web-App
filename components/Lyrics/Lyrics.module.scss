@@ -4,13 +4,29 @@
   }
 }
 
+.song {
+  display: flex;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  h2 {
+    color: white;
+    display: block;
+    font-size: 2rem !important;
+    font-weight: 900;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
 .lyrics {
   padding: 5rem 2rem;
   color: #dddddd;
   font-family: "Proxima Nova", sans-serif;
   min-height: 100vh;
   font-weight: 700;
-  text-align: center;
 
   @include tablet {
     padding: 7rem 2rem 3rem;
@@ -20,43 +36,28 @@
     padding: 7rem 4rem 3rem;
   }
 
-  h1 {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    color: white;
-    padding: 0 0.5rem;
-
-    @include tablet {
-      font-size: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    @media (min-width: 1400px) {
-      font-size: 5rem;
-      margin-bottom: 5rem;
-    }
-  }
-
   div {
-    margin-bottom: 1rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    max-width: 80%;
+
     @include tablet {
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
     }
 
     @media (min-width: 1200px) {
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
     }
 
     p {
-      font-size: 1rem;
+      font-size: 2rem;
+
       @include tablet {
-        font-size: clamp(1.25rem, 5vw, 1.75rem);
+        font-size: 2.25rem;
       }
 
       @media (min-width: 1400px) {
-        font-size: 2.5rem;
+        font-size: 4rem;
       }
     }
   }

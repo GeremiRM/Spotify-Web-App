@@ -57,7 +57,7 @@ export const Album: React.FC<{}> = () => {
         <Banner album={album} artists={artists} />
 
         {/* Body  */}
-        <div className={styles.album__body}>
+        <div className={styles.body}>
           {/* Playbar */}
           <div ref={playbarRef}>
             <PlayBar
@@ -82,7 +82,7 @@ export const Album: React.FC<{}> = () => {
           </div>
 
           {/* Cards */}
-          <div className={styles.album__otherAlbums}>
+          <div className={styles.otherAlbums}>
             <Cards
               data={otherAlbums}
               title={`More by ${artists[0]?.name}`}
