@@ -42,8 +42,6 @@ export const Track: React.FC<TrackProps> = ({
   const [trackSaved, setTrackSaved] = useState<boolean>(false);
   const trackDuration = convertMillisTracks(track?.duration_ms!);
 
-  const [displaySavedMsg, setDisplaySavedMsg] = useState<boolean>(false);
-
   const spotifyApi = useSpotify();
   const play = usePlay([track?.uri], tracklistUri);
 

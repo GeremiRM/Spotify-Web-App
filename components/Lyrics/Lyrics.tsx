@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 // components
 import { Loading } from "../Common/Loading";
@@ -25,6 +25,10 @@ export const Lyrics: React.FC<{}> = ({}) => {
       </div>
     ));
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

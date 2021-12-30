@@ -8,6 +8,9 @@ import {
 } from "next-auth/react";
 
 import styles from "../styles/Login.module.scss";
+
+import { AlertMessage } from "../components/Login/AlertMessage";
+
 import { BsSpotify } from "react-icons/bs";
 
 type Providers = Record<
@@ -22,6 +25,7 @@ interface LoginProps {
 const Login: React.FC<LoginProps> = ({ providers }) => {
   return (
     <div className={styles.login}>
+      <AlertMessage />
       <div className={styles.login__logo}>
         <BsSpotify />
       </div>

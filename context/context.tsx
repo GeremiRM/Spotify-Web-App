@@ -6,11 +6,9 @@ import {
   useState,
 } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 import { useSpotify } from "../hooks/useSpotify";
-
-//@ts-expect-error -> no types
-import solenolyrics from "solenolyrics";
 
 type CurrentTrack = SpotifyApi.SingleTrackResponse;
 type User = SpotifyApi.CurrentUsersProfileResponse;
@@ -22,6 +20,8 @@ interface IContext {
   displayLyrics: boolean;
   setDisplayLyrics: Dispatch<SetStateAction<boolean>>;
   user: User;
+  playerErrors: boolean;
+  setPlayerErrors: Dispatch<SetStateAction<boolean>>;
 }
 
 export const Context = createContext({} as IContext);
@@ -33,9 +33,12 @@ export const ContextProvider = (props: any) => {
   const [user, setUser] = useState<User>();
   const [lyrics, setLyrics] = useState("");
   const [displayLyrics, setDisplayLyrics] = useState(false);
+  const [playerErrors, setPlayerErrors] = useState(false);
 
   const spotifyApi = useSpotify();
   const { status } = useSession();
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -48,14 +51,16 @@ export const ContextProvider = (props: any) => {
   useEffect(() => {
     setLyrics("");
     const getLyrics = async () => {
-      const data = await solenolyrics.requestLyricsFor(
-        `${playingTrack.name} ${playingTrack.artists[0].name}`
+      const response = await fetch(`/api/lyrics/${playingTrack.name}`);
+      const data = await response.json();
+
+      setLyrics(
+        data.lyrics ? data.lyrics : "Couldn't find the lyrics for this song"
       );
-      setLyrics(data ? data : "Couldn't find the lyrics for this song");
     };
 
     if (Object.keys(playingTrack).length > 0) getLyrics();
-  }, [playingTrack]);
+  }, [playingTrack, router.pathname]);
 
   useEffect(() => {
     const fetchCurrentPlayingTrack = async () => {
@@ -81,6 +86,8 @@ export const ContextProvider = (props: any) => {
         displayLyrics,
         setDisplayLyrics,
         user: user!,
+        playerErrors,
+        setPlayerErrors,
       }}
     >
       {props.children}

@@ -15,7 +15,8 @@ export const Player: React.FC<{}> = ({}) => {
   const { status } = useSession();
 
   const [currentTrack, setCurrentTrack] = useState<string>("");
-  const { playingTrack, setPlayingTrack } = useContext(Context);
+  const { playingTrack, setPlayingTrack, setPlayerErrors } =
+    useContext(Context);
 
   // Get the full data of the currently playing tack
   useEffect(() => {
@@ -35,7 +36,6 @@ export const Player: React.FC<{}> = ({}) => {
   let token = spotifyApi.getAccessToken();
 
   if (!token) return <></>;
-
   return (
     <div className={styles.player}>
       <SpotifyPlayer
@@ -53,6 +53,10 @@ export const Player: React.FC<{}> = ({}) => {
           sliderTrackColor: "gray",
         }}
         callback={(state) => {
+          if (state.error) {
+            setPlayerErrors(true);
+          }
+
           setCurrentTrack(state.track.id);
         }}
       />
