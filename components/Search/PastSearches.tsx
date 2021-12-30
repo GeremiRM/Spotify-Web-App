@@ -36,14 +36,14 @@ export const PastSearches: React.FC<{}> = ({}) => {
   return (
     <div className={styles.wrapper}>
       {/* Title */}
-      <div className={styles.wrapper__header}>
-        <div className={styles.wrapper__title}>
+      <div className={styles.header}>
+        <div className={styles.title}>
           <h2>Recent Searches</h2>
         </div>
       </div>
 
       {/* Past searches Cards */}
-      <div className={`${styles.wrapper__cards}`}>{renderCards()}</div>
+      <div className={`${styles.cards}`}>{renderCards()}</div>
     </div>
   );
 };

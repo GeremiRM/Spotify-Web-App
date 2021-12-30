@@ -1,9 +1,9 @@
 .banner {
+  align-items: flex-end;
+  display: flex;
   min-height: 275px;
   padding: 1rem 1rem 1.5rem;
   padding-right: 0.5rem;
-  display: flex;
-  align-items: flex-end;
   padding-top: 5rem;
 
   @media (min-width: 1000px) {
@@ -12,19 +12,19 @@
 
   &__title {
     h1 {
-      font-weight: 900;
-      padding-right: 2rem;
       display: -webkit-box;
+      font-weight: 900;
+      line-height: 110%;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      padding-right: 2rem;
+      text-overflow: ellipsis;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 1rem;
-      line-height: 110%;
 
       @media (min-width: 1000px) {
-        -webkit-line-clamp: 2;
         align-self: center;
+        -webkit-line-clamp: 2;
       }
     }
   }

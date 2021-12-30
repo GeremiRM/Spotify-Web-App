@@ -8,7 +8,7 @@
   color: white;
   padding-bottom: 4rem;
 
-  &__body {
+  .body {
     @media (min-width: 1000px) {
       padding-left: 1.5rem;
     }
@@ -18,12 +18,12 @@
     margin-bottom: 3rem;
 
     &__title {
-      margin-left: 1rem;
-      margin-bottom: 1rem;
       font-family: "Proxima Nova", sans-serif;
+      margin-bottom: 1rem;
+      margin-left: 1rem;
     }
 
-    &__tracklist {
+    .tracklist {
       margin: 0 0.5rem;
 
       @media (min-width: 1000px) {
@@ -32,13 +32,13 @@
     }
 
     .seeMore {
+      color: #ccc;
+      cursor: pointer;
       font-family: "Proxima Nova", sans-serif;
       font-size: 0.7rem;
       margin-top: 1rem;
       margin-left: 1.75rem;
       text-transform: uppercase;
-      color: #ccc;
-      cursor: pointer;
       width: fit-content;
 
       &:hover {

@@ -5,19 +5,19 @@
 }
 
 .login {
-  height: 100vh;
+  align-items: center;
+  background-color: black;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  background-color: black;
   font-family: "Proxima Nova", sans-serif;
+  height: 100vh;
+  left: 0;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
 
-  &__logo {
+  .logo {
     color: white;
     font-size: 10rem;
 
@@ -26,24 +26,24 @@
     }
   }
 
-  &__btn {
-    padding: 0.75rem 1.5rem;
+  .button {
     background: green;
-    color: white;
     border: none;
-    transition: 0.25s;
-    font-family: "Proxima Nova", sans-serif;
-    text-transform: uppercase;
+    border-radius: 8px;
+    color: white;
     cursor: pointer;
+    font-family: "Proxima Nova", sans-serif;
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 2px;
-    border-radius: 8px;
     margin-bottom: 8rem;
+    padding: 0.75rem 1.5rem;
+    text-transform: uppercase;
+    transition: 0.25s;
 
     @include tablet {
-      padding: 1rem 2.5rem;
       font-size: 1.5rem;
+      padding: 1rem 2.5rem;
     }
 
     &:hover {

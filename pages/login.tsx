@@ -26,13 +26,13 @@ const Login: React.FC<LoginProps> = ({ providers }) => {
   return (
     <div className={styles.login}>
       <AlertMessage />
-      <div className={styles.login__logo}>
+      <div className={styles.logo}>
         <BsSpotify />
       </div>
       <div>
         {Object.values(providers!).map((provider) => (
           <button
-            className={styles.login__btn}
+            className={styles.button}
             key={provider.id}
             onClick={() => signIn(provider.id, { callbackUrl: "/" })}
           >

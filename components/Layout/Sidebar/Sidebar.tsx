@@ -43,7 +43,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
       return playlists?.map((playlist) => (
         <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
           <a onClick={() => setDisplaySidebar(false)}>
-            <p className={styles.sidebar__playlistName}>{playlist.name}</p>
+            <p className={styles.playlists__name}>{playlist.name}</p>
           </a>
         </Link>
       ));
@@ -74,7 +74,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
         </Link>
 
         {/* home - search - library */}
-        <div className={styles.sidebar__options}>
+        <div className={styles.options}>
           {/* Home */}
           <Link href="/">
             <a onClick={() => setDisplaySidebar(false)}>
@@ -104,7 +104,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
         </div>
 
         {/* create playlist - liked songs */}
-        <div className={styles.sidebar__options}>
+        <div className={styles.options}>
           {/* <SidebarOption icon={RiAddBoxFill}>Create Playlist</SidebarOption> */}
           <Link href="/collection/savedtracks">
             <a onClick={() => setDisplaySidebar(false)}>
@@ -119,9 +119,7 @@ export const Sidebar: React.FC<{}> = ({}) => {
         </div>
 
         {/* playlists list */}
-        <div
-          className={`${styles.sidebar__options} ${styles.sidebar__playlists}`}
-        >
+        <div className={`${styles.options} ${styles.playlists}`}>
           {renderPlaylistsNames()}
         </div>
       </div>

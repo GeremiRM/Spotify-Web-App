@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Header } from "../Header/Header";
 import { Selector } from "./Selector";
 import { Cards } from "../Common/Cards";
-import { SavedTracksCard } from "./SavedTracksCard/SavedTracksCard";
+// import { SavedTracksCard } from "./SavedTracksCard/SavedTracksCard";
 import { Loading } from "../Common/Loading";
 
 // styling
@@ -47,7 +47,7 @@ export const Collection: React.FC<{}> = ({}) => {
           }
           multirow
           hideLink
-        ></Cards>
+        />
         {/* liked songs card */}
         {/* {selector === 0 && <LikedSongs numberOfTracks={likedSongs.length} />} */}
       </div>

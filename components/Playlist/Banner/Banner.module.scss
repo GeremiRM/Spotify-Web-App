@@ -5,58 +5,44 @@
 }
 
 .banner {
-  min-height: 340px;
-  padding-top: 6rem;
+  align-items: center;
   display: flex;
+  font-family: "Proxima Nova", sans-serif;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  font-family: "Proxima Nova", sans-serif;
+  min-height: 340px;
   padding-bottom: 1rem;
+  padding-top: 6rem;
 
   @include tablet {
-    padding: 1rem 1rem 1.5rem 1rem;
-    flex-direction: row;
     align-items: flex-end;
+    flex-direction: row;
     justify-content: flex-start;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
   }
 
   @media (min-width: 1000px) {
-    padding-top: 7rem;
     padding-left: 2.5rem;
+    padding-top: 7rem;
   }
 
-  &__separator {
-    background: white;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    margin-top: 3.25px;
-    margin: 0.25rem;
-  }
-
-  &__cover {
-    height: 150px;
-    width: 150px;
+  .cover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
     display: flex;
+    height: 150px;
     justify-content: center;
+    width: 150px;
 
     @include tablet {
+      margin-right: 1.5rem;
       min-height: 190px;
       min-width: 190px;
-      margin-right: 1.5rem;
     }
 
     @media (min-width: 1000px) {
       min-height: clamp(190px, 15vw, 240px);
       min-width: clamp(190px, 15vw, 240px);
-    }
-
-    &__placeholder {
-      font-size: 4rem;
-      color: gray;
-      align-self: center;
     }
 
     img {
@@ -65,73 +51,83 @@
     }
   }
 
-  &__info {
-    font-size: 0.85rem;
+  .info {
+    color: #ccc;
     display: flex;
     flex-direction: column;
+    font-size: 0.85rem;
     justify-content: flex-end;
-    color: #ccc;
     margin-top: 1rem;
     padding: 0 1rem;
-  }
 
-  &__name {
-    color: white;
+    .name {
+      color: white;
 
-    h1 {
-      font-weight: 800;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 0.25rem;
-      line-height: 110%;
+      h1 {
+        display: -webkit-box;
+        font-weight: 800;
+        line-height: 110%;
+        margin-bottom: 0.25rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+
+        @include tablet {
+          margin-bottom: 0;
+          padding-right: 2rem;
+        }
+
+        @media (min-width: 1000px) {
+          align-self: center;
+          -webkit-line-clamp: 2;
+        }
+      }
+    }
+
+    .desc {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      justify-content: center;
+      line-height: 1.25rem;
+      margin: 0.25rem 0 0.75rem;
 
       @include tablet {
-        padding-right: 2rem;
-        margin-bottom: 0;
+        justify-content: flex-start;
+        margin: 0;
       }
 
-      @media (min-width: 1000px) {
-        -webkit-line-clamp: 2;
-        align-self: center;
+      &__separator {
+        background: white;
+        border-radius: 50%;
+        height: 3px;
+        margin: 0.25rem;
+        margin-top: 3.25px;
+        width: 3px;
       }
-    }
-  }
 
-  &__desc {
-    align-items: center;
-    line-height: 1.25rem;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-    justify-content: center;
-    display: flex;
-    margin: 0.25rem 0 0.75rem;
-
-    @include tablet {
-      justify-content: flex-start;
-      margin: 0;
-    }
-
-    &__owner {
-      display: flex;
-      align-items: center;
-      color: white;
-      font-weight: 700;
-      p {
+      .owner {
+        align-items: center;
+        color: white;
         display: flex;
+        font-weight: 700;
 
-        a {
-          margin-right: 0.25rem;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        p {
+          display: flex;
 
-          &:hover {
-            text-decoration: underline;
+          a {
+            display: -webkit-box;
+            margin-right: 0.25rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
       }

@@ -57,27 +57,26 @@ export const TopResult: React.FC<TopResultProps> = ({ data }) => {
   return (
     <Link href={`/${data?.type}/${data?.id}`} passHref>
       <div className={styles.card} onClick={() => saveSearch()}>
-        <div className={styles.card__image}>
-          <div
-            className={`${data?.type === "artist" ? styles.artist : ""} ${
-              styles.card__img
-            } `}
-          >
-            <Image
-              src={data?.images[1]?.url || "/music-placeholder.png"}
-              width="100%"
-              height="100%"
-              alt={data?.name}
-              layout="responsive"
-              objectFit="cover"
-            />
-          </div>
+        <div
+          className={`${data?.type === "artist" ? styles.img__artist : ""} ${
+            styles.img
+          } `}
+        >
+          <Image
+            src={data?.images[1]?.url || "/music-placeholder.png"}
+            width="100%"
+            height="100%"
+            alt={data?.name}
+            layout="responsive"
+            objectFit="cover"
+          />
         </div>
-        <div className={styles.card__info}>
-          <h2 className={styles.card__title}>{data?.name}</h2>
-          <p className={`${styles.card__desc}`}>{data.type}</p>
 
-          <div className={styles.card__button}>
+        <div className={styles.info}>
+          <h2 className={styles.title}>{data?.name}</h2>
+          <p className={`${styles.desc}`}>{data.type}</p>
+
+          <div className={styles.button}>
             {isPlaying ? <GiPauseButton /> : <FaPlay onClick={play} />}
           </div>
         </div>

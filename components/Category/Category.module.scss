@@ -5,12 +5,12 @@
 }
 
 .category {
+  color: white;
+  font-family: "Proxima Nova", sans-serif;
   max-width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  color: white;
   padding-bottom: 2.5rem;
-  font-family: "Proxima Nova", sans-serif;
 
   .banner {
     background: linear-gradient(0deg, #121212 0%, #6e174a 100%);
@@ -18,8 +18,8 @@
 
   .body {
     @media (min-width: 1000px) {
-      padding-left: 1.5rem;
       margin-top: 3rem;
+      padding-left: 1.5rem;
     }
   }
 }

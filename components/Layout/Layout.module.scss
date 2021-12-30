@@ -1,13 +1,13 @@
 .dashboard {
-  display: flex;
   background-color: #111;
+  display: flex;
 
   .container {
-    position: relative;
     max-width: 100vw;
-    min-width: 300px;
-    width: 100%;
     min-height: 100vh;
+    min-width: 300px;
     padding-bottom: 2rem;
+    position: relative;
+    width: 100%;
   }
 }

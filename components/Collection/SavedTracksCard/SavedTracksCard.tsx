@@ -13,16 +13,14 @@ export const SavedTracksCard: React.FC<LikedSongsProps> = ({
   return (
     <Link href={`/collection/tracks`} passHref>
       <div className={styles.likedSongs}>
-        <div className={styles.likedSongs__body}>
+        <div className={styles.body}>
           {/* Title */}
-          <div className={styles.likedSongs__body__title}>
+          <div className={styles.title}>
             <h2>Liked Songs</h2>
           </div>
 
           {/* Number of songs */}
-          <div className={styles.likedSongs__body__desc}>
-            {numberOfTracks} liked songs
-          </div>
+          <div className={styles.desc}>{numberOfTracks} liked songs</div>
         </div>
       </div>
     </Link>

@@ -36,9 +36,9 @@ export const Home: React.FC<{}> = ({}) => {
       <Header />
       <div className={styles.home}>
         {/* Body */}
-        <div className={styles.home__body}>
+        <div className={styles.body}>
           {/* Result Cards */}
-          <div className={styles.home__results}>
+          <div className={styles.results}>
             {/* Featured Playlists */}
             <Cards
               data={featuredPlaylists.slice(0, LIMIT)}

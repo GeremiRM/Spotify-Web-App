@@ -11,8 +11,8 @@
     cursor: pointer;
     font-size: 1.5rem;
     position: absolute;
-    top: 0.75rem;
     right: 1rem;
+    top: 0.75rem;
   }
 
   &__title {
@@ -30,10 +30,10 @@
 
     button {
       background: green;
-      color: white;
-      cursor: pointer;
       border: none;
       border-radius: 5px;
+      color: white;
+      cursor: pointer;
       font-size: 0.9rem;
       padding: 0.5rem 1.25rem;
       transition: 0.25s all ease;

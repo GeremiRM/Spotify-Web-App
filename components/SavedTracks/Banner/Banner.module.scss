@@ -5,45 +5,37 @@
 }
 
 .banner {
-  min-height: 340px;
-  padding-top: 6rem;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-family: "Proxima Nova", sans-serif;
+  justify-content: center;
+  min-height: 340px;
+  padding-top: 6rem;
   padding-bottom: 1rem;
 
   @include tablet {
-    padding: 1rem 1rem 1.5rem 1rem;
-    flex-direction: row;
     align-items: flex-end;
+    flex-direction: row;
     justify-content: flex-start;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
   }
 
   @media (min-width: 1000px) {
-    padding-top: 7rem;
     padding-left: 2.5rem;
+    padding-top: 7rem;
   }
 
-  &__separator {
-    background: white;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    margin-top: 3.25px;
-    margin-left: 3px;
-  }
-
-  &__cover {
+  .cover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
     height: 150px;
     width: 150px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
 
     @include tablet {
+      margin-right: 1.5rem;
       min-height: 190px;
       min-width: 190px;
-      margin-right: 1.5rem;
     }
 
     @media (min-width: 1000px) {
@@ -52,44 +44,44 @@
     }
   }
 
-  &__info {
-    font-size: 0.85rem;
-    display: flex;
-    flex-direction: column;
+  .info {
     align-items: center;
+    display: flex;
     color: #ccc;
+    flex-direction: column;
+    font-size: 0.85rem;
 
     @include tablet {
-      justify-content: flex-start;
       align-items: flex-start;
+      justify-content: flex-start;
     }
-  }
 
-  &__title {
-    color: white;
-    font-family: "Proxima Nova", sans-serif;
+    .title {
+      color: white;
+      font-family: "Proxima Nova", sans-serif;
 
-    h1 {
-      font-weight: 800;
-      padding: 0 0.5rem;
-      margin-top: 0.5rem;
-      font-size: 3.5rem;
+      h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-top: 0.5rem;
+        padding: 0 0.5rem;
 
-      @include tablet {
-        font-size: clamp(3rem, 5vw, 7rem);
+        @include tablet {
+          font-size: clamp(3rem, 5vw, 7rem);
+        }
       }
     }
-  }
 
-  &__desc {
-    display: flex;
-    align-items: center;
-    font-size: 1.25rem;
-    font-weight: 600;
+    .desc {
+      align-items: center;
+      display: flex;
+      font-size: 1.25rem;
+      font-weight: 600;
 
-    p {
-      @include tablet {
-        margin-left: 0.75rem;
+      p {
+        @include tablet {
+          margin-left: 0.75rem;
+        }
       }
     }
   }

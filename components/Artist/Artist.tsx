@@ -72,7 +72,7 @@ export const Artist: React.FC<{}> = ({}) => {
         <Banner artist={artist} />
 
         {/* Body */}
-        <div className={styles.artist__body}>
+        <div className={styles.body}>
           {/* Playbar */}
           <div ref={playbarRef}>
             <PlayBar
@@ -85,7 +85,7 @@ export const Artist: React.FC<{}> = ({}) => {
           {/* Tracklist */}
           <div className={styles.tracks}>
             <h2 className={styles.tracks__title}>Popular</h2>
-            <div className={styles.tracks__tracklist}>
+            <div className={styles.tracklist}>
               <Tracklist
                 tracks={topTracks!.slice(0, seeMore ? 10 : 5)}
                 hideHeader

@@ -7,24 +7,37 @@
 .tracklist {
   font-family: "Proxima Nova", sans-serif;
 
-  &__header {
-    display: grid;
-    gap: 4%;
-    text-transform: uppercase;
-    color: #ccc;
-    letter-spacing: 1px;
-    border-bottom: 1px solid rgba(82, 82, 82, 0.25);
-    padding: 0.75rem;
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
+  .header {
     background: transparent;
+    border-bottom: 1px solid rgba(82, 82, 82, 0.25);
+    color: #ccc;
+    display: grid;
+    font-size: 0.85rem;
+    gap: 4%;
+    grid-template-columns: 72% 20%;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    text-transform: uppercase;
     top: 60px;
     z-index: 2;
-    grid-template-columns: 72% 20%;
+
+    &__noAlbum {
+      grid-template-columns: 72% 20%;
+    }
+
+    &__sticky {
+      background: #181818;
+      z-index: 3;
+    }
+
+    &__hide {
+      display: none;
+    }
 
     @include tablet {
-      padding: 0.75rem 1.5rem;
       grid-template-columns: 45% 25% 18%;
+      padding: 0.75rem 1.5rem;
     }
 
     @media (min-width: 1000px) {
@@ -32,31 +45,19 @@
     }
   }
 
-  &__noAlbum {
-    grid-template-columns: 72% 20%;
-  }
-
-  &__sticky {
-    z-index: 3;
-    background: #181818;
-  }
-
-  &__hide {
-    display: none;
-  }
-
-  &__title {
+  .title {
     display: flex;
 
     p {
       margin-right: 1rem;
+
       @include tablet {
         margin-right: 1.25rem;
       }
     }
   }
 
-  &__album {
+  .album {
     display: none;
 
     @include tablet {
@@ -64,7 +65,7 @@
     }
   }
 
-  &__duration {
+  .duration {
     text-align: end;
   }
 }

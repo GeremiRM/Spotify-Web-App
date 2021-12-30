@@ -17,7 +17,7 @@
     justify-content: flex-start;
   }
 
-  &__button {
+  .button {
     background: #1db954;
     height: 40px;
     width: 40px;
@@ -37,20 +37,6 @@
 
     &:hover {
       background: lightgreen;
-      cursor: pointer;
-    }
-  }
-
-  &__heart {
-    color: #888;
-    font-size: 2.25rem;
-    display: flex;
-    align-items: center;
-    margin-left: 2rem;
-    transition: 0.25s all ease;
-
-    &:hover {
-      color: white;
       cursor: pointer;
     }
   }

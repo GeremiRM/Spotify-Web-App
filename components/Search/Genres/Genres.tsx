@@ -44,11 +44,11 @@ export const Genres: React.FC<{}> = ({}) => {
   return (
     <div className={styles.genres}>
       {/* Title */}
-      <div className={styles.genres__title}>
-        <h2>Browse All</h2>
-      </div>
+
+      <h2>Browse All</h2>
+
       {/* Genres Cards */}
-      <div className={styles.genres__cards}>{renderCards()}</div>
+      <div className={styles.cards}>{renderCards()}</div>
     </div>
   );
 };

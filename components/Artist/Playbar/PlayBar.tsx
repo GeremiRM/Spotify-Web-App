@@ -65,7 +65,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isFollowing }) => {
   return (
     <div className={styles.playbar}>
       {/* Play button */}
-      <div className={styles.playbar__button}>
+      <div className={styles.button}>
         {isPlayingArtist ? (
           <GiPauseButton onClick={() => spotifyApi.pause()} />
         ) : (
@@ -76,7 +76,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ id, uri, isFollowing }) => {
       {/* Follow button */}
       <div
         onClick={() => changeSavedState()}
-        className={`${styles.playbar__follow} ${
+        className={`${styles.follow} ${
           isFollowingArtist ? styles.playbar__following : ""
         }`}
       >

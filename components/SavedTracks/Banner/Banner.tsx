@@ -10,7 +10,7 @@ interface BannerProps {
 export const Banner: React.FC<BannerProps> = ({ amountSongs }) => {
   return (
     <div className={styles.banner}>
-      <div className={styles.banner__cover}>
+      <div className={styles.cover}>
         <Image
           src="/likedSongs.png"
           alt="Liked songs"
@@ -21,12 +21,12 @@ export const Banner: React.FC<BannerProps> = ({ amountSongs }) => {
           objectPosition="center"
         />
       </div>
-      <div className={styles.banner__info}>
-        <div className={styles.banner__title}>
+      <div className={styles.info}>
+        <div className={styles.title}>
           <h1>Liked Songs</h1>
         </div>
-        <div className={styles.banner__desc}>
-          <div className={styles.banner__tracks}>
+        <div className={styles.desc}>
+          <div className={styles.tracks}>
             <p>{amountSongs} songs </p>
           </div>
         </div>

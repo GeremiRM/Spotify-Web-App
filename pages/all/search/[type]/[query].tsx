@@ -65,13 +65,13 @@ export const All: React.FC<{}> = ({}) => {
     <>
       <Header />
       <div className={styles.all}>
-        <div className={styles.all__title}>
+        <div className={styles.title}>
           <h1>
             <span style={{ textTransform: "capitalize" }}>{type}</span> results
             for {query}
           </h1>
         </div>
-        <div className={styles.all__cards}>
+        <div className={styles.cards}>
           {searchResults && (
             <Cards data={searchResults} title="" multirow hideLink />
           )}

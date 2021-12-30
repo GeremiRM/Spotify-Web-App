@@ -62,9 +62,9 @@
         display: -webkit-box;
         font-weight: 900;
         line-height: 110%;
+        overflow: hidden;
         text-align: center;
         text-overflow: ellipsis;
-        overflow: hidden;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
 

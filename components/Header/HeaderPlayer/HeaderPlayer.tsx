@@ -37,12 +37,12 @@ export const HeaderPlayer: React.FC<HeaderPlayerProps> = ({
   return (
     <div className={`${styles.player} ${display ? styles.display : ""}`}>
       {/* Play button */}
-      <div className={styles.player__button}>
+      <div className={styles.button}>
         <FaPlay onClick={play} />
       </div>
 
       {/* Title -> Not shown on mobile */}
-      <div className={styles.player__title}>
+      <div className={styles.title}>
         <h2>{title}</h2>
       </div>
     </div>

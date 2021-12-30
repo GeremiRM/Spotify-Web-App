@@ -15,7 +15,7 @@ export const PlayBar: React.FC<PlaybarProps> = ({ uri }) => {
 
   return (
     <div className={styles.playbar}>
-      <div className={styles.playbar__button}>
+      <div className={styles.button}>
         <ImPlay3 onClick={play} />
       </div>
     </div>

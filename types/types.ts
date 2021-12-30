@@ -5,6 +5,7 @@ export type Results = {
   playlists: SpotifyApi.PlaylistObjectSimplified[] | undefined;
 };
 
+// The data passed to the cards wrapper
 export type CardsData =
   | SpotifyApi.AlbumObjectSimplified[]
   | SpotifyApi.ArtistObjectFull[]
@@ -13,6 +14,7 @@ export type CardsData =
   | undefined
   | null;
 
+// All the possible links for the /all page
 export type LinkType =
   | "albums"
   | "singles"

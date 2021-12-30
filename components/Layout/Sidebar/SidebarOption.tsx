@@ -20,12 +20,12 @@ export const SidebarOption: React.FC<SidebarOptionProps> = ({
 
   return (
     <div
-      className={`${styles.sidebar__option} ${active && styles.active}`}
+      className={`${styles.option} ${active && styles.option__active}`}
       onClick={() => setDisplayLyrics(false)}
     >
-      {icon && <Icon className={styles.sidebar__icon} />}
+      {icon && <Icon className={styles.option__icon} />}
 
-      <p className={styles.sidebar__text}>{children}</p>
+      <p className={styles.option__text}>{children}</p>
     </div>
   );
 };

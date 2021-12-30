@@ -5,27 +5,26 @@
 }
 
 .banner {
-  min-height: 340px;
-  padding-top: 6rem;
+  align-items: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   font-family: "Proxima Nova", sans-serif;
-  position: relative;
-  z-index: 0;
   justify-content: center;
-  align-items: center;
+  min-height: 340px;
+  padding-top: 6rem;
+  position: relative;
   text-align: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  z-index: 0;
 
   @include tablet {
-    padding: 1rem 1rem 1.5rem;
-    text-align: left;
-    align-items: flex-end;
-    justify-content: flex-start;
     align-items: flex-end;
     flex-direction: row;
+    justify-content: flex-start;
+    padding: 1rem 1rem 1.5rem;
+    text-align: left;
   }
 
   @media (min-width: 1000px) {
@@ -38,29 +37,29 @@
   }
 
   ::before {
+    background: rgba(0, 0, 0, 0.1);
     content: "";
     position: absolute;
-    width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1);
     left: 0;
     top: 0;
+    width: 100%;
     z-index: -5;
   }
 
-  &__cover {
-    height: 150px;
-    width: 150px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
+  .cover {
     border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25), 0 0 40px rgba(0, 0, 0, 0.25);
+    height: 150px;
+    margin-bottom: 1rem;
     overflow: hidden;
     position: relative;
-    margin-bottom: 1rem;
+    width: 150px;
 
     @include tablet {
+      margin-right: 1.5rem;
       min-height: 190px;
       min-width: 190px;
-      margin-right: 1.5rem;
     }
 
     @media (min-width: 1000px) {
@@ -69,46 +68,46 @@
     }
   }
 
-  &__info {
+  .info {
+    color: #ccc;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #ccc;
     padding-bottom: 2rem;
   }
 
-  &__name {
+  .name {
     color: white;
 
     h1 {
       font-weight: 800;
       display: -webkit-box;
+      line-height: 110%;
+      overflow: hidden;
       padding: 0 0.5rem;
+      text-overflow: ellipsis;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      line-height: 110%;
 
       @include tablet {
         padding-right: 2rem;
       }
 
       @media (min-width: 1000px) {
-        -webkit-line-clamp: 2;
         align-self: center;
+        -webkit-line-clamp: 2;
       }
     }
   }
 
-  &__desc {
-    display: flex;
+  .desc {
     align-items: center;
-    font-size: 0.9rem;
-    font-family: sans-serif;
+    display: flex;
     flex-wrap: wrap;
-    text-align: center;
+    font-family: sans-serif;
+    font-size: 0.9rem;
     justify-content: center;
+    text-align: center;
 
     @include tablet {
       justify-content: flex-start;

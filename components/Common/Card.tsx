@@ -115,13 +115,13 @@ const Card: React.FC<CardProps> = ({ info }) => {
               className={styles.playlist}
             />
           )}
-          <div className={styles.card__play} onClick={play}>
+          <div className={styles.play} onClick={play}>
             <ImPlay3 />
           </div>
         </div>
-        <div className={styles.card__body}>
-          <p className={styles.card__body__title}>{info?.name}</p>
-          <p className={`${styles.card__body__desc} ${info?.type === "track"}`}>
+        <div className={styles.body}>
+          <p className={styles.body__title}>{info?.name}</p>
+          <p className={`${styles.body__desc} ${info?.type === "track"}`}>
             {cardDesc()}
           </p>
         </div>

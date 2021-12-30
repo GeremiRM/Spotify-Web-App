@@ -16,17 +16,17 @@
     display: block;
     font-size: 2rem !important;
     font-weight: 900;
-    text-overflow: ellipsis;
     overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
 .lyrics {
-  padding: 5rem 2rem;
   color: #dddddd;
   font-family: "Proxima Nova", sans-serif;
-  min-height: 100vh;
   font-weight: 700;
+  min-height: 100vh;
+  padding: 5rem 2rem;
 
   @include tablet {
     padding: 7rem 2rem 3rem;

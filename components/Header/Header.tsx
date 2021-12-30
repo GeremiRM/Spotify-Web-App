@@ -58,8 +58,8 @@ export const Header: React.FC<HeaderProps> = ({
       >
         {/* Lyrics Button */}
         <div
-          className={`${styles.header__lyrics} 
-          ${displayLyrics ? styles.header__lyricsActive : ""}`}
+          className={`${styles.lyrics} 
+          ${displayLyrics ? styles.lyrics__active : ""}`}
           onClick={() => setDisplayLyrics(!displayLyrics)}
         >
           <GiMicrophone />
@@ -84,27 +84,23 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Username (Not shown on mobile) */}
-          <div className={styles.user__name}>
+          <div className={styles.name}>
             <p>{user.display_name}</p>
           </div>
 
           {/* Caret */}
-          <div
-            className={`${styles.user__caret} ${
-              isMenuOpen ? styles.user__rotate : ""
-            }`}
-          >
+          <div className={`${styles.caret} ${isMenuOpen ? styles.rotate : ""}`}>
             <AiFillCaretDown />
           </div>
 
           {/* User menu */}
           {isMenuOpen && (
             <div
-              className={styles.user__menu}
+              className={styles.menu}
               onClick={() => signOut({ callbackUrl: "/login" })}
             >
-              <p className={styles.user__menu__text}>Log out</p>
-              <BiLogOut className={styles.user__menu__icon} />
+              <p className={styles.menu__text}>Log out</p>
+              <BiLogOut className={styles.menu__icon} />
             </div>
           )}
         </div>

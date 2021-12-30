@@ -57,7 +57,7 @@ export const Playlist: React.FC<{}> = ({}) => {
               tracks={tracks.slice(0, tracks.length > 50 ? 50 : tracks.length)}
             />
             {/* Body */}
-            <div className={styles.playlist__body}>
+            <div className={styles.body}>
               {/* Playbar */}
               <div ref={playbarRef}>
                 <PlayBar

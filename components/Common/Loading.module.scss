@@ -6,7 +6,7 @@
   color: gray;
   height: 100vh;
 
-  &__dots {
+  .dots {
     &__first {
       animation: firstDot 1s ease-in-out 0s infinite alternate;
       opacity: 0;

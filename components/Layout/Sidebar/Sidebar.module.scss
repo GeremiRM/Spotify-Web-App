@@ -70,63 +70,63 @@
     flex: 1;
   }
 
-  &__options {
+  .options {
     margin: 1rem 0.5rem 0;
-  }
 
-  &__option {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-radius: 4px;
-    padding: 1rem;
-    color: #777;
-    transition: 0.25s all ease;
-    height: 2.25rem;
-    margin: 0.25rem 0;
+    .option {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 4px;
+      padding: 1rem;
+      color: #777;
+      transition: 0.25s all ease;
+      height: 2.25rem;
+      margin: 0.25rem 0;
 
-    @include tablet {
-      padding: 1.25rem 1rem;
+      @include tablet {
+        padding: 1.25rem 1rem;
+      }
+
+      &:hover {
+        color: white;
+      }
+
+      &__active {
+        background: #222;
+        color: white;
+      }
+
+      &__icon {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+
+      &__text {
+        font-weight: 700;
+      }
     }
-
-    &:hover {
-      color: white;
-    }
   }
 
-  &__option.active {
-    background: #222;
-    color: white;
-  }
-
-  &__icon {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-  }
-
-  &__text {
-    font-weight: 700;
-  }
-
-  &__playlists {
+  .playlists {
     border-top: 2px solid rgba(39, 39, 39, 0.568);
     padding-top: 1.5rem;
     overflow-y: auto;
     max-height: 100%;
-  }
 
-  &__playlistName {
-    font-size: 0.9rem;
-    margin-left: 1.25rem;
-    overflow-y: auto;
-    color: #ddd;
-    transition: 0.25s all ease;
-    margin-bottom: 1rem;
-    cursor: pointer;
+    &__name {
+      font-size: 0.9rem;
+      margin-left: 1.25rem;
+      overflow-y: auto;
+      color: #ddd;
+      transition: 0.25s all ease;
+      margin-bottom: 1rem;
+      cursor: pointer;
 
-    &:hover {
-      color: white;
+      &:hover {
+        color: white;
+      }
     }
   }
 }

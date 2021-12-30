@@ -25,11 +25,11 @@ export const Card: React.FC<CardProps> = ({ id, title, cover }) => {
           background: `${randomBackground()}`,
         }}
       >
-        <div className={styles.card__title}>
+        <div className={styles.title}>
           <h3>{title}</h3>
         </div>
 
-        <div className={styles.card__image}>
+        <div className={styles.image}>
           <Image src={cover} alt={title} width="100px" height="100px" />
         </div>
       </div>

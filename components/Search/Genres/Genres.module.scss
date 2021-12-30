@@ -1,21 +1,21 @@
 .genres {
-  gap: 1rem;
   color: white;
-  padding: 0 1rem 3rem;
-  margin: 1rem 0 3rem;
   font-family: "Proxima Nova", sans-serif;
+  gap: 1rem;
+  margin: 1rem 0 3rem;
+  padding: 0 1rem 3rem;
 
   h2 {
     font-size: 1.4rem;
   }
 
-  &__cards {
+  .cards {
     display: grid;
-    margin-top: 1.5rem;
+    gap: 1.5rem;
+    grid-auto-rows: auto;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     grid-template-rows: 1fr;
-    grid-auto-rows: auto;
-    gap: 1.5rem;
+    margin-top: 1.5rem;
 
     @media (min-width: 700px) {
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));

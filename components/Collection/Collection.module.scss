@@ -5,16 +5,16 @@
 }
 
 .selector {
-  display: flex;
   color: white;
+  display: flex;
   font-size: 0.85rem;
 
   .selection {
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 900;
     margin: 0.25rem 0.5rem;
     padding: 0.8rem 1rem;
-    border-radius: 4px;
-    font-weight: 900;
-    cursor: pointer;
   }
 }
 
@@ -28,8 +28,8 @@
 }
 
 .selector__mobile {
-  width: 100%;
   margin-bottom: 2.5rem;
+  width: 100%;
 
   @include tablet {
     display: none;

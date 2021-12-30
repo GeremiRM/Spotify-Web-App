@@ -99,14 +99,14 @@ export const Track: React.FC<TrackProps> = ({
       className={`${styles.track} ${hideAlbum ? styles.track__noAlbum : ""} `}
       onDoubleClick={play}
     >
-      <div className={styles.track__header}>
+      <div className={styles.header}>
         {/* index */}
-        <div className={styles.track__index}>
+        <div className={styles.idx}>
           {isPlayingTrack ? renderSoundBars() : <p>{idx}</p>}
         </div>
 
         {/* image */}
-        <div className={styles.track__img}>
+        <div className={styles.header__img}>
           <Image
             src={
               track.album.images[2]?.url ??
@@ -122,22 +122,20 @@ export const Track: React.FC<TrackProps> = ({
         </div>
 
         {/* name and artists*/}
-        <div className={styles.track__desc}>
+        <div className={styles.desc}>
           <div
-            className={styles.track__desc__title}
+            className={styles.title}
             style={{ color: `${isPlayingTrack ? "#1db954" : "white"}` }}
           >
             <p>{track.name}</p>
           </div>
-          <div className={styles.track__desc__artists}>
+          <div className={styles.artists}>
             <p>{renderArtists()}</p>
           </div>
 
           {/* album name desktop. Can be hidden*/}
           {!hideAlbum && (
-            <div
-              className={`${styles.track__album} ${styles.track__album__mobile}`}
-            >
+            <div className={`${styles.album} ${styles.album__mobile}`}>
               <Link href={`/album/${track.album.id}`} passHref>
                 <p>{track.album.name}</p>
               </Link>
@@ -148,9 +146,7 @@ export const Track: React.FC<TrackProps> = ({
 
       {/* album name. Can be hidden*/}
       {!hideAlbum && (
-        <div
-          className={`${styles.track__album} ${styles.track__album__desktop}`}
-        >
+        <div className={`${styles.album} ${styles.album__desktop}`}>
           <Link href={`/album/${track.album.id}`} passHref>
             <p>{track.album.name}</p>
           </Link>
@@ -158,7 +154,7 @@ export const Track: React.FC<TrackProps> = ({
       )}
 
       {/* save icon and duration */}
-      <div className={styles.track__duration}>
+      <div className={styles.duration}>
         <div onClick={() => changeSavedState()}>
           {trackSaved ? (
             <AiFillHeart

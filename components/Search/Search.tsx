@@ -127,24 +127,24 @@ export const Search: React.FC<{}> = ({}) => {
 
         {/* If input and data is done fetching, display results */}
         {searchInput !== "" && Object.keys(searchResults).length !== 0 && (
-          <div className={styles.search__body}>
+          <div className={styles.body}>
             {/* Tracks Results */}
-            <div className={styles.search__tracks}>
+            <div className={styles.tracks}>
               {/* Top result Card */}
-              <div className={styles.search__topResult}>
-                <h2 className={styles.search__topResult__title}>Top Result</h2>
+              <div className={styles.topResult}>
+                <h2>Top Result</h2>
                 <TopResult data={searchResults.artists![0]} />
               </div>
 
               {/* Tracklist */}
-              <div className={styles.search__tracklist}>
-                <h1 className={styles.search__tracklist__title}>Songs</h1>
+              <div className={styles.tracklist}>
+                <h2>Songs</h2>
                 <Tracklist tracks={trackResults} hideAlbum hideHeader />
               </div>
             </div>
 
             {/* Albums, Artists, Playlists Results */}
-            <div className={styles.search__results}>{renderCards()}</div>
+            <div className={styles.result}>{renderCards()}</div>
           </div>
         )}
       </div>

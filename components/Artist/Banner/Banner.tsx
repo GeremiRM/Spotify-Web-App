@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useBannerImage } from "../../../hooks/useBannerImage";
 
 // styling
 import styles from "./Banner.module.scss";
+
+import { useBannerImage } from "../../../hooks/useBannerImage";
 
 interface BannerProps {
   artist: SpotifyApi.ArtistObjectFull;
@@ -27,7 +28,7 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
       }}
     >
       {/* Banner image */}
-      <div className={styles.banner__cover}>
+      <div className={styles.cover}>
         <Image
           src={artist?.images[0]?.url ?? "/music-placeholder.png"}
           width="100%"
@@ -39,9 +40,9 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
       </div>
 
       {/* Banner info */}
-      <div className={styles.banner__info}>
+      <div className={styles.info}>
         {/* Title */}
-        <div className={styles.banner__name}>
+        <div className={styles.name}>
           <h1
             style={{
               fontSize: `clamp(2.75rem,calc(8vw - ${artist.name.length}px), 96px)`,
@@ -52,7 +53,7 @@ export const Banner: React.FC<BannerProps> = ({ artist }) => {
         </div>
 
         {/* Description */}
-        <div className={styles.banner__desc}>
+        <div className={styles.desc}>
           <p>{artist.followers.total.toLocaleString()} followers</p>
         </div>
       </div>

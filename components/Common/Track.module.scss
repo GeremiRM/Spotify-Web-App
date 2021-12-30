@@ -5,23 +5,23 @@
 }
 
 .track {
-  display: grid;
-  gap: 4%;
-  padding: 0.5rem;
-  margin-bottom: 0.25rem;
-  color: #777;
-  font-size: 0.75rem;
   border-radius: 5px;
-  font-weight: 500;
-  transition: 0.1s all ease;
+  color: #777;
+  display: grid;
   font-family: "Gilroy-Bold", sans-serif;
-  position: relative;
+  font-size: 0.75rem;
+  font-weight: 500;
+  gap: 4%;
   grid-template-columns: 72% 20%;
+  margin-bottom: 0.25rem;
+  padding: 0.5rem;
+  position: relative;
+  transition: 0.1s all ease;
 
   @include tablet {
-    padding: 0.75rem 1.5rem;
-    grid-template-columns: 45% 25% 18%;
     font-size: 0.85rem;
+    grid-template-columns: 45% 25% 18%;
+    padding: 0.75rem 1.5rem;
   }
 
   @media (min-width: 1000px) {
@@ -42,174 +42,115 @@
     }
   }
 
-  &__header {
-    display: flex;
+  .header {
     align-items: center;
-    overflow: hidden;
-  }
-
-  &__desc {
+    display: flex;
     overflow: hidden;
 
-    &__title {
-      color: white;
+    .idx {
+      display: flex;
       font-size: 1rem;
+      font-weight: 900;
+      justify-content: center;
+      margin-right: 0.75rem;
+      min-height: 20px;
+      min-width: 20px;
+      position: relative;
 
       @include tablet {
-        font-size: 0.9rem;
-        margin-bottom: 0.25rem;
-      }
-
-      p {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        margin-right: 1rem;
       }
     }
 
-    &__artists {
+    &__img {
+      border-radius: 1px;
+      height: 50px;
+      margin-right: 1rem;
+      min-height: 50px;
+      min-width: 50px;
+      overflow: hidden;
+      width: 50px;
+
+      @include tablet {
+        height: 40px;
+        min-height: 40px;
+        min-width: 40px;
+        width: 40px;
+      }
+    }
+    .desc {
       overflow: hidden;
 
-      p {
-        text-overflow: ellipsis;
-        white-space: nowrap;
+      .title {
+        color: white;
+        font-size: 1rem;
+
+        @include tablet {
+          font-size: 0.9rem;
+          margin-bottom: 0.25rem;
+        }
+
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .artists {
         overflow: hidden;
 
-        a:hover {
-          text-decoration: underline;
-          cursor: pointer;
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          a:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
         }
       }
     }
   }
 
-  &__index {
-    min-height: 20px;
-    min-width: 20px;
-    margin-right: 0.75rem;
-    font-size: 1rem;
+  .album {
+    align-items: center;
     display: flex;
-    position: relative;
-    justify-content: center;
-    font-weight: 900;
-
-    @include tablet {
-      margin-right: 1rem;
-    }
-  }
-
-  &__soundbars {
-    justify-self: flex-start;
-
-    &__bar {
-      background: #1db954;
-      bottom: 1px;
-      position: absolute;
-      width: 2px;
-      animation: sound 0ms -800ms linear infinite alternate;
-    }
-
-    @keyframes sound {
-      0% {
-        opacity: 0.35;
-        height: 3px;
-      }
-      100% {
-        opacity: 1;
-        height: 20px;
-      }
-    }
-
-    &__bar:nth-child(1) {
-      left: 1px;
-      animation-duration: 474ms;
-    }
-    &__bar:nth-child(2) {
-      left: 4px;
-      animation-duration: 350ms;
-    }
-    &__bar:nth-child(3) {
-      left: 7px;
-      animation-duration: 450ms;
-    }
-    &__bar:nth-child(4) {
-      left: 10px;
-      animation-duration: 375ms;
-    }
-    &__bar:nth-child(5) {
-      left: 13px;
-      animation-duration: 550ms;
-    }
-    &__bar:nth-child(6) {
-      left: 16px;
-      animation-duration: 600ms;
-    }
-  }
-
-  &__img {
-    min-height: 50px;
-    min-width: 50px;
-    width: 50px;
-    height: 50px;
-    margin-right: 1rem;
-    border-radius: 1px;
     overflow: hidden;
-
-    @include tablet {
-      min-height: 40px;
-      min-width: 40px;
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  &__duration {
-    text-align: end;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    letter-spacing: 2px;
-    font-weight: 700;
-    font-size: 0.85rem;
-  }
-
-  &__album {
-    display: flex;
-    align-items: center;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
 
-    p {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-
-      &:hover {
-        text-decoration: underline;
-        cursor: pointer;
+    &__mobile {
+      @include tablet {
+        display: none;
       }
     }
-  }
 
-  &__album__mobile {
-    @include tablet {
+    &__desktop {
       display: none;
+
+      @include tablet {
+        display: flex;
+      }
     }
-  }
 
-  &__album__desktop {
-    display: none;
+    p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
-    @include tablet {
-      display: flex;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
   }
 
   &__savedIcon {
-    margin-right: 1rem;
     cursor: pointer;
     font-size: 1.5rem;
+    margin-right: 1rem;
   }
 
   &__savedSong {
@@ -218,6 +159,64 @@
 
   &__unsavedSong {
     display: none;
+  }
+
+  .duration {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: end;
+  }
+
+  &__soundbars {
+    justify-self: flex-start;
+
+    &__bar {
+      animation: sound 0ms -800ms linear infinite alternate;
+      background: #1db954;
+      bottom: 1px;
+      position: absolute;
+      width: 2px;
+    }
+
+    @keyframes sound {
+      0% {
+        height: 3px;
+        opacity: 0.35;
+      }
+      100% {
+        height: 20px;
+        opacity: 1;
+      }
+    }
+
+    &__bar:nth-child(1) {
+      animation-duration: 474ms;
+      left: 1px;
+    }
+    &__bar:nth-child(2) {
+      animation-duration: 350ms;
+      left: 4px;
+    }
+    &__bar:nth-child(3) {
+      animation-duration: 450ms;
+      left: 7px;
+    }
+    &__bar:nth-child(4) {
+      animation-duration: 375ms;
+      left: 10px;
+    }
+    &__bar:nth-child(5) {
+      animation-duration: 550ms;
+      left: 13px;
+    }
+    &__bar:nth-child(6) {
+      animation-duration: 600ms;
+      left: 16px;
+    }
   }
 
   // &__options {

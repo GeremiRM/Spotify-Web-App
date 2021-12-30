@@ -57,7 +57,7 @@ export const SavedTracks: React.FC<{}> = ({}) => {
       </div>
 
       {/* Tracklist */}
-      <div className={styles.savedTracks__tracklist}>
+      <div className={styles.tracklist}>
         <Tracklist tracks={savedSongsData} stickyHeader />
       </div>
     </div>

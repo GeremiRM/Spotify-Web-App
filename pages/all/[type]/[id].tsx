@@ -45,10 +45,10 @@ export const All: React.FC<{}> = ({}) => {
     <>
       <Header />
       <div className={styles.all}>
-        <div className={styles.all__title}>
+        <div className={styles.title}>
           <h1>{Data[type as keyof Data].title}</h1>
         </div>
-        <div className={styles.all__cards}>
+        <div className={styles.cards}>
           <Cards
             data={Data[type as keyof Data].data}
             title=""

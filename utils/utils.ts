@@ -1,9 +1,11 @@
+// Converts from milliseconds to minutes:seconds. Used by the tracks
 export const convertMillisTracks = (millis: number) => {
   const minutes = Math.floor(millis / 60000);
   const seconds = ((millis % 60000) / 1000).toFixed(0);
   return `${minutes}:${Number(seconds) < 10 ? "0" : ""}${seconds}`;
 };
 
+// Converts from milliseconds to hours:minutes:seconds. Used by the banners
 export function converMillisBanners(millis: number) {
   let sec: number | string = Math.floor(millis / 1000);
   let hrs: number | string = Math.floor(sec / 3600);
@@ -23,6 +25,7 @@ export function converMillisBanners(millis: number) {
   }
 }
 
+// Get the overall duration of an album
 export const getAlbumDuration = (album: SpotifyApi.AlbumObjectFull) => {
   let totalDuration = 0;
   for (let i = 0; i < album.total_tracks; i++) {
@@ -31,6 +34,7 @@ export const getAlbumDuration = (album: SpotifyApi.AlbumObjectFull) => {
   return totalDuration;
 };
 
+// Eliminate repeated items from the list
 export const filterRepeated = (list: any) => {
   return list?.filter(
     (v: { name: any }, i: any, a: any[]) =>

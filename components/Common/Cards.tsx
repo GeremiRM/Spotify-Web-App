@@ -47,16 +47,15 @@ export const Cards: React.FC<Cards> = ({
   return (
     <div className={styles.wrapper}>
       {/* Cards Header */}
-      <div className={styles.wrapper__header}>
+      <div className={styles.header}>
         {/* Title */}
-        <div className={styles.wrapper__title}>
-          <h2>{title}</h2>
-        </div>
+
+        <h2>{title}</h2>
 
         {/* See all Link */}
         {!hideLink && (
           <Link href={`/all/${linkType}${linkId ? `/${linkId}` : ""}`} passHref>
-            <div className={styles.wrapper__link}>
+            <div className={styles.header__link}>
               <p>See All</p>
             </div>
           </Link>
@@ -64,11 +63,7 @@ export const Cards: React.FC<Cards> = ({
       </div>
 
       {/* Cards */}
-      <div
-        className={`${styles.wrapper__cards} ${
-          multirow ? styles.multirow : ""
-        }`}
-      >
+      <div className={`${styles.cards} ${multirow ? styles.multirow : ""}`}>
         {renderCards()}
       </div>
     </div>

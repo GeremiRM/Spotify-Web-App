@@ -66,31 +66,31 @@ export const Tracklist: React.FC<TracklistProps> = ({
       );
     });
 
-  if (Object.keys(tracks).length === 0) return <></>;
+  if (!Object.keys(tracks).length) return <></>;
 
   return (
     <div className={`${styles.tracklist}`}>
       {/* header. Can be hidden or made sticky */}
       <div
-        className={`${styles.tracklist__header} 
-        ${hideAlbum ? styles.tracklist__noAlbum : ""} 
-        ${stickyHeader && scrollIntersect ? styles.tracklist__sticky : ""}
-        ${hideHeader ? styles.tracklist__hide : ""}
+        className={`${styles.header} 
+        ${hideAlbum ? styles.header__noAlbum : ""} 
+        ${stickyHeader && scrollIntersect ? styles.header__sticky : ""}
+        ${hideHeader ? styles.header__hide : ""}
         `}
         ref={headerRef}
         style={{ position: `${stickyHeader ? "sticky" : "static"}` }}
       >
-        <div className={`${styles.tracklist__title}`}>
+        <div className={`${styles.title}`}>
           <p>#</p>
           <p>Title</p>
         </div>
 
-        {!hideAlbum && <div className={styles.tracklist__album}>Album</div>}
-        <div className={styles.tracklist__duration}>
+        {!hideAlbum && <div className={styles.album}>Album</div>}
+        <div className={styles.duration}>
           <BsClock />
         </div>
       </div>
-      <div className={styles.tracklist__body}>{renderTracks()}</div>
+      <div className={styles.body}>{renderTracks()}</div>
     </div>
   );
 };
