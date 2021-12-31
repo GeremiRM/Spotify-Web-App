@@ -10,6 +10,7 @@ export const useBannerImage = (query: string) => {
       const data = await fetch(DB_URL + query);
 
       const image = await data.json();
+
       setBannerImage(
         image.artists && image.artists[0].hasOwnProperty("strArtistFanart")
           ? image.artists[0].strArtistFanart

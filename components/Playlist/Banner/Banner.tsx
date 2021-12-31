@@ -12,11 +12,13 @@ interface BannerProps {
 export const Banner: React.FC<BannerProps> = ({ playlist, tracks }) => {
   const getPlaylistDuration = () => {
     let totalDuration = 0;
-    tracks.map((track) => (totalDuration += track.duration_ms));
+
     return converMillisBanners(totalDuration);
   };
 
-  if (!Object.keys(playlist).length) return <></>;
+  console.log(playlist);
+
+  if (Object.keys(playlist).length === 0 || tracks.length === 0) return <></>;
 
   return (
     <div className={styles.banner}>

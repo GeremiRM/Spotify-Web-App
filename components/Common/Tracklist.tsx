@@ -53,6 +53,7 @@ export const Tracklist: React.FC<TracklistProps> = ({
 
   const renderTracks = () =>
     tracks.map((track, idx) => {
+      if (!track) return "";
       const savedSong = savedSongs.findIndex((song) => song.id === track.id);
       return (
         <Track
@@ -66,7 +67,7 @@ export const Tracklist: React.FC<TracklistProps> = ({
       );
     });
 
-  if (!Object.keys(tracks).length) return <></>;
+  if (Object.keys(tracks).length === 0) return <></>;
 
   return (
     <div className={`${styles.tracklist}`}>
