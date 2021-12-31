@@ -8,7 +8,7 @@
   font-family: "Proxima Nova", sans-serif;
 
   .header {
-    background: transparent;
+    background: red;
     border-bottom: 1px solid rgba(82, 82, 82, 0.25);
     color: #ccc;
     display: grid;
@@ -21,10 +21,6 @@
     text-transform: uppercase;
     top: 60px;
     z-index: 2;
-
-    &__noAlbum {
-      grid-template-columns: 72% 20%;
-    }
 
     &__sticky {
       background: #181818;
@@ -43,6 +39,10 @@
     @media (min-width: 1000px) {
       padding-left: 2.5rem;
     }
+  }
+
+  .header__noAlbum {
+    grid-template-columns: 72% 20%;
   }
 
   .title {
