@@ -6,9 +6,6 @@ import Card from "./Card";
 // styling
 import styles from "./Cards.module.scss";
 
-// func
-import { filterRepeated } from "../../utils/utils";
-
 // types
 import { CardsData, LinkType } from "../../types/types";
 
@@ -40,9 +37,6 @@ export const Cards: React.FC<Cards> = ({
 
   // If no data, return nothing
   if (!data || Object.keys(data!).length === 0) return <></>;
-
-  // if data are albums, filter repeated albums
-  if (data![0]?.type === "album") data = filterRepeated(data!);
 
   return (
     <div className={styles.wrapper}>

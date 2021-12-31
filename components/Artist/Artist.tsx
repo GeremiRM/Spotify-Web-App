@@ -16,6 +16,7 @@ import styles from "./Artist.module.scss";
 // hook
 import { useArtistInfo } from "../../hooks/useArtistInfo";
 import { useImageColor } from "../../hooks/useImageColor";
+import { filterRepeated } from "../../utils/utils";
 
 export const Artist: React.FC<{}> = ({}) => {
   const [seeMore, setSeeMore] = useState(false);
@@ -102,7 +103,7 @@ export const Artist: React.FC<{}> = ({}) => {
           <div className={styles.cards}>
             {/* Albums */}
             <Cards
-              data={albums.slice(0, 8)}
+              data={filterRepeated(albums).slice(0, 8)}
               title="Albums"
               linkId={artist.id}
               linkType="albums"
